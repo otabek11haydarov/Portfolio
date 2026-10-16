@@ -1,7 +1,10 @@
 import { ArrowDown, Github, Linkedin, Mail, MapPin } from 'lucide-react';
-import { profile } from '@/data/portfolio';
+import { usePortfolio } from '@/context/PortfolioContext';
 
 export default function Hero() {
+  const { data } = usePortfolio();
+  const { profile } = data;
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg">
       {/* Animated blobs */}

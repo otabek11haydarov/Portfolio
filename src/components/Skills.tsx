@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useReveal } from '@/hooks/useReveal';
-import { skills, type Skill } from '@/data/portfolio';
+import { usePortfolio, type Skill } from '@/context/PortfolioContext';
 
 const categories: Skill['category'][] = ['Languages', 'Data & Analytics', 'Frameworks', 'Tools'];
 
@@ -13,6 +13,8 @@ const categoryIcons: Record<string, string> = {
 
 export default function Skills() {
   const { ref, visible } = useReveal();
+  const { data } = usePortfolio();
+  const { skills } = data;
 
   const grouped = useMemo(() => {
     const map = new Map<string, Skill[]>();
@@ -20,7 +22,8 @@ export default function Skills() {
       map.set(cat, skills.filter((s) => s.category === cat));
     }
     return map;
-  }, []);
+  }, [skills]);
+
 
   return (
     <section id="skills" className="relative py-28 px-6 bg-[#0c121f]">

@@ -1,5 +1,5 @@
 import { useReveal } from '@/hooks/useReveal';
-import { aboutText, profile } from '@/data/portfolio';
+import { usePortfolio } from '@/context/PortfolioContext';
 
 const stats = [
   { value: '< 1', label: 'Year Experience' },
@@ -10,6 +10,9 @@ const stats = [
 
 export default function About() {
   const { ref, visible } = useReveal();
+  const { data } = usePortfolio();
+  const { aboutText } = data;
+
 
   return (
     <section id="about" className="relative py-28 px-6">

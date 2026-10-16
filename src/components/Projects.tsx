@@ -1,9 +1,11 @@
 import { ExternalLink, Github } from 'lucide-react';
 import { useReveal } from '@/hooks/useReveal';
-import { projects } from '@/data/portfolio';
+import { usePortfolio } from '@/context/PortfolioContext';
 
 export default function Projects() {
   const { ref, visible } = useReveal();
+  const { data } = usePortfolio();
+  const { projects } = data;
 
   return (
     <section id="projects" className="relative py-28 px-6">
@@ -18,7 +20,8 @@ export default function Projects() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p) => (
             <article
-              key={p.title}
+              key={p.id || p.title}
+
               className="group relative rounded-2xl bg-white/[0.03] border border-white/10 p-6 hover:border-sky-500/30 hover:bg-sky-500/[0.02] transition-all duration-300 hover:-translate-y-1"
             >
               <div className="text-3xl mb-4">{p.emoji}</div>

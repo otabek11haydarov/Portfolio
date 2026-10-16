@@ -1,9 +1,13 @@
 import { Briefcase } from 'lucide-react';
 import { useReveal } from '@/hooks/useReveal';
-import { experience } from '@/data/portfolio';
+import { usePortfolio } from '@/context/PortfolioContext';
 
 export default function Experience() {
   const { ref, visible } = useReveal();
+  const { data } = usePortfolio();
+  const { experience } = data;
+
+  if (!experience || experience.length === 0) return null;
 
   return (
     <section id="experience" className="relative py-28 px-6 bg-[#0c121f]">
@@ -17,7 +21,7 @@ export default function Experience() {
 
         <div className="relative pl-8 border-l border-white/10 space-y-10">
           {experience.map((e) => (
-            <div key={e.role} className="relative">
+            <div key={e.id || `${e.company}-${e.role}`} className="relative">
               <div className="absolute -left-[41px] w-4 h-4 rounded-full bg-sky-500/20 border-2 border-sky-400 flex items-center justify-center">
                 <Briefcase className="w-2 h-2 text-sky-400" />
               </div>

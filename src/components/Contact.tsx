@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { Mail, MapPin, Send, Github, Linkedin, CheckCircle2 } from 'lucide-react';
 import { useReveal } from '@/hooks/useReveal';
-import { profile } from '@/data/portfolio';
+import { usePortfolio } from '@/context/PortfolioContext';
 
 export default function Contact() {
   const { ref, visible } = useReveal();
+  const { data } = usePortfolio();
+  const { profile } = data;
+
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', message: '' });
 
