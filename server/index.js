@@ -19,6 +19,14 @@ const activeSessions = new Set();
 app.use(cors());
 app.use(express.json());
 
+// Normalize URLs if proxy or serverless router strips /api prefix
+app.use((req, res, next) => {
+  if (!req.url.startsWith('/api') && !req.url.startsWith('/favicon')) {
+    req.url = '/api' + (req.url.startsWith('/') ? req.url : '/' + req.url);
+  }
+  next();
+});
+
 // Helper to read data safely
 function readData() {
   if (inMemoryData) return inMemoryData;
