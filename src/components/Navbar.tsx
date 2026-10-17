@@ -27,7 +27,11 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-        <a href="#hero" className="flex items-center gap-2 font-display font-bold text-lg">
+        <a
+          href="#hero"
+          className="flex items-center gap-2 font-display font-bold text-lg"
+          aria-label="Otabek Haydarov - Home"
+        >
           <Code2 className="w-6 h-6 text-sky-400" />
           <span>OH<span className="text-sky-400">.</span></span>
         </a>
@@ -53,9 +57,10 @@ export default function Navbar() {
         </a>
 
         <button
-          className="md:hidden text-slate-200"
+          className="md:hidden text-slate-200 p-1.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/40"
           onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
+          aria-label="Toggle navigation menu"
+          aria-expanded={open}
         >
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>

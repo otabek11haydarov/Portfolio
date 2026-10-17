@@ -108,38 +108,38 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
     setAuthError('');
 
     try {
-      if (serverConnected) {
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password }),
-        });
-        const resData = await res.json();
-        if (res.ok && resData.success) {
-          localStorage.setItem('portfolio_admin_token', resData.token);
-          setIsAuthenticated(true);
-          return;
-        }
-      }
-
-      // Offline / fallback password check (default: admin123)
-      if (password === 'admin123' || password === localStorage.getItem('portfolio_admin_pass')) {
-        localStorage.setItem('portfolio_admin_token', 'offline_auth');
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      const resData = await res.json();
+      if (res.ok && resData.success) {
+        localStorage.setItem('portfolio_admin_token', resData.token);
         setIsAuthenticated(true);
-      } else {
-        setAuthError('Incorrect password. (Default is admin123)');
+        return;
       }
+      setAuthError(resData.message || 'Invalid admin credentials');
     } catch {
-      if (password === 'admin123') {
-        localStorage.setItem('portfolio_admin_token', 'offline_auth');
-        setIsAuthenticated(true);
-      } else {
-        setAuthError('Login failed. Please verify password.');
-      }
+      setAuthError('Authentication service unreachable. Ensure the backend server is running on port 5000.');
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    const token = localStorage.getItem('portfolio_admin_token');
+    if (token) {
+      try {
+        await fetch('/api/auth/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } catch (e) {
+        console.warn('Logout network error:', e);
+      }
+    }
     localStorage.removeItem('portfolio_admin_token');
     setIsAuthenticated(false);
   };
@@ -308,32 +308,25 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setPasswordChangeStatus(null);
+    const token = localStorage.getItem('portfolio_admin_token');
     try {
-      if (serverConnected) {
-        const res = await fetch('/api/auth/change-password', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ oldPassword, newPassword }),
-        });
-        const d = await res.json();
-        if (res.ok) {
-          showToast('Password changed successfully on server!');
-          setIsPasswordModalOpen(false);
-          setOldPassword('');
-          setNewPassword('');
-          return;
-        } else {
-          setPasswordChangeStatus(d.error || 'Failed to update password');
-          return;
-        }
+      const res = await fetch('/api/auth/change-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ oldPassword, newPassword }),
+      });
+      const d = await res.json();
+      if (res.ok) {
+        showToast('Password changed successfully on server!');
+        setIsPasswordModalOpen(false);
+        setOldPassword('');
+        setNewPassword('');
+      } else {
+        setPasswordChangeStatus(d.error || 'Failed to update password');
       }
-
-      // Offline
-      localStorage.setItem('portfolio_admin_pass', newPassword);
-      showToast('Password changed successfully in browser!');
-      setIsPasswordModalOpen(false);
-      setOldPassword('');
-      setNewPassword('');
     } catch (e: any) {
       setPasswordChangeStatus('Error changing password: ' + e.message);
     }
@@ -372,7 +365,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter password (default: admin123)"
+                placeholder="Enter admin password"
                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition-colors"
                 autoFocus
               />
@@ -392,10 +385,6 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
               Sign In to Admin
             </button>
           </form>
-
-          <p className="mt-6 text-center text-xs text-slate-500">
-            Default credentials: <code className="text-sky-400">admin123</code>
-          </p>
         </div>
       </div>
     );
@@ -1176,7 +1165,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
                   value={oldPassword}
                   onChange={(e) => setOldPassword(e.target.value)}
                   className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white"
-                  placeholder="Current password (default: admin123)"
+                  placeholder="Current password"
                 />
               </div>
 

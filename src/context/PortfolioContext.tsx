@@ -127,6 +127,15 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     }
   };
 
+  const getAuthHeaders = (): Record<string, string> => {
+    const token = localStorage.getItem('portfolio_admin_token') || sessionStorage.getItem('portfolio_admin_token');
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    return headers;
+  };
+
   useEffect(() => {
     fetchFromApi();
   }, []);
@@ -145,7 +154,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (serverConnected) {
         await fetch('/api/portfolio/profile', {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers: getAuthHeaders(),
           body: JSON.stringify({ profile: profileUpdates, aboutText: aboutTextUpdate }),
         });
       }
@@ -169,7 +178,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (serverConnected) {
         await fetch('/api/portfolio/projects', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: getAuthHeaders(),
           body: JSON.stringify(newProj),
         });
       }
@@ -190,7 +199,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (serverConnected) {
         await fetch(`/api/portfolio/projects/${id}`, {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers: getAuthHeaders(),
           body: JSON.stringify(updates),
         });
       }
@@ -211,6 +220,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (serverConnected) {
         await fetch(`/api/portfolio/projects/${id}`, {
           method: 'DELETE',
+          headers: getAuthHeaders(),
         });
       }
     } catch (e) {
@@ -233,7 +243,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (serverConnected) {
         await fetch('/api/portfolio/skills', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: getAuthHeaders(),
           body: JSON.stringify(newSkill),
         });
       }
@@ -254,7 +264,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (serverConnected) {
         await fetch(`/api/portfolio/skills/${id}`, {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers: getAuthHeaders(),
           body: JSON.stringify(updates),
         });
       }
@@ -275,6 +285,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (serverConnected) {
         await fetch(`/api/portfolio/skills/${id}`, {
           method: 'DELETE',
+          headers: getAuthHeaders(),
         });
       }
     } catch (e) {
@@ -297,7 +308,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (serverConnected) {
         await fetch('/api/portfolio/experience', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: getAuthHeaders(),
           body: JSON.stringify(newExp),
         });
       }
@@ -318,7 +329,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (serverConnected) {
         await fetch(`/api/portfolio/experience/${id}`, {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers: getAuthHeaders(),
           body: JSON.stringify(updates),
         });
       }
@@ -339,6 +350,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (serverConnected) {
         await fetch(`/api/portfolio/experience/${id}`, {
           method: 'DELETE',
+          headers: getAuthHeaders(),
         });
       }
     } catch (e) {
@@ -363,7 +375,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (serverConnected) {
         await fetch('/api/portfolio/sync', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: getAuthHeaders(),
           body: JSON.stringify(defaultData),
         });
       }

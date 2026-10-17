@@ -46,6 +46,7 @@ export default function Projects() {
                   href={p.link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`View live demo of ${p.title}`}
                   className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-sky-400 transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" /> Live
@@ -54,6 +55,7 @@ export default function Projects() {
                   href={p.repo}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`View source code of ${p.title}`}
                   className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-sky-400 transition-colors"
                 >
                   <Github className="w-4 h-4" /> Code

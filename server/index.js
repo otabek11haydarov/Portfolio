@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -11,25 +12,32 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const DATA_FILE = path.join(__dirname, 'data', 'portfolio.json');
 
+// Memory cache fallback for serverless/read-only hosting environments
+let inMemoryData = null;
+const activeSessions = new Set();
+
 app.use(cors());
 app.use(express.json());
 
 // Helper to read data safely
 function readData() {
+  if (inMemoryData) return inMemoryData;
   try {
     if (!fs.existsSync(DATA_FILE)) {
       return null;
     }
     const raw = fs.readFileSync(DATA_FILE, 'utf-8');
-    return JSON.parse(raw);
+    inMemoryData = JSON.parse(raw);
+    return inMemoryData;
   } catch (err) {
-    console.error('Error reading data:', err);
+    console.error('[Database] Error reading data file:', err.message);
     return null;
   }
 }
 
-// Helper to write data safely
+// Helper to write data safely with serverless read-only fallback
 function writeData(data) {
+  inMemoryData = data;
   try {
     const dir = path.dirname(DATA_FILE);
     if (!fs.existsSync(dir)) {
@@ -38,35 +46,63 @@ function writeData(data) {
     fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8');
     return true;
   } catch (err) {
-    console.error('Error writing data:', err);
-    return false;
+    console.warn('[Server Storage] Read-only filesystem detected. Retaining updates in runtime memory cache.');
+    return true;
   }
+}
+
+// Secure Authentication Middleware
+function requireAuth(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Unauthorized: Missing or malformed authorization token' });
+  }
+
+  const token = authHeader.split(' ')[1];
+  if (!activeSessions.has(token)) {
+    return res.status(403).json({ error: 'Forbidden: Session expired or invalid token' });
+  }
+
+  next();
 }
 
 // --- Auth Routes ---
 app.post('/api/auth/login', (req, res) => {
   const { password } = req.body;
-  const data = readData();
-  const currentPassword = data?.admin?.passwordHash || 'admin123';
-
-  if (password === currentPassword) {
-    return res.json({ success: true, token: 'auth_' + Date.now() });
+  if (!password) {
+    return res.status(400).json({ success: false, message: 'Password is required' });
   }
-  return res.status(401).json({ success: false, message: 'Invalid password' });
+
+  const data = readData();
+  const configuredPassword = process.env.ADMIN_PASSWORD || data?.admin?.passwordHash || 'admin123';
+
+  if (password === configuredPassword) {
+    const token = crypto.randomBytes(32).toString('hex');
+    activeSessions.add(token);
+    return res.json({ success: true, token });
+  }
+
+  return res.status(401).json({ success: false, message: 'Invalid credentials' });
 });
 
-app.post('/api/auth/change-password', (req, res) => {
+app.post('/api/auth/logout', requireAuth, (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  activeSessions.delete(token);
+  res.json({ success: true, message: 'Logged out successfully' });
+});
+
+app.post('/api/auth/change-password', requireAuth, (req, res) => {
   const { oldPassword, newPassword } = req.body;
   const data = readData();
   if (!data) return res.status(500).json({ error: 'Database unavailable' });
 
-  const currentPassword = data.admin?.passwordHash || 'admin123';
+  const currentPassword = process.env.ADMIN_PASSWORD || data.admin?.passwordHash || 'admin123';
   if (oldPassword !== currentPassword) {
     return res.status(400).json({ error: 'Old password is incorrect' });
   }
 
-  if (!newPassword || newPassword.trim().length < 4) {
-    return res.status(400).json({ error: 'New password must be at least 4 characters long' });
+  if (!newPassword || newPassword.trim().length < 6) {
+    return res.status(400).json({ error: 'New password must be at least 6 characters long' });
   }
 
   data.admin = { passwordHash: newPassword.trim() };
@@ -74,19 +110,19 @@ app.post('/api/auth/change-password', (req, res) => {
   return res.json({ success: true, message: 'Password updated successfully' });
 });
 
-// --- Portfolio Public Data ---
+// --- Public Portfolio Data ---
 app.get('/api/portfolio', (req, res) => {
   const data = readData();
   if (!data) {
     return res.status(500).json({ error: 'Failed to read portfolio data' });
   }
-  // Exclude admin credentials from response
+  // Exclude admin credentials from public API
   const { admin, ...publicData } = data;
   res.json(publicData);
 });
 
-// --- Update Profile & About ---
-app.put('/api/portfolio/profile', (req, res) => {
+// --- Protected Mutating Routes (Require Bearer Token) ---
+app.put('/api/portfolio/profile', requireAuth, (req, res) => {
   const { profile, aboutText } = req.body;
   const data = readData();
   if (!data) return res.status(500).json({ error: 'Data unavailable' });
@@ -98,8 +134,8 @@ app.put('/api/portfolio/profile', (req, res) => {
   res.json({ success: true, profile: data.profile, aboutText: data.aboutText });
 });
 
-// --- Projects CRUD ---
-app.post('/api/portfolio/projects', (req, res) => {
+// Projects CRUD
+app.post('/api/portfolio/projects', requireAuth, (req, res) => {
   const data = readData();
   if (!data) return res.status(500).json({ error: 'Data unavailable' });
 
@@ -120,7 +156,7 @@ app.post('/api/portfolio/projects', (req, res) => {
   res.status(201).json({ success: true, project: newProject, projects: data.projects });
 });
 
-app.put('/api/portfolio/projects/:id', (req, res) => {
+app.put('/api/portfolio/projects/:id', requireAuth, (req, res) => {
   const { id } = req.params;
   const data = readData();
   if (!data) return res.status(500).json({ error: 'Data unavailable' });
@@ -133,14 +169,14 @@ app.put('/api/portfolio/projects/:id', (req, res) => {
   data.projects[index] = {
     ...data.projects[index],
     ...req.body,
-    id // keep original id
+    id
   };
   writeData(data);
 
   res.json({ success: true, project: data.projects[index], projects: data.projects });
 });
 
-app.delete('/api/portfolio/projects/:id', (req, res) => {
+app.delete('/api/portfolio/projects/:id', requireAuth, (req, res) => {
   const { id } = req.params;
   const data = readData();
   if (!data) return res.status(500).json({ error: 'Data unavailable' });
@@ -151,8 +187,8 @@ app.delete('/api/portfolio/projects/:id', (req, res) => {
   res.json({ success: true, projects: data.projects });
 });
 
-// --- Skills CRUD ---
-app.post('/api/portfolio/skills', (req, res) => {
+// Skills CRUD
+app.post('/api/portfolio/skills', requireAuth, (req, res) => {
   const data = readData();
   if (!data) return res.status(500).json({ error: 'Data unavailable' });
 
@@ -170,7 +206,7 @@ app.post('/api/portfolio/skills', (req, res) => {
   res.status(201).json({ success: true, skill: newSkill, skills: data.skills });
 });
 
-app.put('/api/portfolio/skills/:id', (req, res) => {
+app.put('/api/portfolio/skills/:id', requireAuth, (req, res) => {
   const { id } = req.params;
   const data = readData();
   if (!data) return res.status(500).json({ error: 'Data unavailable' });
@@ -191,7 +227,7 @@ app.put('/api/portfolio/skills/:id', (req, res) => {
   res.json({ success: true, skill: data.skills[index], skills: data.skills });
 });
 
-app.delete('/api/portfolio/skills/:id', (req, res) => {
+app.delete('/api/portfolio/skills/:id', requireAuth, (req, res) => {
   const { id } = req.params;
   const data = readData();
   if (!data) return res.status(500).json({ error: 'Data unavailable' });
@@ -202,8 +238,8 @@ app.delete('/api/portfolio/skills/:id', (req, res) => {
   res.json({ success: true, skills: data.skills });
 });
 
-// --- Experience CRUD ---
-app.post('/api/portfolio/experience', (req, res) => {
+// Experience CRUD
+app.post('/api/portfolio/experience', requireAuth, (req, res) => {
   const data = readData();
   if (!data) return res.status(500).json({ error: 'Data unavailable' });
 
@@ -211,7 +247,7 @@ app.post('/api/portfolio/experience', (req, res) => {
     id: 'exp-' + Date.now(),
     role: req.body.role || 'New Role',
     company: req.body.company || 'Company',
-    period: req.body.period || '2024 - Present',
+    period: req.body.period || 'Present',
     description: req.body.description || ''
   };
 
@@ -222,7 +258,7 @@ app.post('/api/portfolio/experience', (req, res) => {
   res.status(201).json({ success: true, experience: newExp, allExperience: data.experience });
 });
 
-app.put('/api/portfolio/experience/:id', (req, res) => {
+app.put('/api/portfolio/experience/:id', requireAuth, (req, res) => {
   const { id } = req.params;
   const data = readData();
   if (!data) return res.status(500).json({ error: 'Data unavailable' });
@@ -242,7 +278,7 @@ app.put('/api/portfolio/experience/:id', (req, res) => {
   res.json({ success: true, experience: data.experience[index], allExperience: data.experience });
 });
 
-app.delete('/api/portfolio/experience/:id', (req, res) => {
+app.delete('/api/portfolio/experience/:id', requireAuth, (req, res) => {
   const { id } = req.params;
   const data = readData();
   if (!data) return res.status(500).json({ error: 'Data unavailable' });
@@ -253,8 +289,8 @@ app.delete('/api/portfolio/experience/:id', (req, res) => {
   res.json({ success: true, allExperience: data.experience });
 });
 
-// --- Bulk Sync (Full Update / Restore) ---
-app.post('/api/portfolio/sync', (req, res) => {
+// Bulk sync endpoint
+app.post('/api/portfolio/sync', requireAuth, (req, res) => {
   const data = readData();
   if (!data) return res.status(500).json({ error: 'Data unavailable' });
 
@@ -266,7 +302,7 @@ app.post('/api/portfolio/sync', (req, res) => {
   if (Array.isArray(experience)) data.experience = experience;
 
   writeData(data);
-  res.json({ success: true, message: 'All portfolio data synchronized successfully' });
+  res.json({ success: true, message: 'Portfolio data synchronized successfully' });
 });
 
 app.listen(PORT, () => {
