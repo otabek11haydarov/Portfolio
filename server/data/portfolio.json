@@ -6,7 +6,8 @@
     "email": "otabek11haydarov@gmail.com",
     "github": "https://github.com/otabek11haydarov",
     "linkedin": "https://www.linkedin.com/in/otabek-haydarov-910789386",
-    "location": "Tashkent, Uzbekistan"
+    "location": "Tashkent, Uzbekistan",
+    "resumeUrl": "/resume.pdf"
   },
   "aboutText": "I’m a Data Analyst with a solid engineering foundation, focused on turning complex datasets into clear, actionable business insights. While my primary drive is data exploration, dashboarding, and analytics workflows, my background in web development allows me to bridge the gap between backend data pipelines and intuitive interfaces. I care deeply about data integrity, analytical clarity, and delivering metrics that drive confident decisions.",
   "skills": [

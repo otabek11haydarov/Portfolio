@@ -30,6 +30,7 @@ export interface Profile {
   github: string;
   linkedin: string;
   location: string;
+  resumeUrl?: string;
 }
 
 export interface PortfolioData {

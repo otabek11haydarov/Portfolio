@@ -770,6 +770,19 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
 
               <div>
                 <label className="block text-xs uppercase tracking-wider text-slate-400 font-semibold mb-2">
+                  CV / Resume URL (File path or Google Drive link)
+                </label>
+                <input
+                  type="text"
+                  value={profileForm.resumeUrl || ''}
+                  onChange={(e) => setProfileForm({ ...profileForm, resumeUrl: e.target.value })}
+                  placeholder="/resume.pdf or https://drive.google.com/..."
+                  className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-sky-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-400 font-semibold mb-2">
                   About Me Description
                 </label>
                 <textarea
