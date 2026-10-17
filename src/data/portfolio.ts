@@ -109,24 +109,24 @@ export const projects: Project[] = [
 
 export const experience: Experience[] = [
   {
-    role: 'Senior Data Analyst',
-    company: 'Northwind Analytics',
-    period: '2023 — Present',
+    role: 'Open to Work — Seeking Internship',
+    company: 'Available for Opportunities',
+    period: 'Present',
     description:
-      'Lead analyst for the growth team. Built the experimentation platform, automated weekly reporting, and partnered with engineering on data quality initiatives.',
+      'Actively looking for Internship and Junior Data Analyst / Software Developer positions. Ready to contribute with strong technical fundamentals, hands-on experience in Python, SQL, Power BI, React, and a passion for data-driven problem solving.',
   },
   {
-    role: 'Full-Stack Developer',
-    company: 'Brightwave Labs',
-    period: '2020 — 2023',
+    role: 'Practical Project Development & Analytics',
+    company: 'Independent Projects',
+    period: '2024 — Present',
     description:
-      'Developed customer-facing dashboards and internal tools using React and Node.js. Shipped the analytics module used by 10k+ daily active users.',
+      'Designing and developing end-to-end data analytics solutions, predictive machine learning models, and full-stack applications. Focused on writing clean, scalable code and delivering intuitive dashboards.',
   },
   {
-    role: 'Data Engineer',
-    company: 'Crestline Financial',
-    period: '2018 — 2020',
+    role: 'Technical Training & Continuous Learning',
+    company: 'Self-Directed & Academic Studies',
+    period: '2023 — 2024',
     description:
-      'Built and maintained ETL pipelines feeding the risk and compliance teams. Migrated legacy reporting to a modern cloud data stack.',
+      'Completed comprehensive practical coursework in Data Analytics, Database Management (PostgreSQL, MySQL, SQL Server), and Modern Web Development. Built real-world portfolio projects and analytical case studies.',
   },
 ];

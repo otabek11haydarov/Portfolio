@@ -190,24 +190,24 @@
   "experience": [
     {
       "id": "exp-1",
-      "role": "Senior Data Analyst",
-      "company": "Northwind Analytics",
-      "period": "2023 — Present",
-      "description": "Lead analyst for the growth team. Built the experimentation platform, automated weekly reporting, and partnered with engineering on data quality initiatives."
+      "role": "Open to Work — Seeking Internship",
+      "company": "Available for Opportunities",
+      "period": "Present",
+      "description": "Actively looking for Internship and Junior Data Analyst / Software Developer positions. Ready to contribute with strong technical fundamentals, hands-on experience in Python, SQL, Power BI, React, and a passion for data-driven problem solving."
     },
     {
       "id": "exp-2",
-      "role": "Full-Stack Developer",
-      "company": "Brightwave Labs",
-      "period": "2020 — 2023",
-      "description": "Developed customer-facing dashboards and internal tools using React and Node.js. Shipped the analytics module used by 10k+ daily active users."
+      "role": "Practical Project Development & Analytics",
+      "company": "Independent Projects",
+      "period": "2024 — Present",
+      "description": "Designing and developing end-to-end data analytics solutions, predictive machine learning models, and full-stack applications. Focused on writing clean, scalable code and delivering intuitive dashboards."
     },
     {
       "id": "exp-3",
-      "role": "Data Engineer",
-      "company": "Crestline Financial",
-      "period": "2018 — 2020",
-      "description": "Built and maintained ETL pipelines feeding the risk and compliance teams. Migrated legacy reporting to a modern cloud data stack."
+      "role": "Technical Training & Continuous Learning",
+      "company": "Self-Directed & Academic Studies",
+      "period": "2023 — 2024",
+      "description": "Completed comprehensive practical coursework in Data Analytics, Database Management (PostgreSQL, MySQL, SQL Server), and Modern Web Development. Built real-world portfolio projects and analytical case studies."
     }
   ],
   "admin": {

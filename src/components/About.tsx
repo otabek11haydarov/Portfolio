@@ -2,10 +2,10 @@ import { useReveal } from '@/hooks/useReveal';
 import { usePortfolio } from '@/context/PortfolioContext';
 
 const stats = [
-  { value: '< 1', label: 'Year Experience' },
-  { value: '5+', label: 'Projects Delivered' },
-  { value: '2M+', label: 'Rows Processed Daily' },
-  { value: '100%', label: 'Data-Driven Focus' },
+  { value: 'Open', label: 'For Internship' },
+  { value: '5+', label: 'Projects Completed' },
+  { value: '10+', label: 'Technologies Used' },
+  { value: '100%', label: 'Dedication & Focus' },
 ];
 
 export default function About() {

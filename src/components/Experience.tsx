@@ -1,4 +1,4 @@
-import { Briefcase } from 'lucide-react';
+import { Briefcase, ArrowUpRight } from 'lucide-react';
 import { useReveal } from '@/hooks/useReveal';
 import { usePortfolio } from '@/context/PortfolioContext';
 
@@ -12,12 +12,25 @@ export default function Experience() {
   return (
     <section id="experience" className="relative py-28 px-6 bg-[#0c121f]">
       <div ref={ref} className={`max-w-4xl mx-auto reveal ${visible ? 'is-visible' : ''}`}>
-        <p className="text-sky-400 font-display font-semibold text-sm tracking-widest uppercase mb-3">
-          Experience
-        </p>
-        <h2 className="font-display font-bold text-3xl md:text-4xl mb-12">
-          Where I've worked
-        </h2>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+          <div>
+            <p className="text-sky-400 font-display font-semibold text-sm tracking-widest uppercase mb-3">
+              Career & Pathway
+            </p>
+            <h2 className="font-display font-bold text-3xl md:text-4xl">
+              Experience & Opportunities
+            </h2>
+          </div>
+
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold hover:bg-emerald-500/20 transition-all self-start sm:self-auto group"
+          >
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Open to Work — Available for Internship</span>
+            <ArrowUpRight className="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+        </div>
 
         <div className="relative pl-8 border-l border-white/10 space-y-10">
           {experience.map((e) => (
