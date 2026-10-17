@@ -187,7 +187,7 @@ Portfolio/
 **Otabek Haydarov**  
 - **Email:** [otabek11haydarov@gmail.com](mailto:otabek11haydarov@gmail.com)  
 - **GitHub:** [@otabek11haydarov](https://github.com/otabek11haydarov)  
-- **LinkedIn:** [Otabek Haydarov](https://linkedin.com/in/jordanrivera)  
+- **LinkedIn:** [Otabek Haydarov](https://www.linkedin.com/in/otabek-haydarov-910789386)  
 - **Location:** Tashkent, Uzbekistan  
 
 ---

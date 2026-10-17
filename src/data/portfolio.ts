@@ -26,7 +26,7 @@ export const profile = {
   tagline: 'I turn messy data into clean insights and clean code into great products.',
   email: 'otabek11haydarov@gmail.com',
   github: 'https://github.com/otabek11haydarov',
-  linkedin: 'https://linkedin.com/in/jordanrivera',
+  linkedin: 'https://www.linkedin.com/in/otabek-haydarov-910789386',
   location: 'Tashkent, Uzbekistan',
 };
 
