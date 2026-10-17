@@ -60,14 +60,50 @@ interface PortfolioContextType {
   reload: () => Promise<void>;
 }
 
-const STORAGE_KEY = 'portfolio_custom_data_v1';
+const STORAGE_KEY = 'portfolio_data_v3';
+const LEGACY_STORAGE_KEYS = ['portfolio_custom_data_v1', 'portfolio_custom_data_v2'];
+
+const sanitizeCachedData = (raw: any): PortfolioData | null => {
+  if (!raw || typeof raw !== 'object') return null;
+
+  // Detect and purge legacy template mock data (Northwind, Brightwave, Crestline, etc.)
+  const hasMockExperience = Array.isArray(raw.experience) && raw.experience.some((exp: any) =>
+    exp?.company?.toLowerCase().includes('northwind') ||
+    exp?.company?.toLowerCase().includes('brightwave') ||
+    exp?.company?.toLowerCase().includes('crestline') ||
+    exp?.role?.toLowerCase().includes('senior data analyst')
+  );
+
+  if (hasMockExperience) {
+    return null;
+  }
+
+  if (!raw.profile || !raw.skills || !raw.projects || !raw.experience) {
+    return null;
+  }
+
+  return raw as PortfolioData;
+};
 
 const getInitialState = (): PortfolioData => {
+  // Clear any legacy keys with old mock data
+  try {
+    LEGACY_STORAGE_KEYS.forEach((key) => localStorage.removeItem(key));
+  } catch {
+    // Ignore storage errors in restricted contexts
+  }
+
   // 1. Try local storage cache
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
-      return JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      const sanitized = sanitizeCachedData(parsed);
+      if (sanitized) {
+        return sanitized;
+      } else {
+        localStorage.removeItem(STORAGE_KEY);
+      }
     }
   } catch (e) {
     console.warn('Could not read from localStorage', e);
@@ -107,13 +143,17 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       const res = await fetch('/api/portfolio');
       if (res.ok) {
         const apiData = await res.json();
-        // Ensure arrays and objects exist
+        // Ensure arrays and objects exist and don't contain stale mock companies
+        const experienceData = (Array.isArray(apiData.experience) && !apiData.experience.some((e: any) => e?.company?.toLowerCase().includes('northwind')))
+          ? apiData.experience
+          : defaultExperience.map((e, idx) => ({ ...e, id: `exp-${idx}` }));
+
         const formatted: PortfolioData = {
           profile: apiData.profile || defaultProfile,
           aboutText: apiData.aboutText || defaultAboutText,
           skills: apiData.skills || [],
           projects: apiData.projects || [],
-          experience: apiData.experience || [],
+          experience: experienceData,
         };
         persistLocally(formatted);
         setServerConnected(true);
