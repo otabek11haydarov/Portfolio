@@ -12,9 +12,11 @@ import Footer from '@/components/Footer';
 import AdminDashboard from '@/components/admin/AdminDashboard';
 import { PortfolioProvider } from '@/context/PortfolioContext';
 import { useInteractiveButtons } from '@/hooks/useInteractiveButtons';
+import { useInteractiveCards } from '@/hooks/useInteractiveCards';
 
 function PortfolioApp() {
   useInteractiveButtons();
+  useInteractiveCards();
 
   const [isAdminOpen, setIsAdminOpen] = useState(() => {
     return window.location.hash === '#admin' || window.location.pathname === '/admin';

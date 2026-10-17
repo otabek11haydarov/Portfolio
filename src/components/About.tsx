@@ -33,10 +33,11 @@ export default function About() {
           </div>
 
           <div className="md:col-span-2 grid grid-cols-2 gap-4">
-            {stats.map((s) => (
+            {stats.map((s, idx) => (
               <div
                 key={s.label}
-                className="rounded-2xl bg-white/[0.03] border border-white/10 p-5 text-center hover:border-sky-500/30 hover:bg-sky-500/[0.03] transition-all duration-300"
+                className="interactive-card stat-card-float rounded-2xl bg-white/[0.03] border border-white/10 p-5 text-center transition-all duration-300"
+                style={{ '--card-idx': idx } as React.CSSProperties}
               >
                 <p className="font-display font-bold text-3xl bg-gradient-to-r from-sky-400 to-teal-300 bg-clip-text text-transparent">
                   {s.value}

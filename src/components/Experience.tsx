@@ -33,18 +33,23 @@ export default function Experience() {
         </div>
 
         <div className="relative pl-8 border-l border-white/10 space-y-10">
-          {experience.map((e) => (
+          {experience.map((e, idx) => (
             <div key={e.id || `${e.company}-${e.role}`} className="relative">
               <div className="absolute -left-[41px] w-4 h-4 rounded-full bg-sky-500/20 border-2 border-sky-400 flex items-center justify-center">
                 <Briefcase className="w-2 h-2 text-sky-400" />
               </div>
-              <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-6 hover:border-sky-500/20 transition-colors duration-300">
+              <div
+                className="interactive-card rounded-2xl bg-white/[0.03] border border-white/10 p-6"
+                style={{ '--card-idx': idx } as React.CSSProperties}
+              >
                 <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
                   <h3 className="font-display font-semibold text-lg text-slate-100">{e.role}</h3>
-                  <span className="text-xs text-slate-500 font-medium">{e.period}</span>
+                  <span className="text-xs text-sky-400 font-mono font-medium bg-sky-500/10 px-2.5 py-1 rounded-full border border-sky-500/20">
+                    {e.period}
+                  </span>
                 </div>
                 <p className="text-sky-400 text-sm font-medium mb-3">{e.company}</p>
-                <p className="text-sm text-slate-400 leading-relaxed">{e.description}</p>
+                <p className="text-sm text-slate-300 leading-relaxed">{e.description}</p>
               </div>
             </div>
           ))}

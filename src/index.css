@@ -248,3 +248,129 @@ a.btn-interactive:active,
   }
 }
 
+/* ===== ADVANCED 3D HOLOGRAPHIC CARD ANIMATIONS ===== */
+@keyframes cardCascadeIn {
+  0% {
+    opacity: 0;
+    transform: perspective(950px) translateY(26px) rotateX(8deg) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(950px) translateY(0) rotateX(0deg) scale(1);
+  }
+}
+
+@keyframes skillBarShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes floatStatPulse {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+.interactive-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transform-style: preserve-3d;
+  animation: cardCascadeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--card-idx, 0) * 65ms);
+  transform:
+    perspective(950px)
+    rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg))
+    translateY(var(--lift, 0px))
+    scale(var(--cscale, 1));
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+/* Kursor kuzatuvchi Holographic Spotlight nuri */
+.interactive-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    320px circle at var(--cmx, 50%) var(--cmy, 50%),
+    rgba(56, 189, 248, 0.18),
+    rgba(129, 140, 248, 0.12) 38%,
+    rgba(192, 132, 252, 0.06) 60%,
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Yorqin Neon Chegara Nuri (Border Beam Glow) */
+.interactive-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: radial-gradient(
+    220px circle at var(--cmx, 50%) var(--cmy, 50%),
+    rgba(56, 189, 248, 0.9),
+    rgba(168, 85, 247, 0.65) 45%,
+    transparent 75%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.interactive-card:hover {
+  --lift: -6px;
+  --cscale: 1.02;
+  border-color: rgba(56, 189, 248, 0.55) !important;
+  box-shadow:
+    0 22px 42px -12px rgba(2, 132, 199, 0.32),
+    0 0 28px -4px rgba(129, 140, 248, 0.25);
+}
+
+.interactive-card:hover::before,
+.interactive-card:hover::after {
+  opacity: 1;
+}
+
+.interactive-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Kartochka ichidagi sarlavha va teglarning 3D qalqib chiqishi */
+.interactive-card h3 {
+  transition: transform 0.28s ease, color 0.25s ease;
+}
+
+.interactive-card:hover h3 {
+  color: #38bdf8;
+  transform: translateX(3px);
+}
+
+.skill-bar-animated {
+  background: linear-gradient(90deg, #0ea5e9, #6366f1, #a855f7, #38bdf8);
+  background-size: 250% 250%;
+  animation: skillBarShimmer 3.2s ease infinite;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.55);
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.stat-card-float {
+  animation: floatStatPulse 4s ease-in-out infinite;
+}
+
+

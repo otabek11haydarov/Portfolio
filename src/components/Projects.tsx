@@ -18,30 +18,32 @@ export default function Projects() {
         </h2>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((p) => (
+          {projects.map((p, idx) => (
             <article
               key={p.id || p.title}
-
-              className="group relative rounded-2xl bg-white/[0.03] border border-white/10 p-6 hover:border-sky-500/30 hover:bg-sky-500/[0.02] transition-all duration-300 hover:-translate-y-1"
+              className="interactive-card group relative rounded-2xl bg-white/[0.03] border border-white/10 p-6 flex flex-col justify-between"
+              style={{ '--card-idx': idx } as React.CSSProperties}
             >
-              <div className="text-3xl mb-4">{p.emoji}</div>
-              <h3 className="font-display font-semibold text-lg text-slate-100 mb-2 group-hover:text-sky-400 transition-colors">
-                {p.title}
-              </h3>
-              <p className="text-sm text-slate-400 leading-relaxed mb-4">{p.description}</p>
+              <div>
+                <div className="text-3xl mb-4">{p.emoji}</div>
+                <h3 className="font-display font-semibold text-lg text-slate-100 mb-2 group-hover:text-sky-400 transition-colors">
+                  {p.title}
+                </h3>
+                <p className="text-sm text-slate-400 leading-relaxed mb-4">{p.description}</p>
 
-              <div className="flex flex-wrap gap-2 mb-5">
-                {p.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300"
-                  >
-                    {t}
-                  </span>
-                ))}
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {p.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 pt-4 border-t border-white/5">
                 <a
                   href={p.link}
                   target="_blank"
