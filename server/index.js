@@ -82,7 +82,7 @@ app.post('/api/auth/login', (req, res) => {
   }
 
   const data = readData();
-  const configuredPassword = process.env.ADMIN_PASSWORD || data?.admin?.passwordHash || 'admin123';
+  const configuredPassword = process.env.ADMIN_PASSWORD || data?.admin?.passwordHash || 'Otabek#2026';
 
   if (password === configuredPassword) {
     const token = crypto.randomBytes(32).toString('hex');
@@ -104,7 +104,7 @@ app.post('/api/auth/change-password', requireAuth, (req, res) => {
   const data = readData();
   if (!data) return res.status(500).json({ error: 'Database unavailable' });
 
-  const currentPassword = process.env.ADMIN_PASSWORD || data.admin?.passwordHash || 'admin123';
+  const currentPassword = process.env.ADMIN_PASSWORD || data.admin?.passwordHash || 'Otabek#2026';
   if (oldPassword !== currentPassword) {
     return res.status(400).json({ error: 'Old password is incorrect' });
   }

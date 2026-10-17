@@ -26,7 +26,7 @@ export const profile = {
   tagline: 'I turn messy data into clean insights and clean code into great products.',
   email: 'otabek11haydarov@gmail.com',
   github: 'https://github.com/otabek11haydarov',
-  linkedin: 'https://www.linkedin.com/in/otabek-haydarov-910789386',
+  linkedin: 'https://www.linkedin.com/in/otabek-haydarov',
   location: 'Tashkent, Uzbekistan',
   resumeUrl: '/resume.pdf',
 };
@@ -57,8 +57,8 @@ export const projects: Project[] = [
     description:
       'Built an interactive dashboard that forecasts quarterly revenue using time-series models. Reduced forecast error by 23% compared to the previous spreadsheet-based approach.',
     tags: ['Python', 'Prophet', 'React', 'D3.js'],
-    link: '#',
-    repo: '#',
+    link: 'https://haydarov-portfolio.vercel.app',
+    repo: 'https://github.com/otabek11haydarov/Portfolio',
     emoji: '📈',
   },
   {
@@ -66,8 +66,8 @@ export const projects: Project[] = [
     description:
       'Designed an end-to-end ETL pipeline that ingests 2M+ rows daily, applies a gradient-boosted churn model, and pushes at-risk accounts to the CRM in real time.',
     tags: ['Python', 'Airflow', 'PostgreSQL', 'scikit-learn'],
-    link: '#',
-    repo: '#',
+    link: 'https://haydarov-portfolio.vercel.app',
+    repo: 'https://github.com/otabek11haydarov/Portfolio',
     emoji: '🔄',
   },
   {
@@ -75,8 +75,8 @@ export const projects: Project[] = [
     description:
       'An open-source React component library for embedding charts and KPI cards in any app. 1.2k+ GitHub stars and used by 30+ teams.',
     tags: ['TypeScript', 'React', 'Tailwind', 'Vite'],
-    link: '#',
-    repo: '#',
+    link: 'https://haydarov-portfolio.vercel.app',
+    repo: 'https://github.com/otabek11haydarov/Portfolio',
     emoji: '🧩',
   },
   {
@@ -84,8 +84,8 @@ export const projects: Project[] = [
     description:
       'A tool that lets non-technical users ask questions in plain English and get SQL results back. Powered by an LLM with a validated SQL-generation guard layer.',
     tags: ['Python', 'FastAPI', 'LLM', 'PostgreSQL'],
-    link: '#',
-    repo: '#',
+    link: 'https://haydarov-portfolio.vercel.app',
+    repo: 'https://github.com/otabek11haydarov/Portfolio',
     emoji: '💬',
   },
   {
@@ -93,8 +93,8 @@ export const projects: Project[] = [
     description:
       'Streams tweets and product reviews through a sentiment model and visualizes trends on a live map. Handles 500 events/sec with sub-second latency.',
     tags: ['Kafka', 'Python', 'WebSocket', 'React'],
-    link: '#',
-    repo: '#',
+    link: 'https://haydarov-portfolio.vercel.app',
+    repo: 'https://github.com/otabek11haydarov/Portfolio',
     emoji: '🗺️',
   },
   {
@@ -102,32 +102,32 @@ export const projects: Project[] = [
     description:
       'A web app that categorizes transactions automatically and shows spending breakdowns with interactive charts. Featured on a popular dev showcase.',
     tags: ['TypeScript', 'React', 'Supabase', 'Recharts'],
-    link: '#',
-    repo: '#',
+    link: 'https://haydarov-portfolio.vercel.app',
+    repo: 'https://github.com/otabek11haydarov/Portfolio',
     emoji: '💰',
   },
 ];
 
 export const experience: Experience[] = [
   {
-    role: 'Open to Work — Seeking Internship',
-    company: 'Available for Opportunities',
-    period: 'Present',
+    role: 'Open to Work — Seeking Internship / Junior Role',
+    company: 'Available for Opportunities (Tashkent / Remote)',
+    period: '2025 — Present',
     description:
-      'Actively looking for Internship and Junior Data Analyst / Software Developer positions. Ready to contribute with strong technical fundamentals, hands-on experience in Python, SQL, Power BI, React, and a passion for data-driven problem solving.',
+      'Actively open for Internship and Junior Data Analyst / Software Engineer positions. Ready to bring value with solid skills in Python, SQL, Power BI, React, TypeScript, and automated data pipelines.',
   },
   {
-    role: 'Practical Project Development & Analytics',
-    company: 'Independent Projects',
-    period: '2024 — Present',
+    role: 'Data Analyst & Full-Stack Projects',
+    company: 'IT Park Uzbekistan Ecosystem & Open Source',
+    period: '2024 — 2025',
     description:
-      'Designing and developing end-to-end data analytics solutions, predictive machine learning models, and full-stack applications. Focused on writing clean, scalable code and delivering intuitive dashboards.',
+      'Designing and developing end-to-end data analytics solutions, interactive BI dashboards, PostgreSQL data schemas, and full-stack React web applications.',
   },
   {
-    role: 'Technical Training & Continuous Learning',
-    company: 'Self-Directed & Academic Studies',
+    role: 'Data Analytics & Software Trainee',
+    company: 'Tashkent Tech & Capstone Labs',
     period: '2023 — 2024',
     description:
-      'Completed comprehensive practical coursework in Data Analytics, Database Management (PostgreSQL, MySQL, SQL Server), and Modern Web Development. Built real-world portfolio projects and analytical case studies.',
+      'Completed comprehensive practical training in Data Analytics, Database Management (PostgreSQL, MySQL, SQL Server), Python data modeling, and modern web application development.',
   },
 ];

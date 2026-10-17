@@ -337,7 +337,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
   if (!isAuthenticated) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#070b14]/95 backdrop-blur-xl p-4">
-        <div className="w-full max-w-md p-8 rounded-3xl bg-[#0f172a] border border-white/10 shadow-2xl relative">
+        <div className="w-full max-w-md p-6 sm:p-8 rounded-3xl bg-[#0f172a] border border-white/10 shadow-2xl relative">
           <button
             onClick={onClose}
             className="absolute top-5 right-5 text-slate-400 hover:text-white transition-colors"
@@ -367,7 +367,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter admin password"
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition-colors"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 transition-colors text-base sm:text-sm"
                 autoFocus
               />
             </div>
@@ -381,7 +381,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
 
             <button
               type="submit"
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold hover:opacity-95 transition-opacity btn-interactive btn-cta-glow"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold hover:opacity-95 transition-opacity btn-interactive btn-cta-glow text-sm sm:text-base"
             >
               Sign In to Admin
             </button>
@@ -403,21 +403,21 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
       )}
 
       {/* Top Bar */}
-      <header className="sticky top-0 z-40 bg-[#0a0f1a]/90 backdrop-blur-md border-b border-white/10 px-6 py-4">
+      <header className="sticky top-0 z-40 bg-[#0a0f1a]/90 backdrop-blur-md border-b border-white/10 px-4 sm:px-6 py-3.5 sm:py-4">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-teal-400 flex items-center justify-center text-white font-bold text-lg">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-teal-400 flex items-center justify-center text-white font-bold text-lg shrink-0">
               OH
             </div>
             <div>
-              <h1 className="font-display font-bold text-lg text-white">Portfolio Admin Panel</h1>
+              <h1 className="font-display font-bold text-base sm:text-lg text-white">Portfolio Admin Panel</h1>
               <div className="flex items-center gap-2 text-xs">
                 <span
-                  className={`w-2 h-2 rounded-full ${
+                  className={`w-2 h-2 rounded-full shrink-0 ${
                     serverConnected ? 'bg-emerald-400' : 'bg-amber-400'
                   }`}
                 />
-                <span className="text-slate-400">
+                <span className="text-slate-400 truncate max-w-[200px] sm:max-w-none">
                   {serverConnected
                     ? 'Backend Server Connected (Express :5000)'
                     : 'Local Offline Mode (Synced to Browser)'}
@@ -427,10 +427,10 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <button
               onClick={() => setIsPasswordModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-300 hover:text-white hover:border-white/20 transition-all flex items-center gap-1.5"
+              className="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-300 hover:text-white hover:border-white/20 transition-all flex items-center gap-1.5"
             >
               <Key className="w-3.5 h-3.5" /> Password
             </button>
@@ -441,19 +441,19 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
                   showToast('Reset to original defaults!');
                 }
               }}
-              className="px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-400 hover:text-red-400 hover:border-red-500/30 transition-all flex items-center gap-1.5"
+              className="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-400 hover:text-red-400 hover:border-red-500/30 transition-all flex items-center gap-1.5"
             >
               <RotateCcw className="w-3.5 h-3.5" /> Reset
             </button>
             <button
               onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-semibold hover:bg-sky-500/20 transition-all flex items-center gap-1.5"
+              className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-semibold hover:bg-sky-500/20 transition-all flex items-center gap-1.5"
             >
               <Eye className="w-3.5 h-3.5" /> View Portfolio
             </button>
             <button
               onClick={handleLogout}
-              className="p-2 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-white transition-colors"
+              className="p-1.5 sm:p-2 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-white transition-colors"
               title="Log Out"
             >
               <LogOut className="w-4 h-4" />
@@ -463,9 +463,9 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
       </header>
 
       {/* Main Container */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Navigation Tabs */}
-        <div className="flex border-b border-white/10 gap-2 mb-8 overflow-x-auto">
+        <div className="flex border-b border-white/10 gap-2 mb-8 overflow-x-auto no-scrollbar pb-1">
           <button
             onClick={() => setActiveTab('projects')}
             className={`flex items-center gap-2 px-5 py-3 border-b-2 font-medium text-sm transition-all whitespace-nowrap ${

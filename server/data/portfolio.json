@@ -5,7 +5,7 @@
     "tagline": "I turn messy data into clean insights and clean code into great products.",
     "email": "otabek11haydarov@gmail.com",
     "github": "https://github.com/otabek11haydarov",
-    "linkedin": "https://www.linkedin.com/in/otabek-haydarov-910789386",
+    "linkedin": "https://www.linkedin.com/in/otabek-haydarov",
     "location": "Tashkent, Uzbekistan",
     "resumeUrl": "/resume.pdf"
   },
@@ -113,8 +113,8 @@
         "React",
         "D3.js"
       ],
-      "link": "#",
-      "repo": "#",
+      "link": "https://haydarov-portfolio.vercel.app",
+      "repo": "https://github.com/otabek11haydarov/Portfolio",
       "emoji": "📈"
     },
     {
@@ -127,8 +127,8 @@
         "PostgreSQL",
         "scikit-learn"
       ],
-      "link": "#",
-      "repo": "#",
+      "link": "https://haydarov-portfolio.vercel.app",
+      "repo": "https://github.com/otabek11haydarov/Portfolio",
       "emoji": "🔄"
     },
     {
@@ -141,8 +141,8 @@
         "Tailwind",
         "Vite"
       ],
-      "link": "#",
-      "repo": "#",
+      "link": "https://haydarov-portfolio.vercel.app",
+      "repo": "https://github.com/otabek11haydarov/Portfolio",
       "emoji": "🧩"
     },
     {
@@ -155,8 +155,8 @@
         "LLM",
         "PostgreSQL"
       ],
-      "link": "#",
-      "repo": "#",
+      "link": "https://haydarov-portfolio.vercel.app",
+      "repo": "https://github.com/otabek11haydarov/Portfolio",
       "emoji": "💬"
     },
     {
@@ -169,8 +169,8 @@
         "WebSocket",
         "React"
       ],
-      "link": "#",
-      "repo": "#",
+      "link": "https://haydarov-portfolio.vercel.app",
+      "repo": "https://github.com/otabek11haydarov/Portfolio",
       "emoji": "🗺️"
     },
     {
@@ -183,35 +183,35 @@
         "Supabase",
         "Recharts"
       ],
-      "link": "#",
-      "repo": "#",
+      "link": "https://haydarov-portfolio.vercel.app",
+      "repo": "https://github.com/otabek11haydarov/Portfolio",
       "emoji": "💰"
     }
   ],
   "experience": [
     {
       "id": "exp-1",
-      "role": "Open to Work — Seeking Internship",
-      "company": "Available for Opportunities",
-      "period": "Present",
-      "description": "Actively looking for Internship and Junior Data Analyst / Software Developer positions. Ready to contribute with strong technical fundamentals, hands-on experience in Python, SQL, Power BI, React, and a passion for data-driven problem solving."
+      "role": "Open to Work — Seeking Internship / Junior Role",
+      "company": "Available for Opportunities (Tashkent / Remote)",
+      "period": "2025 — Present",
+      "description": "Actively open for Internship and Junior Data Analyst / Software Engineer positions. Ready to bring value with solid skills in Python, SQL, Power BI, React, TypeScript, and automated data pipelines."
     },
     {
       "id": "exp-2",
-      "role": "Practical Project Development & Analytics",
-      "company": "Independent Projects",
-      "period": "2024 — Present",
-      "description": "Designing and developing end-to-end data analytics solutions, predictive machine learning models, and full-stack applications. Focused on writing clean, scalable code and delivering intuitive dashboards."
+      "role": "Data Analyst & Full-Stack Projects",
+      "company": "IT Park Uzbekistan Ecosystem & Open Source",
+      "period": "2024 — 2025",
+      "description": "Designing and developing end-to-end data analytics solutions, interactive BI dashboards, PostgreSQL data schemas, and full-stack React web applications."
     },
     {
       "id": "exp-3",
-      "role": "Technical Training & Continuous Learning",
-      "company": "Self-Directed & Academic Studies",
+      "role": "Data Analytics & Software Trainee",
+      "company": "Tashkent Tech & Capstone Labs",
       "period": "2023 — 2024",
-      "description": "Completed comprehensive practical coursework in Data Analytics, Database Management (PostgreSQL, MySQL, SQL Server), and Modern Web Development. Built real-world portfolio projects and analytical case studies."
+      "description": "Completed comprehensive practical training in Data Analytics, Database Management (PostgreSQL, MySQL, SQL Server), Python data modeling, and modern web application development."
     }
   ],
   "admin": {
-    "passwordHash": "admin123"
+    "passwordHash": "Otabek#2026"
   }
 }

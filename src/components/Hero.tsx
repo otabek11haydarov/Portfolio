@@ -18,7 +18,7 @@ export default function Hero() {
           Available for new opportunities
         </div>
 
-        <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-7xl leading-[1.05] mb-6">
+        <h1 className="font-display font-bold text-4xl sm:text-6xl md:text-7xl leading-[1.08] mb-6">
           {profile.name.split(' ')[0]}
           <br />
           <span className="bg-gradient-to-r from-sky-400 via-cyan-300 to-teal-300 bg-clip-text text-transparent">
@@ -26,21 +26,21 @@ export default function Hero() {
           </span>
         </h1>
 
-        <p className="text-xl md:text-2xl text-slate-300 font-medium mb-4">
+        <p className="text-lg sm:text-xl md:text-2xl text-slate-300 font-medium mb-4">
           {profile.title}
         </p>
-        <p className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+        <p className="text-sm sm:text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
           {profile.tagline}
         </p>
 
-        {/* Primary CTA Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
+        {/* Primary CTA Buttons (Mobile Full Width / Desktop Row) */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 mb-8 w-full max-w-sm sm:max-w-none mx-auto">
           <a
             href={profile.resumeUrl || '/resume.pdf'}
             download="Otabek_Haydarov_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold text-sm hover:opacity-95 shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition-all hover:-translate-y-0.5 group btn-interactive btn-cta-glow"
+            className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold text-sm hover:opacity-95 shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition-all hover:-translate-y-0.5 group btn-interactive btn-cta-glow text-center"
           >
             <FileDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
             <span>Download CV / Resume</span>
@@ -48,7 +48,7 @@ export default function Hero() {
 
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-slate-200 font-medium text-sm hover:text-white hover:bg-white/10 hover:border-white/20 transition-all hover:-translate-y-0.5 btn-interactive"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-slate-200 font-medium text-sm hover:text-white hover:bg-white/10 hover:border-white/20 transition-all hover:-translate-y-0.5 btn-interactive text-center"
           >
             <span>View Projects</span>
             <ArrowRight className="w-4 h-4 text-sky-400" />

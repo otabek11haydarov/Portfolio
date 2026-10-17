@@ -15,8 +15,10 @@
   --accent-2: #2dd4bf;
 }
 
-html {
+html, body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
@@ -24,6 +26,14 @@ body {
   color: var(--text);
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .font-display {
@@ -371,6 +381,19 @@ a.btn-interactive:active,
 
 .stat-card-float {
   animation: floatStatPulse 4s ease-in-out infinite;
+}
+
+/* Mobile-First touch and dampening */
+@media (max-width: 640px) {
+  .interactive-card:hover {
+    --lift: -2px;
+    --cscale: 1.006;
+  }
+  button:hover,
+  a.btn-interactive:hover,
+  .btn-interactive:hover {
+    --scale: 1.015;
+  }
 }
 
 

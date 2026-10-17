@@ -33,7 +33,18 @@ export function useInteractiveCards() {
       card.style.setProperty('--cmx', `${x}px`);
       card.style.setProperty('--cmy', `${y}px`);
 
-      // 3D Tilt calculation based on cursor offset from card center
+      // Dampen/disable 3D perspective tilt on mobile & touch devices to prevent scroll stutter
+      const isTouchOrMobile =
+        window.innerWidth <= 640 ||
+        (window.matchMedia && window.matchMedia('(hover: none)').matches);
+
+      if (isTouchOrMobile) {
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+        return;
+      }
+
+      // 3D Tilt calculation based on cursor offset from card center (desktop)
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       const rotateY = ((x - centerX) / Math.max(centerX, 1)) * 6.5;

@@ -4,6 +4,7 @@ import { Menu, X, Code2 } from 'lucide-react';
 const links = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -57,7 +58,7 @@ export default function Navbar() {
         </a>
 
         <button
-          className="md:hidden text-slate-200 p-1.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+          className="md:hidden text-slate-200 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/40"
           onClick={() => setOpen(!open)}
           aria-label="Toggle navigation menu"
           aria-expanded={open}
@@ -67,20 +68,29 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="md:hidden bg-[#0a0f1a]/95 backdrop-blur-md border-t border-white/5">
-          <ul className="px-6 py-4 space-y-3">
+        <div className="md:hidden bg-[#0a0f1a]/98 backdrop-blur-xl border-t border-white/10 px-6 py-5 shadow-2xl">
+          <ul className="space-y-3">
             {links.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block py-2 text-slate-300 hover:text-sky-400 transition-colors"
+                  className="block py-2 text-base font-medium text-slate-300 hover:text-sky-400 transition-colors"
                 >
                   {l.label}
                 </a>
               </li>
             ))}
           </ul>
+          <div className="pt-4 mt-3 border-t border-white/10">
+            <a
+              href="#contact"
+              onClick={() => setOpen(false)}
+              className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold text-sm shadow-lg shadow-sky-500/25 btn-interactive btn-cta-glow"
+            >
+              Let's talk
+            </a>
+          </div>
         </div>
       )}
     </header>
