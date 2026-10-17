@@ -1,7 +1,9 @@
 {
-  "name": "vite-react-typescript-starter",
+  "name": "otabek-haydarov-portfolio",
+  "description": "Otabek Haydarov — Software Engineer & Data Analyst Portfolio",
+  "author": "Otabek Haydarov",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "concurrently -k -p \"[{name}]\" -n \"Vite,Server\" -c \"cyan.bold,green.bold\" \"vite\" \"node server/index.js\"",
