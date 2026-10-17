@@ -93,7 +93,7 @@ export default function Contact() {
             <a
               href={`mailto:${profile.email}`}
               aria-label={`Send direct email to ${profile.email}`}
-              className="flex items-center gap-4 p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-sky-500/30 transition-colors group"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-sky-500/30 transition-colors group btn-interactive"
             >
               <div className="w-11 h-11 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400">
                 <Mail className="w-5 h-5" />
@@ -120,7 +120,7 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit Otabek Haydarov's GitHub profile"
-                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-slate-300 hover:text-sky-400 hover:border-sky-500/30 transition-all"
+                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-slate-300 hover:text-sky-400 hover:border-sky-500/30 transition-all btn-interactive"
               >
                 <Github className="w-5 h-5" /> GitHub
               </a>
@@ -129,7 +129,7 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit Otabek Haydarov's LinkedIn profile"
-                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-slate-300 hover:text-sky-400 hover:border-sky-500/30 transition-all"
+                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-slate-300 hover:text-sky-400 hover:border-sky-500/30 transition-all btn-interactive"
               >
                 <Linkedin className="w-5 h-5" /> LinkedIn
               </a>
@@ -210,7 +210,7 @@ export default function Contact() {
               type="submit"
               disabled={loading}
               aria-label="Send Message"
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-gradient-to-r from-sky-500 to-teal-500 text-white font-medium text-sm hover:from-sky-400 hover:to-teal-400 transition-all duration-200 disabled:opacity-60 cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-gradient-to-r from-sky-500 to-teal-500 text-white font-medium text-sm hover:from-sky-400 hover:to-teal-400 transition-all duration-200 disabled:opacity-60 cursor-pointer btn-interactive btn-cta-glow"
             >
               {loading ? (
                 <>

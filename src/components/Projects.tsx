@@ -41,13 +41,13 @@ export default function Projects() {
                 ))}
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
                 <a
                   href={p.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View live demo of ${p.title}`}
-                  className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-sky-400 transition-colors"
+                  className="flex items-center gap-1.5 text-sm text-slate-300 hover:text-sky-400 transition-colors px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/5 hover:border-sky-500/30 btn-interactive"
                 >
                   <ExternalLink className="w-4 h-4" /> Live
                 </a>
@@ -56,7 +56,7 @@ export default function Projects() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View source code of ${p.title}`}
-                  className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-sky-400 transition-colors"
+                  className="flex items-center gap-1.5 text-sm text-slate-300 hover:text-sky-400 transition-colors px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/5 hover:border-sky-500/30 btn-interactive"
                 >
                   <Github className="w-4 h-4" /> Code
                 </a>

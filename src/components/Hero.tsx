@@ -40,7 +40,7 @@ export default function Hero() {
             download="Otabek_Haydarov_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold text-sm hover:opacity-95 shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition-all hover:-translate-y-0.5 group"
+            className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold text-sm hover:opacity-95 shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition-all hover:-translate-y-0.5 group btn-interactive btn-cta-glow"
           >
             <FileDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
             <span>Download CV / Resume</span>
@@ -48,7 +48,7 @@ export default function Hero() {
 
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-slate-200 font-medium text-sm hover:text-white hover:bg-white/10 hover:border-white/20 transition-all hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-slate-200 font-medium text-sm hover:text-white hover:bg-white/10 hover:border-white/20 transition-all hover:-translate-y-0.5 btn-interactive"
           >
             <span>View Projects</span>
             <ArrowRight className="w-4 h-4 text-sky-400" />
@@ -61,7 +61,7 @@ export default function Hero() {
             href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-sky-400 hover:border-sky-500/40 hover:bg-sky-500/10 transition-all duration-200"
+            className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-sky-400 hover:border-sky-500/40 hover:bg-sky-500/10 transition-all duration-200 btn-interactive"
             aria-label="GitHub"
           >
             <Github className="w-5 h-5" />
@@ -70,14 +70,14 @@ export default function Hero() {
             href={profile.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-sky-400 hover:border-sky-500/40 hover:bg-sky-500/10 transition-all duration-200"
+            className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-sky-400 hover:border-sky-500/40 hover:bg-sky-500/10 transition-all duration-200 btn-interactive"
             aria-label="LinkedIn"
           >
             <Linkedin className="w-5 h-5" />
           </a>
           <a
             href={`mailto:${profile.email}`}
-            className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-sky-400 hover:border-sky-500/40 hover:bg-sky-500/10 transition-all duration-200"
+            className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-sky-400 hover:border-sky-500/40 hover:bg-sky-500/10 transition-all duration-200 btn-interactive"
             aria-label="Email"
           >
             <Mail className="w-5 h-5" />
@@ -92,7 +92,7 @@ export default function Hero() {
 
       <a
         href="#about"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-500 hover:text-sky-400 transition-colors"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-500 hover:text-sky-400 transition-colors btn-interactive p-2 rounded-full"
         aria-label="Scroll down"
       >
         <ArrowDown className="w-6 h-6 animate-bounce" />

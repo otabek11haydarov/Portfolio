@@ -380,7 +380,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
 
             <button
               type="submit"
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold hover:opacity-95 transition-opacity"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold hover:opacity-95 transition-opacity btn-interactive btn-cta-glow"
             >
               Sign In to Admin
             </button>

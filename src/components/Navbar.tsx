@@ -51,7 +51,7 @@ export default function Navbar() {
 
         <a
           href="#contact"
-          className="hidden md:inline-flex items-center px-4 py-2 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-500/30 text-sm font-medium hover:bg-sky-500/20 transition-colors duration-200"
+          className="hidden md:inline-flex items-center px-4 py-2 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-500/30 text-sm font-medium hover:bg-sky-500/20 transition-colors duration-200 btn-interactive btn-cta-glow"
         >
           Let's talk
         </a>

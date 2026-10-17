@@ -31,7 +31,7 @@ export default function Footer({ onOpenAdmin }: FooterProps) {
               href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-lg bg-white/5 hover:bg-sky-500/20 text-slate-400 hover:text-sky-400 transition-colors"
+              className="p-1.5 rounded-lg bg-white/5 hover:bg-sky-500/20 text-slate-400 hover:text-sky-400 transition-colors btn-interactive"
               aria-label="GitHub profile"
             >
               <Github className="w-4 h-4" />
@@ -40,14 +40,14 @@ export default function Footer({ onOpenAdmin }: FooterProps) {
               href={profile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-lg bg-white/5 hover:bg-sky-500/20 text-slate-400 hover:text-sky-400 transition-colors"
+              className="p-1.5 rounded-lg bg-white/5 hover:bg-sky-500/20 text-slate-400 hover:text-sky-400 transition-colors btn-interactive"
               aria-label="LinkedIn profile"
             >
               <Linkedin className="w-4 h-4" />
             </a>
             <a
               href={`mailto:${profile.email}`}
-              className="p-1.5 rounded-lg bg-white/5 hover:bg-sky-500/20 text-slate-400 hover:text-sky-400 transition-colors"
+              className="p-1.5 rounded-lg bg-white/5 hover:bg-sky-500/20 text-slate-400 hover:text-sky-400 transition-colors btn-interactive"
               aria-label="Send email"
             >
               <Mail className="w-4 h-4" />
@@ -61,7 +61,7 @@ export default function Footer({ onOpenAdmin }: FooterProps) {
           {onOpenAdmin && (
             <button
               onClick={onOpenAdmin}
-              className="p-1.5 rounded-lg bg-white/5 hover:bg-sky-500/20 text-slate-500 hover:text-sky-400 transition-colors"
+              className="p-1.5 rounded-lg bg-white/5 hover:bg-sky-500/20 text-slate-500 hover:text-sky-400 transition-colors btn-interactive"
               title="Admin Panel"
               aria-label="Open Admin Panel"
             >

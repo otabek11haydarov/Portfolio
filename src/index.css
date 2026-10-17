@@ -95,3 +95,156 @@ body {
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+/* ===== ADVANCED INTERACTIVE BUTTON ANIMATIONS ===== */
+button,
+a.btn-interactive,
+.btn-interactive {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transform: translate3d(var(--tx, 0px), var(--ty, 0px), 0) scale(var(--scale, 1));
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    color 0.2s ease;
+  will-change: transform, box-shadow;
+}
+
+/* Keep text/icons inside buttons elevated above spotlight and shimmer overlays */
+button > *,
+a.btn-interactive > *,
+.btn-interactive > * {
+  position: relative;
+  z-index: 4;
+}
+
+/* Spotlight / Kursor nuri effekti */
+button::before,
+a.btn-interactive::before,
+.btn-interactive::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    130px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.22),
+    rgba(56, 189, 248, 0.12) 45%,
+    transparent 75%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+button:hover::before,
+a.btn-interactive:hover::before,
+.btn-interactive:hover::before {
+  opacity: 1;
+}
+
+/* Diagonal Shimmer Sweep (Yaltirash chizig'i) */
+button::after,
+a.btn-interactive::after,
+.btn-interactive::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -130%;
+  width: 65%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.28),
+    transparent
+  );
+  transform: skewX(-24deg);
+  transition: left 0.65s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+button:hover::after,
+a.btn-interactive:hover::after,
+.btn-interactive:hover::after {
+  left: 145%;
+}
+
+/* Hover va Active 3D Press chuqurligi */
+button:hover,
+a.btn-interactive:hover,
+.btn-interactive:hover {
+  --scale: 1.035;
+  box-shadow:
+    0 10px 26px -6px rgba(56, 189, 248, 0.35),
+    0 0 16px -2px rgba(129, 140, 248, 0.3);
+}
+
+button:active,
+a.btn-interactive:active,
+.btn-interactive:active {
+  --scale: 0.94 !important;
+  transition-duration: 0.08s;
+}
+
+/* Asosiy CTA tugmalari uchun Neon Pulse va Gradient oqimi */
+@keyframes neonPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.35), 0 0 30px rgba(99, 102, 241, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(56, 189, 248, 0.65), 0 0 45px rgba(168, 85, 247, 0.35);
+  }
+}
+
+.btn-cta-glow {
+  animation: neonPulseGlow 3s infinite ease-in-out;
+}
+
+/* Bosilganda tarqaluvchi Ripple to'lqini */
+@keyframes btnRippleExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(4.2);
+    opacity: 0;
+  }
+}
+
+.btn-ripple-wave {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.75) 0%, rgba(56, 189, 248, 0.45) 60%, transparent 100%);
+  pointer-events: none;
+  z-index: 3;
+  animation: btnRippleExpand 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Uchqun zarrachalari (Click Burst Particles) */
+.btn-burst-particle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: particleFly 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes particleFly {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0);
+    opacity: 0;
+  }
+}
+
