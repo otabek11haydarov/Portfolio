@@ -305,6 +305,10 @@ app.post('/api/portfolio/sync', requireAuth, (req, res) => {
   res.json({ success: true, message: 'Portfolio data synchronized successfully' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Portfolio Admin Backend running on http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Portfolio Admin Backend running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;

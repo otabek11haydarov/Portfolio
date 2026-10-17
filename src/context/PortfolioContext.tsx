@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { API_BASE } from '@/config/api';
 import {
   profile as defaultProfile,
   aboutText as defaultAboutText,
@@ -140,7 +141,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const fetchFromApi = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/portfolio');
+      const res = await fetch(`${API_BASE}/api/portfolio`);
       if (res.ok) {
         const apiData = await res.json();
         // Ensure arrays and objects exist and don't contain stale mock companies
@@ -192,7 +193,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     try {
       if (serverConnected) {
-        await fetch('/api/portfolio/profile', {
+        await fetch(`${API_BASE}/api/portfolio/profile`, {
           method: 'PUT',
           headers: getAuthHeaders(),
           body: JSON.stringify({ profile: profileUpdates, aboutText: aboutTextUpdate }),
@@ -216,7 +217,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     try {
       if (serverConnected) {
-        await fetch('/api/portfolio/projects', {
+        await fetch(`${API_BASE}/api/portfolio/projects`, {
           method: 'POST',
           headers: getAuthHeaders(),
           body: JSON.stringify(newProj),
@@ -237,7 +238,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     try {
       if (serverConnected) {
-        await fetch(`/api/portfolio/projects/${id}`, {
+        await fetch(`${API_BASE}/api/portfolio/projects/${id}`, {
           method: 'PUT',
           headers: getAuthHeaders(),
           body: JSON.stringify(updates),
@@ -258,7 +259,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     try {
       if (serverConnected) {
-        await fetch(`/api/portfolio/projects/${id}`, {
+        await fetch(`${API_BASE}/api/portfolio/projects/${id}`, {
           method: 'DELETE',
           headers: getAuthHeaders(),
         });
@@ -281,7 +282,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     try {
       if (serverConnected) {
-        await fetch('/api/portfolio/skills', {
+        await fetch(`${API_BASE}/api/portfolio/skills`, {
           method: 'POST',
           headers: getAuthHeaders(),
           body: JSON.stringify(newSkill),
@@ -302,7 +303,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     try {
       if (serverConnected) {
-        await fetch(`/api/portfolio/skills/${id}`, {
+        await fetch(`${API_BASE}/api/portfolio/skills/${id}`, {
           method: 'PUT',
           headers: getAuthHeaders(),
           body: JSON.stringify(updates),
@@ -323,7 +324,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     try {
       if (serverConnected) {
-        await fetch(`/api/portfolio/skills/${id}`, {
+        await fetch(`${API_BASE}/api/portfolio/skills/${id}`, {
           method: 'DELETE',
           headers: getAuthHeaders(),
         });
@@ -346,7 +347,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     try {
       if (serverConnected) {
-        await fetch('/api/portfolio/experience', {
+        await fetch(`${API_BASE}/api/portfolio/experience`, {
           method: 'POST',
           headers: getAuthHeaders(),
           body: JSON.stringify(newExp),
@@ -367,7 +368,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     try {
       if (serverConnected) {
-        await fetch(`/api/portfolio/experience/${id}`, {
+        await fetch(`${API_BASE}/api/portfolio/experience/${id}`, {
           method: 'PUT',
           headers: getAuthHeaders(),
           body: JSON.stringify(updates),
@@ -388,7 +389,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     try {
       if (serverConnected) {
-        await fetch(`/api/portfolio/experience/${id}`, {
+        await fetch(`${API_BASE}/api/portfolio/experience/${id}`, {
           method: 'DELETE',
           headers: getAuthHeaders(),
         });
@@ -413,7 +414,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     try {
       if (serverConnected) {
-        await fetch('/api/portfolio/sync', {
+        await fetch(`${API_BASE}/api/portfolio/sync`, {
           method: 'POST',
           headers: getAuthHeaders(),
           body: JSON.stringify(defaultData),

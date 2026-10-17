@@ -20,6 +20,7 @@ import {
   X,
 } from 'lucide-react';
 import { usePortfolio, type Project, type Skill, type Experience } from '@/context/PortfolioContext';
+import { API_BASE } from '@/config/api';
 
 interface AdminDashboardProps {
   onClose: () => void;
@@ -108,7 +109,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
     setAuthError('');
 
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password }),
@@ -121,7 +122,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
       }
       setAuthError(resData.message || 'Invalid admin credentials');
     } catch {
-      setAuthError('Authentication service unreachable. Ensure the backend server is running on port 5000.');
+      setAuthError('Authentication service unreachable. Ensure the backend server is running and accessible.');
     }
   };
 
@@ -129,7 +130,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
     const token = localStorage.getItem('portfolio_admin_token');
     if (token) {
       try {
-        await fetch('/api/auth/logout', {
+        await fetch(`${API_BASE}/api/auth/logout`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -310,7 +311,7 @@ export default function AdminDashboard({ onClose }: AdminDashboardProps) {
     setPasswordChangeStatus(null);
     const token = localStorage.getItem('portfolio_admin_token');
     try {
-      const res = await fetch('/api/auth/change-password', {
+      const res = await fetch(`${API_BASE}/api/auth/change-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
