@@ -53,13 +53,13 @@ export const skills: Skill[] = [
 
 export const projects: Project[] = [
   {
-    title: 'Revenue Forecasting Dashboard',
+    title: 'E-Commerce Profitability Analysis',
     description:
-      'Built an interactive dashboard that forecasts quarterly revenue using time-series models. Reduced forecast error by 23% compared to the previous spreadsheet-based approach.',
-    tags: ['Python', 'Prophet', 'React', 'D3.js'],
-    link: 'https://haydarov-portfolio.vercel.app',
-    repo: 'https://github.com/otabek11haydarov/Portfolio',
-    emoji: '📈',
+      'End-to-end analytics project auditing 2,000+ orders in PostgreSQL to identify unit economics, shipping margin leakage (13% vs 31%), and multi-channel marketing ROAS.',
+    tags: ['PostgreSQL', 'Python', 'SQL', 'Data Analytics'],
+    link: 'https://github.com/otabek11haydarov/E-Commerce-Profitability-Analysis',
+    repo: 'https://github.com/otabek11haydarov/E-Commerce-Profitability-Analysis',
+    emoji: '📊',
   },
   {
     title: 'Customer Churn Pipeline',
