@@ -61,13 +61,13 @@ interface PortfolioContextType {
   reload: () => Promise<void>;
 }
 
-const STORAGE_KEY = 'portfolio_data_v3';
-const LEGACY_STORAGE_KEYS = ['portfolio_custom_data_v1', 'portfolio_custom_data_v2'];
+const STORAGE_KEY = 'portfolio_data_v4';
+const LEGACY_STORAGE_KEYS = ['portfolio_custom_data_v1', 'portfolio_custom_data_v2', 'portfolio_data_v3'];
 
 const sanitizeCachedData = (raw: any): PortfolioData | null => {
   if (!raw || typeof raw !== 'object') return null;
 
-  // Detect and purge legacy template mock data (Northwind, Brightwave, Crestline, etc.)
+  // Detect and purge legacy template mock data (Northwind, Brightwave, Crestline, Revenue Forecasting, etc.)
   const hasMockExperience = Array.isArray(raw.experience) && raw.experience.some((exp: any) =>
     exp?.company?.toLowerCase().includes('northwind') ||
     exp?.company?.toLowerCase().includes('brightwave') ||
@@ -75,7 +75,11 @@ const sanitizeCachedData = (raw: any): PortfolioData | null => {
     exp?.role?.toLowerCase().includes('senior data analyst')
   );
 
-  if (hasMockExperience) {
+  const hasMockProject = Array.isArray(raw.projects) && raw.projects.some((p: any) =>
+    p?.title?.toLowerCase().includes('revenue forecasting dashboard')
+  );
+
+  if (hasMockExperience || hasMockProject) {
     return null;
   }
 

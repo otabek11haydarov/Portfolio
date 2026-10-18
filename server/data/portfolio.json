@@ -105,17 +105,17 @@
   "projects": [
     {
       "id": "proj-1",
-      "title": "Revenue Forecasting Dashboard",
-      "description": "Built an interactive dashboard that forecasts quarterly revenue using time-series models. Reduced forecast error by 23% compared to the previous spreadsheet-based approach.",
+      "title": "E-Commerce Profitability Analysis",
+      "description": "End-to-end analytics project auditing 2,000+ orders in PostgreSQL to identify unit economics, shipping margin leakage (13% vs 31%), and multi-channel marketing ROAS.",
       "tags": [
+        "PostgreSQL",
         "Python",
-        "Prophet",
-        "React",
-        "D3.js"
+        "SQL",
+        "Data Analytics"
       ],
-      "link": "https://haydarov-portfolio.vercel.app",
-      "repo": "https://github.com/otabek11haydarov/Portfolio",
-      "emoji": "📈"
+      "link": "https://github.com/otabek11haydarov/E-Commerce-Profitability-Analysis",
+      "repo": "https://github.com/otabek11haydarov/E-Commerce-Profitability-Analysis",
+      "emoji": "📊"
     },
     {
       "id": "proj-2",
