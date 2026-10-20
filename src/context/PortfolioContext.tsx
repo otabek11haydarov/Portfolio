@@ -61,8 +61,8 @@ interface PortfolioContextType {
   reload: () => Promise<void>;
 }
 
-const STORAGE_KEY = 'portfolio_data_v6';
-const LEGACY_STORAGE_KEYS = ['portfolio_custom_data_v1', 'portfolio_custom_data_v2', 'portfolio_data_v3', 'portfolio_data_v4', 'portfolio_data_v5'];
+const STORAGE_KEY = 'portfolio_data_v7';
+const LEGACY_STORAGE_KEYS = ['portfolio_custom_data_v1', 'portfolio_custom_data_v2', 'portfolio_data_v3', 'portfolio_data_v4', 'portfolio_data_v5', 'portfolio_data_v6'];
 
 const sanitizeCachedData = (raw: any): PortfolioData | null => {
   if (!raw || typeof raw !== 'object') return null;
@@ -90,9 +90,9 @@ const sanitizeCachedData = (raw: any): PortfolioData | null => {
   if (Array.isArray(raw.skills)) {
     raw.skills = raw.skills.filter((s: any) => s?.name !== 'Docker' && s?.name !== 'AWS' && s?.name !== 'scikit-learn');
     raw.skills.forEach((s: any) => {
-      if (s?.name === 'Tableau' && s?.level === 5) {
-        s.level = 25;
-      }
+      if (s?.name === 'React' && s?.level === 90) s.level = 50;
+      if (s?.name === 'FastAPI' && s?.level === 82) s.level = 35;
+      if (s?.name === 'Tableau' && s?.level === 5) s.level = 25;
     });
   }
 

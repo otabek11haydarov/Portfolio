@@ -38,7 +38,7 @@
     {
       "id": "skill-5",
       "name": "React",
-      "level": 90,
+      "level": 50,
       "category": "Frameworks"
     },
     {
@@ -50,7 +50,7 @@
     {
       "id": "skill-7",
       "name": "FastAPI",
-      "level": 82,
+      "level": 35,
       "category": "Frameworks"
     },
     {
