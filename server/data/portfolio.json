@@ -78,21 +78,9 @@
       "category": "Data & Analytics"
     },
     {
-      "id": "skill-12",
-      "name": "Docker",
-      "level": 10,
-      "category": "Tools"
-    },
-    {
       "id": "skill-13",
       "name": "Git",
       "level": 90,
-      "category": "Tools"
-    },
-    {
-      "id": "skill-14",
-      "name": "AWS",
-      "level": 10,
       "category": "Tools"
     },
     {
