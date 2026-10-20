@@ -61,8 +61,8 @@ interface PortfolioContextType {
   reload: () => Promise<void>;
 }
 
-const STORAGE_KEY = 'portfolio_data_v4';
-const LEGACY_STORAGE_KEYS = ['portfolio_custom_data_v1', 'portfolio_custom_data_v2', 'portfolio_data_v3'];
+const STORAGE_KEY = 'portfolio_data_v5';
+const LEGACY_STORAGE_KEYS = ['portfolio_custom_data_v1', 'portfolio_custom_data_v2', 'portfolio_data_v3', 'portfolio_data_v4'];
 
 const sanitizeCachedData = (raw: any): PortfolioData | null => {
   if (!raw || typeof raw !== 'object') return null;
@@ -76,7 +76,8 @@ const sanitizeCachedData = (raw: any): PortfolioData | null => {
   );
 
   const hasMockProject = Array.isArray(raw.projects) && raw.projects.some((p: any) =>
-    p?.title?.toLowerCase().includes('revenue forecasting dashboard')
+    p?.title?.toLowerCase().includes('revenue forecasting dashboard') ||
+    p?.title?.toLowerCase().includes('customer churn pipeline')
   );
 
   if (hasMockExperience || hasMockProject) {

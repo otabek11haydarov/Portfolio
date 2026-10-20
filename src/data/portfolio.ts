@@ -62,13 +62,13 @@ export const projects: Project[] = [
     emoji: '📊',
   },
   {
-    title: 'Customer Churn Pipeline',
+    title: 'U.S. Electric Vehicle Market Share Analysis',
     description:
-      'Designed an end-to-end ETL pipeline that ingests 2M+ rows daily, applies a gradient-boosted churn model, and pushes at-risk accounts to the CRM in real time.',
-    tags: ['Python', 'Airflow', 'PostgreSQL', 'scikit-learn'],
-    link: 'https://haydarov-portfolio.vercel.app',
-    repo: 'https://github.com/otabek11haydarov/Portfolio',
-    emoji: '🔄',
+      'End-to-end data analytics project evaluating 287M+ registered vehicles across 51 jurisdictions to uncover EV adoption trends, alternative fuel penetration, and charging infrastructure priorities.',
+    tags: ['PostgreSQL', 'Python', 'Tableau', 'SQL'],
+    link: 'https://github.com/otabek11haydarov/Analyzing-US-Electric-Vehicle-Market-Share',
+    repo: 'https://github.com/otabek11haydarov/Analyzing-US-Electric-Vehicle-Market-Share',
+    emoji: '⚡',
   },
   {
     title: 'Analytics Component Library',
