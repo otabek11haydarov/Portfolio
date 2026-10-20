@@ -88,7 +88,12 @@ const sanitizeCachedData = (raw: any): PortfolioData | null => {
     return null;
   }
   if (Array.isArray(raw.skills)) {
-    raw.skills = raw.skills.filter((s: any) => s?.name !== 'Docker' && s?.name !== 'AWS');
+    raw.skills = raw.skills.filter((s: any) => s?.name !== 'Docker' && s?.name !== 'AWS' && s?.name !== 'scikit-learn');
+    raw.skills.forEach((s: any) => {
+      if (s?.name === 'Tableau' && s?.level === 5) {
+        s.level = 25;
+      }
+    });
   }
 
   return raw as PortfolioData;

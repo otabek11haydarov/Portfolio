@@ -62,19 +62,13 @@
     {
       "id": "skill-9",
       "name": "Tableau",
-      "level": 5,
+      "level": 25,
       "category": "Data & Analytics"
     },
     {
       "id": "skill-10",
       "name": "Power BI",
       "level": 80,
-      "category": "Data & Analytics"
-    },
-    {
-      "id": "skill-11",
-      "name": "scikit-learn",
-      "level": 20,
       "category": "Data & Analytics"
     },
     {

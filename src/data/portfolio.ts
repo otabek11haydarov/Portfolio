@@ -42,9 +42,8 @@ export const skills: Skill[] = [
   { name: 'Node.js', level: 85, category: 'Frameworks' },
   { name: 'FastAPI', level: 82, category: 'Frameworks' },
   { name: 'Pandas / NumPy', level: 20, category: 'Data & Analytics' },
-  { name: 'Tableau', level: 5, category: 'Data & Analytics' },
+  { name: 'Tableau', level: 25, category: 'Data & Analytics' },
   { name: 'Power BI', level: 80, category: 'Data & Analytics' },
-  { name: 'scikit-learn', level: 20, category: 'Data & Analytics' },
   { name: 'Git', level: 90, category: 'Tools' },
   { name: 'Figma', level: 68, category: 'Tools' },
 ];
