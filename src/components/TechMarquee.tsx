@@ -1,6 +1,6 @@
 const tech = [
   'Python', 'TypeScript', 'React', 'SQL', 'Pandas', 'Tableau',
-  'Node.js', 'FastAPI', 'Docker', 'AWS', 'PostgreSQL', 'scikit-learn',
+  'Node.js', 'FastAPI', 'PostgreSQL', 'scikit-learn',
   'Power BI', 'Git', 'NumPy', 'Tailwind',
 ];
 
