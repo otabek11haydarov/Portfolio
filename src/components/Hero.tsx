@@ -1,9 +1,76 @@
-import { ArrowDown, Github, Linkedin, Mail, MapPin, FileDown, ArrowRight } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { ArrowDown, Github, Linkedin, Mail, MapPin, FileDown, ArrowRight, ChevronDown, ExternalLink } from 'lucide-react';
 import { usePortfolio } from '@/context/PortfolioContext';
+
+const resumeOptions = [
+  {
+    code: 'en',
+    label: 'English',
+    badge: 'EN',
+    flag: '🇬🇧',
+    description: 'Standard International CV',
+    url: '/resume-en.pdf',
+    fileName: 'Otabek_Haydarov_Resume_EN.pdf',
+  },
+  {
+    code: 'ru',
+    label: 'Русский',
+    badge: 'RU',
+    flag: '🇷🇺',
+    description: 'Резюме на русском языке',
+    url: '/resume-ru.pdf',
+    fileName: 'Otabek_Haydarov_Resume_RU.pdf',
+  },
+  {
+    code: 'uz',
+    label: 'Oʻzbekcha',
+    badge: 'UZ',
+    flag: '🇺🇿',
+    description: 'Oʻzbek tilidagi rezyume',
+    url: '/resume-uz.pdf',
+    fileName: 'Otabek_Haydarov_Resume_UZ.pdf',
+  },
+];
 
 export default function Hero() {
   const { data } = usePortfolio();
   const { profile } = data;
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+  const resumeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (resumeRef.current && !resumeRef.current.contains(event.target as Node)) {
+        setIsResumeOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsResumeOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  const handleDownload = (option: typeof resumeOptions[0]) => {
+    // 1. Open in new tab automatically
+    window.open(option.url, '_blank', 'noopener,noreferrer');
+
+    // 2. Trigger automatic file download
+    const link = document.createElement('a');
+    link.href = option.url;
+    link.download = option.fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setIsResumeOpen(false);
+  };
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg">
@@ -35,16 +102,69 @@ export default function Hero() {
 
         {/* Primary CTA Buttons (Mobile Full Width / Desktop Row) */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 mb-8 w-full max-w-sm sm:max-w-none mx-auto">
-          <a
-            href={profile.resumeUrl || '/resume.pdf'}
-            download="Otabek_Haydarov_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold text-sm hover:opacity-95 shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition-all hover:-translate-y-0.5 group btn-interactive btn-cta-glow text-center"
-          >
-            <FileDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-            <span>Download CV / Resume</span>
-          </a>
+          {/* Resume Language Dropdown */}
+          <div ref={resumeRef} className="relative w-full sm:w-auto">
+            <button
+              type="button"
+              onClick={() => setIsResumeOpen((prev) => !prev)}
+              aria-expanded={isResumeOpen}
+              aria-haspopup="true"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold text-sm hover:opacity-95 shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition-all hover:-translate-y-0.5 group btn-interactive btn-cta-glow text-center cursor-pointer"
+            >
+              <FileDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+              <span>Download CV / Resume</span>
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-200 ${
+                  isResumeOpen ? 'rotate-180' : ''
+                }`}
+              />
+            </button>
+
+            {isResumeOpen && (
+              <div
+                className="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 mt-2 w-72 sm:w-80 rounded-2xl bg-[#0b1324]/95 backdrop-blur-xl border border-white/10 p-2 shadow-2xl shadow-sky-950/60 z-50 animate-in fade-in zoom-in-95 duration-150"
+                role="menu"
+              >
+                <div className="px-3 py-2 border-b border-white/5 mb-1 flex items-center justify-between">
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    Tilni tanlang / Select Language
+                  </span>
+                  <span className="text-[10px] text-sky-400 font-mono">PDF</span>
+                </div>
+                <div className="space-y-1">
+                  {resumeOptions.map((opt) => (
+                    <button
+                      key={opt.code}
+                      type="button"
+                      onClick={() => handleDownload(opt)}
+                      className="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl text-left hover:bg-white/10 active:bg-white/15 transition-all group/item cursor-pointer"
+                      role="menuitem"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-base shrink-0 group-hover/item:border-sky-500/30 group-hover/item:bg-sky-500/10 transition-colors">
+                          {opt.flag}
+                        </span>
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-sm font-semibold text-white group-hover/item:text-sky-300 transition-colors">
+                              {opt.label}
+                            </span>
+                            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-slate-400">
+                              {opt.badge}
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-400 leading-tight">
+                            {opt.description}
+                          </p>
+                        </div>
+                      </div>
+                      <ExternalLink className="w-4 h-4 text-slate-500 group-hover/item:text-sky-400 shrink-0 transition-colors" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
 
           <a
             href="#projects"
