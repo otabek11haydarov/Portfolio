@@ -1,11 +1,7 @@
-import { Code2, Heart, Shield, Github, Linkedin, Mail } from 'lucide-react';
+import { Code2, Heart, Github, Linkedin, Mail } from 'lucide-react';
 import { usePortfolio } from '@/context/PortfolioContext';
 
-interface FooterProps {
-  onOpenAdmin?: () => void;
-}
-
-export default function Footer({ onOpenAdmin }: FooterProps) {
+export default function Footer() {
   const { data } = usePortfolio();
   const { profile } = data;
 
@@ -57,17 +53,6 @@ export default function Footer({ onOpenAdmin }: FooterProps) {
           <p className="text-sm text-slate-500">
             © {new Date().getFullYear()} {profile.name}
           </p>
-
-          {onOpenAdmin && (
-            <button
-              onClick={onOpenAdmin}
-              className="p-1.5 rounded-lg bg-white/5 hover:bg-sky-500/20 text-slate-500 hover:text-sky-400 transition-colors btn-interactive"
-              title="Admin Panel"
-              aria-label="Open Admin Panel"
-            >
-              <Shield className="w-4 h-4" />
-            </button>
-          )}
         </div>
       </div>
     </footer>

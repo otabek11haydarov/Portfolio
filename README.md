@@ -1,8 +1,8 @@
 <div align="center">
 
-  <img src="public/favicon.svg" alt="Otabek Haydarov Logo" width="100" height="100" />
+  <img src="public/favicon.svg" alt="Otabek Haydarov Logo" width="96" height="96" />
 
-  # Otabek Haydarov — Developer Portfolio & Admin Suite
+  # Otabek Haydarov — Portfolio
 
   <p align="center">
     <strong>Software Engineer & Data Analyst</strong><br />
@@ -10,66 +10,57 @@
   </p>
 
   <p align="center">
-    <a href="https://github.com/otabek11haydarov/Portfolio/stargazers"><img src="https://img.shields.io/github/stars/otabek11haydarov/Portfolio?color=38bdf8&style=for-the-badge" alt="Stars" /></a>
-    <a href="https://github.com/otabek11haydarov/Portfolio/network/members"><img src="https://img.shields.io/github/forks/otabek11haydarov/Portfolio?color=0ea5e9&style=for-the-badge" alt="Forks" /></a>
-    <a href="https://github.com/otabek11haydarov/Portfolio/issues"><img src="https://img.shields.io/github/issues/otabek11haydarov/Portfolio?color=0284c7&style=for-the-badge" alt="Issues" /></a>
-    <a href="https://github.com/otabek11haydarov/Portfolio/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-teal.svg?style=for-the-badge" alt="License" /></a>
+    <a href="https://github.com/otabek11haydarov/Portfolio/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-teal.svg?style=flat-square" alt="License" /></a>
+    <img src="https://img.shields.io/badge/React-18-blue?style=flat-square&logo=react" alt="React 18" />
+    <img src="https://img.shields.io/badge/TypeScript-5.5-blue?style=flat-square&logo=typescript" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=flat-square&logo=tailwind-css" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/Vite-5.4-purple?style=flat-square&logo=vite" alt="Vite" />
   </p>
 
   <p align="center">
-    <a href="#-about-the-project">About</a> •
-    <a href="#-features">Features</a> •
+    <a href="#-overview">Overview</a> •
+    <a href="#-key-features">Key Features</a> •
     <a href="#-tech-stack">Tech Stack</a> •
     <a href="#-getting-started">Getting Started</a> •
-    <a href="#-admin-control-center">Admin Suite</a> •
     <a href="#-project-structure">Structure</a> •
-    <a href="#-author--contact">Contact</a>
+    <a href="#-contact">Contact</a>
   </p>
 
 </div>
 
 ---
 
-## 🌟 About The Project
+## 🌟 Overview
 
-A high-performance, dark-themed personal portfolio built with **React 18**, **TypeScript**, **Tailwind CSS**, and **Vite**, accompanied by an integrated **Node.js / Express** backend and custom **Admin Control Center**.
+A modern, high-performance, responsive personal portfolio built with **React 18**, **TypeScript**, **Tailwind CSS**, and **Vite**.
 
-The website is engineered for both software engineering showcases and data analytics workflows — featuring dynamic content management, glassmorphic UI, responsive layouts, and interactive components.
+Designed to showcase practical experience in both data analytics and full-stack software engineering — featuring dynamic data structures, clean glassmorphic UI, responsive layouts, 3D card tilt effects, and an interactive contact dispatch.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-- **Futuristic Dark Aesthetic:** Deep navy canvas (`#0a0f1a`), glowing gradient text, backdrop blur cards, and ambient animations.
-- **Dynamic Content & State:** All data (Profile, Bio, Skills, Projects, Work Experience) is fully dynamic and synchronized with the backend.
-- **Integrated Admin Control Center (`/#admin`):**
-  - Protected by admin password authentication.
-  - **Full CRUD:** Create, update, or remove projects, skills, profile information, and experiences in real-time.
-  - Dual-mode sync: Automatically saves to local JSON database (`server/data/portfolio.json`) with seamless `localStorage` offline fallback.
+- **Futuristic Dark Aesthetic:** Deep navy canvas (`#0a0f1a`), glowing gradient typography, backdrop blur cards, and ambient animations.
+- **Mobile-First Responsive Design:** Smooth cross-device compatibility from small smartphones to ultra-wide displays without horizontal scroll stutter.
 - **Interactive Visualizations:**
   - Animated tech stack marquee.
   - Category-based skill bars with animated progress levels.
   - Interactive project cards with tags, live preview, and source code links.
-  - Career timeline showing professional experience and milestones.
+  - Career timeline showing professional experience, education, and milestones.
 - **Working Contact Section:** Integrated AJAX email dispatch with instant status feedback.
 - **Custom Branding:** Bespoke vector SVG branding (`</> OH.`) optimized as high-DPI browser favicon.
-- **100% Responsive:** Optimized across mobile, tablet, and ultra-wide screens.
+- **Production-Ready Performance:** Pre-configured for instantaneous static generation and edge CDN deployment on Vercel.
 
 ---
 
 ## 🛠 Tech Stack
 
-### Frontend
-- **Framework:** [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **Framework:** [React 18](https://react.dev/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
 - **Build Tool:** [Vite 5](https://vitejs.dev/)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **Icons:** [Lucide React](https://lucide.dev/)
-
-### Backend & Storage
-- **Runtime:** [Node.js](https://nodejs.org/)
-- **Server:** [Express.js](https://expressjs.com/)
-- **Database:** Local JSON Data Store with Atomic Disk Writes
-- **Dev Runner:** [Concurrently](https://github.com/open-cli-tools/concurrently) for running client + server simultaneously
+- **Deployment:** [Vercel](https://vercel.com/)
 
 ---
 
@@ -92,106 +83,50 @@ npm -v
    cd Portfolio
    ```
 
-2. **Install all dependencies:**
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-3. **Start the development environment:**
+3. **Start the development server:**
    ```bash
    npm run dev
    ```
-   > 💡 **Tip:** This starts both the **Vite Frontend** (`http://localhost:5173`) and the **Express Backend** (`http://localhost:5000`) concurrently in a single terminal.
+   Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-4. Open your browser and visit:
-   ```text
-   http://localhost:5173
+4. **Build for production:**
+   ```bash
+   npm run build
    ```
-
----
-
-## 🛡️ Admin Control Center
-
-The portfolio includes an integrated Admin Panel to manage all contents without touching raw code:
-
-1. Click the **Shield Icon (🛡️)** in the footer, or open:
-   ```text
-   http://localhost:5173/#admin
-   ```
-2. **Default Password:** `admin123` *(Can be changed directly inside the admin panel).*
-3. **Capabilities:**
-   - **Projects:** Add new projects with titles, emojis, tech tags, descriptions, and URLs.
-   - **Skills:** Add or edit proficiency levels (0-100%) and categorise under *Languages*, *Data & Analytics*, *Frameworks*, or *Tools*.
-   - **Profile & Bio:** Edit full name, tagline, email, location, GitHub/LinkedIn links, and the About Me bio.
-   - **Experience:** Add, modify, or delete career positions and company achievements.
 
 ---
 
 ## 📁 Project Structure
 
-```text
+```
 Portfolio/
-├── public/
-│   ├── favicon.svg          # Custom </> OH. vector favicon
-│   └── vite.svg             # App branding asset
-├── server/
-│   ├── data/
-│   │   └── portfolio.json   # Persistent JSON database for live data
-│   └── index.js             # Express CRUD API backend
+├── public/                # Static assets, favicon, resume PDF
 ├── src/
-│   ├── components/
-│   │   ├── admin/
-│   │   │   └── AdminDashboard.tsx # Complete Admin control panel
-│   │   ├── About.tsx        # Bio & stats section
-│   │   ├── Contact.tsx      # Contact form with email integration
-│   │   ├── Experience.tsx   # Work history timeline
-│   │   ├── Footer.tsx       # Page footer with Admin trigger
-│   │   ├── Hero.tsx         # Headline, socials, & dynamic bio
-│   │   ├── Navbar.tsx       # Navigation bar with backdrop blur
-│   │   ├── Projects.tsx     # Featured work cards
-│   │   ├── ScrollProgress.tsx # Top reading progress indicator
-│   │   ├── Skills.tsx       # Categorized skill progress bars
-│   │   └── TechMarquee.tsx  # Infinite scrolling technologies strip
-│   ├── context/
-│   │   └── PortfolioContext.tsx # Global state with API sync & local fallback
-│   ├── data/
-│   │   └── portfolio.ts     # Initial seed data definitions & TypeScript types
-│   ├── hooks/
-│   │   └── useReveal.ts     # IntersectionObserver animation hook
-│   ├── App.tsx              # Main application root
-│   ├── index.css            # Custom CSS & Tailwind directives
-│   └── main.tsx             # React DOM entry point
-├── index.html               # Main HTML entry with updated meta tags
-├── package.json             # Scripts and package dependencies
-├── tailwind.config.js       # Custom theme extensions & colors
-└── vite.config.ts           # Vite bundler & API proxy configuration
+│   ├── components/        # Modular UI components (Hero, About, Skills, Projects, etc.)
+│   ├── config/            # API and environment configuration
+│   ├── context/           # Portfolio data context provider
+│   ├── data/              # Typed portfolio content data (skills, projects, bio)
+│   ├── hooks/             # Custom interaction hooks (reveal, interactive cards, buttons)
+│   ├── App.tsx            # Main layout wrapper
+│   ├── index.css          # Tailwind and global styles
+│   └── main.tsx           # Application entrypoint
+├── index.html             # HTML entry with Open Graph meta tags
+├── package.json           # Dependencies and build scripts
+├── tsconfig.json          # TypeScript configuration
+└── vite.config.ts         # Vite bundler configuration
 ```
 
 ---
 
-## 📦 Available Scripts
+## 📬 Contact
 
-| Command | Description |
-| :--- | :--- |
-| `npm run dev` | Runs both the Vite dev server and Express backend concurrently |
-| `npm run dev:client` | Runs only the Vite frontend development server |
-| `npm run server` | Runs only the Node.js Express backend server |
-| `npm run build` | Builds the production bundle to the `dist/` directory |
-| `npm run preview` | Previews the production build locally |
-| `npm run typecheck` | Validates TypeScript types across the project |
-
----
-
-## 📬 Author & Contact
-
-**Otabek Haydarov**  
-- **Email:** [otabek11haydarov@gmail.com](mailto:otabek11haydarov@gmail.com)  
-- **GitHub:** [@otabek11haydarov](https://github.com/otabek11haydarov)  
-- **LinkedIn:** [Otabek Haydarov](https://www.linkedin.com/in/otabek-haydarov-910789386)  
-- **Location:** Tashkent, Uzbekistan  
-
----
-
-<div align="center">
-  <sub>Built with ❤️ using React, TypeScript & Tailwind CSS. © 2026 Otabek Haydarov.</sub>
-</div>
+- **Name:** Otabek Haydarov
+- **Email:** [otabek11haydarov@gmail.com](mailto:otabek11haydarov@gmail.com)
+- **LinkedIn:** [linkedin.com/in/otabek-haydarov](https://www.linkedin.com/in/otabek-haydarov)
+- **GitHub:** [github.com/otabek11haydarov](https://github.com/otabek11haydarov)
+- **Live Website:** [haydarov-portfolio.vercel.app](https://haydarov-portfolio.vercel.app)
