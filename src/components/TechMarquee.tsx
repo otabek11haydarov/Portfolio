@@ -6,15 +6,15 @@ const tech = [
 
 export default function TechMarquee() {
   return (
-    <div className="relative overflow-hidden py-8 border-y border-white/5 bg-[#0c121f]">
+    <div className="relative overflow-hidden py-8 border-y border-amber-900/30 bg-[#1c0f09]">
       <div className="flex animate-marquee whitespace-nowrap">
         {[...tech, ...tech].map((t, i) => (
           <span
             key={i}
-            className="mx-6 font-display font-semibold text-lg text-slate-600"
+            className="mx-6 font-display font-semibold text-lg text-amber-200/40 hover:text-amber-100 transition-colors cursor-default"
           >
             {t}
-            <span className="text-sky-500/40 ml-6">/</span>
+            <span className="text-[#f07f3c]/50 ml-6">/</span>
           </span>
         ))}
       </div>

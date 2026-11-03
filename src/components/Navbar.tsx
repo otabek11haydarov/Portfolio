@@ -23,18 +23,18 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0a0f1a]/90 backdrop-blur-md border-b border-white/5 py-3'
+          ? 'bg-[#150d09]/90 backdrop-blur-md border-b border-amber-900/30 py-3'
           : 'bg-transparent py-5'
       }`}
     >
       <nav className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         <a
           href="#hero"
-          className="flex items-center gap-2 font-display font-bold text-lg"
+          className="flex items-center gap-2 font-display font-bold text-lg text-amber-50"
           aria-label="Otabek Haydarov - Home"
         >
-          <Code2 className="w-6 h-6 text-sky-400" />
-          <span>OH<span className="text-sky-400">.</span></span>
+          <Code2 className="w-6 h-6 text-[#f07f3c]" />
+          <span>OH<span className="text-[#f07f3c]">.</span></span>
         </a>
 
         <ul className="hidden md:flex items-center gap-8">
@@ -42,7 +42,7 @@ export default function Navbar() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="text-sm text-slate-300 hover:text-sky-400 transition-colors duration-200"
+                className="text-sm text-amber-100/80 hover:text-[#f07f3c] transition-colors duration-200"
               >
                 {l.label}
               </a>
@@ -52,13 +52,13 @@ export default function Navbar() {
 
         <a
           href="#contact"
-          className="hidden md:inline-flex items-center px-4 py-2 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-500/30 text-sm font-medium hover:bg-sky-500/20 transition-colors duration-200 btn-interactive btn-cta-glow"
+          className="hidden md:inline-flex items-center px-4 py-2 rounded-lg bg-[#f07f3c]/10 text-[#f07f3c] border border-[#f07f3c]/30 text-sm font-medium hover:bg-[#f07f3c]/20 transition-colors duration-200 btn-interactive btn-cta-glow"
         >
           Let's talk
         </a>
 
         <button
-          className="md:hidden text-slate-200 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+          className="md:hidden text-amber-100 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f07f3c]/40"
           onClick={() => setOpen(!open)}
           aria-label="Toggle navigation menu"
           aria-expanded={open}
@@ -68,25 +68,25 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="md:hidden bg-[#0a0f1a]/98 backdrop-blur-xl border-t border-white/10 px-6 py-5 shadow-2xl">
+        <div className="md:hidden bg-[#150d09]/98 backdrop-blur-xl border-t border-amber-900/30 px-6 py-5 shadow-2xl">
           <ul className="space-y-3">
             {links.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block py-2 text-base font-medium text-slate-300 hover:text-sky-400 transition-colors"
+                  className="block py-2 text-base font-medium text-amber-100/80 hover:text-[#f07f3c] transition-colors"
                 >
                   {l.label}
                 </a>
               </li>
             ))}
           </ul>
-          <div className="pt-4 mt-3 border-t border-white/10">
+          <div className="pt-4 mt-3 border-t border-amber-900/30">
             <a
               href="#contact"
               onClick={() => setOpen(false)}
-              className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold text-sm shadow-lg shadow-sky-500/25 btn-interactive btn-cta-glow"
+              className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#ea580c] to-[#f07f3c] text-white font-semibold text-sm shadow-lg shadow-orange-500/25 btn-interactive btn-cta-glow"
             >
               Let's talk
             </a>

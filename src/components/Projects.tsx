@@ -10,10 +10,10 @@ export default function Projects() {
   return (
     <section id="projects" className="relative py-28 px-6">
       <div ref={ref} className={`max-w-6xl mx-auto reveal ${visible ? 'is-visible' : ''}`}>
-        <p className="text-sky-400 font-display font-semibold text-sm tracking-widest uppercase mb-3">
+        <p className="text-[#f07f3c] font-display font-semibold text-sm tracking-widest uppercase mb-3">
           Projects
         </p>
-        <h2 className="font-display font-bold text-3xl md:text-4xl mb-12">
+        <h2 className="font-display font-bold text-3xl md:text-4xl mb-12 text-white">
           Selected work
         </h2>
 
@@ -21,21 +21,21 @@ export default function Projects() {
           {projects.map((p, idx) => (
             <article
               key={p.id || p.title}
-              className="interactive-card group relative rounded-2xl bg-white/[0.03] border border-white/10 p-6 flex flex-col justify-between"
+              className="interactive-card group relative rounded-2xl bg-[#21140e]/60 border border-amber-900/40 p-6 flex flex-col justify-between"
               style={{ '--card-idx': idx } as React.CSSProperties}
             >
               <div>
                 <div className="text-3xl mb-4">{p.emoji}</div>
-                <h3 className="font-display font-semibold text-lg text-slate-100 mb-2 group-hover:text-sky-400 transition-colors">
+                <h3 className="font-display font-semibold text-lg text-white mb-2 group-hover:text-[#f07f3c] transition-colors">
                   {p.title}
                 </h3>
-                <p className="text-sm text-slate-400 leading-relaxed mb-4">{p.description}</p>
+                <p className="text-sm text-amber-200/70 leading-relaxed mb-4">{p.description}</p>
 
                 <div className="flex flex-wrap gap-2 mb-5">
                   {p.tags.map((t) => (
                     <span
                       key={t}
-                      className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-slate-300 font-mono"
+                      className="px-2.5 py-1 rounded-md bg-[#3b1b10]/60 border border-amber-900/40 text-xs text-amber-200/80 font-mono"
                     >
                       {t}
                     </span>
@@ -43,13 +43,13 @@ export default function Projects() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 pt-4 border-t border-white/5">
+              <div className="flex items-center gap-3 pt-4 border-t border-amber-900/30">
                 <a
                   href={p.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View live demo of ${p.title}`}
-                  className="flex items-center gap-1.5 text-sm text-slate-300 hover:text-sky-400 transition-colors px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/5 hover:border-sky-500/30 btn-interactive"
+                  className="flex items-center gap-1.5 text-sm text-amber-200/80 hover:text-[#f07f3c] transition-colors px-3 py-1.5 rounded-lg bg-white/[0.03] border border-amber-900/40 hover:border-[#f07f3c]/40 btn-interactive"
                 >
                   <ExternalLink className="w-4 h-4" /> Live
                 </a>
@@ -58,7 +58,7 @@ export default function Projects() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View source code of ${p.title}`}
-                  className="flex items-center gap-1.5 text-sm text-slate-300 hover:text-sky-400 transition-colors px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/5 hover:border-sky-500/30 btn-interactive"
+                  className="flex items-center gap-1.5 text-sm text-amber-200/80 hover:text-[#f07f3c] transition-colors px-3 py-1.5 rounded-lg bg-white/[0.03] border border-amber-900/40 hover:border-[#f07f3c]/40 btn-interactive"
                 >
                   <Github className="w-4 h-4" /> Code
                 </a>

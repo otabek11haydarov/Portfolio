@@ -5,14 +5,15 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0a0f1a;
-  --bg-soft: #111827;
-  --surface: #151c2c;
-  --border: #1f2937;
-  --text: #e5e7eb;
-  --text-muted: #94a3b8;
-  --accent: #38bdf8;
-  --accent-2: #2dd4bf;
+  --bg: #150d09;
+  --bg-soft: #1c0f09;
+  --surface: #27170f;
+  --border: #442216;
+  --text: #ffedd5;
+  --text-muted: #d5b9a5;
+  --accent: #f07f3c;
+  --accent-2: #ffd2a8;
+  --accent-warm: #ea580c;
 }
 
 html, body {
@@ -28,6 +29,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+::selection {
+  background-color: rgba(240, 127, 60, 0.3);
+  color: #ffd2a8;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -40,12 +46,12 @@ body {
   font-family: 'Space Grotesk', 'Inter', sans-serif;
 }
 
-/* Animated gradient background blobs */
+/* Animated gradient background blobs (Quyosh shafaqi warm sunset glow) */
 .blob {
   position: absolute;
   border-radius: 9999px;
   filter: blur(80px);
-  opacity: 0.25;
+  opacity: 0.22;
   pointer-events: none;
 }
 
@@ -65,15 +71,15 @@ body {
   transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Subtle grid background */
+/* Subtle grid background with warm amber glow */
 .grid-bg {
   background-image:
-    linear-gradient(to right, rgba(56, 189, 248, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(56, 189, 248, 0.06) 1px, transparent 1px);
+    linear-gradient(to right, rgba(240, 127, 60, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(240, 127, 60, 0.06) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar matching Quyosh shafaqi theme */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -81,11 +87,11 @@ body {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: #2d3a52;
+  background: #4a2215;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b4d6b;
+  background: #7a3518;
 }
 
 /* Marquee animation */
@@ -141,7 +147,7 @@ a.btn-interactive::before,
   background: radial-gradient(
     130px circle at var(--mx, 50%) var(--my, 50%),
     rgba(255, 255, 255, 0.22),
-    rgba(56, 189, 248, 0.12) 45%,
+    rgba(240, 127, 60, 0.2) 45%,
     transparent 75%
   );
   opacity: 0;
@@ -190,8 +196,8 @@ a.btn-interactive:hover,
 .btn-interactive:hover {
   --scale: 1.035;
   box-shadow:
-    0 10px 26px -6px rgba(56, 189, 248, 0.35),
-    0 0 16px -2px rgba(129, 140, 248, 0.3);
+    0 10px 26px -6px rgba(240, 127, 60, 0.4),
+    0 0 16px -2px rgba(255, 210, 168, 0.25);
 }
 
 button:active,
@@ -201,13 +207,13 @@ a.btn-interactive:active,
   transition-duration: 0.08s;
 }
 
-/* Asosiy CTA tugmalari uchun Neon Pulse va Gradient oqimi */
+/* Asosiy CTA tugmalari uchun Sunset Neon Pulse va Gradient oqimi */
 @keyframes neonPulseGlow {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.35), 0 0 30px rgba(99, 102, 241, 0.18);
+    box-shadow: 0 0 15px rgba(240, 127, 60, 0.4), 0 0 30px rgba(122, 53, 24, 0.25);
   }
   50% {
-    box-shadow: 0 0 24px rgba(56, 189, 248, 0.65), 0 0 45px rgba(168, 85, 247, 0.35);
+    box-shadow: 0 0 24px rgba(240, 127, 60, 0.7), 0 0 45px rgba(255, 210, 168, 0.35);
   }
 }
 
@@ -230,7 +236,7 @@ a.btn-interactive:active,
 .btn-ripple-wave {
   position: absolute;
   border-radius: 9999px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.75) 0%, rgba(56, 189, 248, 0.45) 60%, transparent 100%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(240, 127, 60, 0.5) 60%, transparent 100%);
   pointer-events: none;
   z-index: 3;
   animation: btnRippleExpand 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -302,16 +308,16 @@ a.btn-interactive:active,
   will-change: transform, box-shadow;
 }
 
-/* Kursor kuzatuvchi Holographic Spotlight nuri */
+/* Kursor kuzatuvchi Holographic Sunset Spotlight nuri */
 .interactive-card::before {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
     320px circle at var(--cmx, 50%) var(--cmy, 50%),
-    rgba(56, 189, 248, 0.18),
-    rgba(129, 140, 248, 0.12) 38%,
-    rgba(192, 132, 252, 0.06) 60%,
+    rgba(240, 127, 60, 0.16),
+    rgba(122, 53, 24, 0.14) 38%,
+    rgba(255, 210, 168, 0.05) 60%,
     transparent 80%
   );
   opacity: 0;
@@ -320,7 +326,7 @@ a.btn-interactive:active,
   z-index: 0;
 }
 
-/* Yorqin Neon Chegara Nuri (Border Beam Glow) */
+/* Yorqin Quyosh Shafaqi Chegara Nuri (Border Beam Glow) */
 .interactive-card::after {
   content: "";
   position: absolute;
@@ -329,8 +335,8 @@ a.btn-interactive:active,
   padding: 1.5px;
   background: radial-gradient(
     220px circle at var(--cmx, 50%) var(--cmy, 50%),
-    rgba(56, 189, 248, 0.9),
-    rgba(168, 85, 247, 0.65) 45%,
+    rgba(240, 127, 60, 0.95),
+    rgba(255, 210, 168, 0.65) 45%,
     transparent 75%
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -345,10 +351,10 @@ a.btn-interactive:active,
 .interactive-card:hover {
   --lift: -6px;
   --cscale: 1.02;
-  border-color: rgba(56, 189, 248, 0.55) !important;
+  border-color: rgba(240, 127, 60, 0.6) !important;
   box-shadow:
-    0 22px 42px -12px rgba(2, 132, 199, 0.32),
-    0 0 28px -4px rgba(129, 140, 248, 0.25);
+    0 22px 42px -12px rgba(28, 15, 9, 0.8),
+    0 0 28px -4px rgba(240, 127, 60, 0.3);
 }
 
 .interactive-card:hover::before,
@@ -367,15 +373,15 @@ a.btn-interactive:active,
 }
 
 .interactive-card:hover h3 {
-  color: #38bdf8;
+  color: #f07f3c;
   transform: translateX(3px);
 }
 
 .skill-bar-animated {
-  background: linear-gradient(90deg, #0ea5e9, #6366f1, #a855f7, #38bdf8);
+  background: linear-gradient(90deg, #ea580c, #f07f3c, #ffd2a8, #ea580c);
   background-size: 250% 250%;
   animation: skillBarShimmer 3.2s ease infinite;
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.55);
+  box-shadow: 0 0 14px rgba(240, 127, 60, 0.55);
   transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -395,5 +401,3 @@ a.btn-interactive:active,
     --scale: 1.015;
   }
 }
-
-

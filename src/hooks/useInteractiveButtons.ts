@@ -76,7 +76,7 @@ export function useInteractiveButtons() {
 
       // 2. 8 ta Neon zarracha portlashi (Particle Burst)
       if (e.clientX && e.clientY) {
-        const palette = ['#38bdf8', '#818cf8', '#c084fc', '#34d399', '#fbbf24'];
+        const palette = ['#f07f3c', '#ffd2a8', '#ea580c', '#f59e0b', '#fb923c'];
         for (let i = 0; i < 8; i++) {
           const p = document.createElement('span');
           p.className = 'btn-burst-particle';

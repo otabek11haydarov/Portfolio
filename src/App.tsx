@@ -17,7 +17,7 @@ function PortfolioApp() {
   useInteractiveCards();
 
   return (
-    <div className="min-h-screen bg-[#0a0f1a] text-slate-200">
+    <div className="min-h-screen bg-[#150d09] text-amber-50 selection:bg-orange-500/30 selection:text-orange-200">
       <ScrollProgress />
       <Navbar />
       <main>

@@ -74,29 +74,29 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg">
-      {/* Animated blobs */}
-      <div className="blob w-96 h-96 bg-sky-500 top-20 -left-20 animate-float" />
-      <div className="blob w-80 h-80 bg-teal-400 bottom-10 right-0 animate-float" style={{ animationDelay: '2s' }} />
-      <div className="blob w-72 h-72 bg-indigo-500 top-1/3 right-1/4 animate-float" style={{ animationDelay: '4s' }} />
+      {/* Animated blobs - Quyosh shafaqi warm sunset glow */}
+      <div className="blob w-96 h-96 bg-[#f07f3c] top-20 -left-20 animate-float" />
+      <div className="blob w-80 h-80 bg-[#ea580c] bottom-10 right-0 animate-float" style={{ animationDelay: '2s' }} />
+      <div className="blob w-72 h-72 bg-[#7a3518] top-1/3 right-1/4 animate-float" style={{ animationDelay: '4s' }} />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center pt-24 pb-16">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-slate-300 mb-8">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-amber-900/40 text-xs text-amber-200/90 mb-8 backdrop-blur-sm">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           Available for new opportunities
         </div>
 
-        <h1 className="font-display font-bold text-4xl sm:text-6xl md:text-7xl leading-[1.08] mb-6">
+        <h1 className="font-display font-bold text-4xl sm:text-6xl md:text-7xl leading-[1.08] mb-6 text-white">
           {profile.name.split(' ')[0]}
           <br />
-          <span className="bg-gradient-to-r from-sky-400 via-cyan-300 to-teal-300 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#f07f3c] via-[#ffd2a8] to-[#f07f3c] bg-clip-text text-transparent">
             {profile.name.split(' ').slice(1).join(' ')}
           </span>
         </h1>
 
-        <p className="text-lg sm:text-xl md:text-2xl text-slate-300 font-medium mb-4">
+        <p className="text-lg sm:text-xl md:text-2xl text-amber-100 font-medium mb-4">
           {profile.title}
         </p>
-        <p className="text-sm sm:text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+        <p className="text-sm sm:text-base md:text-lg text-amber-200/70 max-w-2xl mx-auto mb-8 leading-relaxed">
           {profile.tagline}
         </p>
 
@@ -109,7 +109,7 @@ export default function Hero() {
               onClick={() => setIsResumeOpen((prev) => !prev)}
               aria-expanded={isResumeOpen}
               aria-haspopup="true"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-teal-400 text-white font-semibold text-sm hover:opacity-95 shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition-all hover:-translate-y-0.5 group btn-interactive btn-cta-glow text-center cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#ea580c] to-[#f07f3c] text-white font-semibold text-sm hover:opacity-95 shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 transition-all hover:-translate-y-0.5 group btn-interactive btn-cta-glow text-center cursor-pointer"
             >
               <FileDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
               <span>Download CV / Resume</span>
@@ -122,14 +122,14 @@ export default function Hero() {
 
             {isResumeOpen && (
               <div
-                className="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 mt-2 w-72 sm:w-80 rounded-2xl bg-[#0b1324]/95 backdrop-blur-xl border border-white/10 p-2 shadow-2xl shadow-sky-950/60 z-50 animate-in fade-in zoom-in-95 duration-150"
+                className="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 mt-2 w-72 sm:w-80 rounded-2xl bg-[#1c0f09]/95 backdrop-blur-xl border border-amber-900/40 p-2 shadow-2xl shadow-black/80 z-50 animate-in fade-in zoom-in-95 duration-150"
                 role="menu"
               >
-                <div className="px-3 py-2 border-b border-white/5 mb-1 flex items-center justify-between">
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                <div className="px-3 py-2 border-b border-amber-900/30 mb-1 flex items-center justify-between">
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-amber-200/70">
                     Tilni tanlang / Select Language
                   </span>
-                  <span className="text-[10px] text-sky-400 font-mono">PDF</span>
+                  <span className="text-[10px] text-[#f07f3c] font-mono font-bold">PDF</span>
                 </div>
                 <div className="space-y-1">
                   {resumeOptions.map((opt) => (
@@ -141,24 +141,24 @@ export default function Hero() {
                       role="menuitem"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-base shrink-0 group-hover/item:border-sky-500/30 group-hover/item:bg-sky-500/10 transition-colors">
+                        <span className="w-8 h-8 rounded-lg bg-white/5 border border-amber-900/40 flex items-center justify-center text-base shrink-0 group-hover/item:border-[#f07f3c]/40 group-hover/item:bg-[#f07f3c]/10 transition-colors">
                           {opt.flag}
                         </span>
                         <div>
                           <div className="flex items-center gap-1.5">
-                            <span className="text-sm font-semibold text-white group-hover/item:text-sky-300 transition-colors">
+                            <span className="text-sm font-semibold text-white group-hover/item:text-[#ffd2a8] transition-colors">
                               {opt.label}
                             </span>
-                            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-slate-400">
+                            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-amber-200/60">
                               {opt.badge}
                             </span>
                           </div>
-                          <p className="text-xs text-slate-400 leading-tight">
+                          <p className="text-xs text-amber-200/60 leading-tight">
                             {opt.description}
                           </p>
                         </div>
                       </div>
-                      <ExternalLink className="w-4 h-4 text-slate-500 group-hover/item:text-sky-400 shrink-0 transition-colors" />
+                      <ExternalLink className="w-4 h-4 text-amber-600/70 group-hover/item:text-[#f07f3c] shrink-0 transition-colors" />
                     </button>
                   ))}
                 </div>
@@ -168,10 +168,10 @@ export default function Hero() {
 
           <a
             href="#projects"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-slate-200 font-medium text-sm hover:text-white hover:bg-white/10 hover:border-white/20 transition-all hover:-translate-y-0.5 btn-interactive text-center"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-white/5 border border-amber-900/40 text-amber-100 font-medium text-sm hover:text-white hover:bg-white/10 hover:border-[#f07f3c]/40 transition-all hover:-translate-y-0.5 btn-interactive text-center"
           >
             <span>View Projects</span>
-            <ArrowRight className="w-4 h-4 text-sky-400" />
+            <ArrowRight className="w-4 h-4 text-[#f07f3c]" />
           </a>
         </div>
 
@@ -181,7 +181,7 @@ export default function Hero() {
             href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-sky-400 hover:border-sky-500/40 hover:bg-sky-500/10 transition-all duration-200 btn-interactive"
+            className="w-11 h-11 rounded-xl bg-white/5 border border-amber-900/40 flex items-center justify-center text-amber-200/80 hover:text-[#f07f3c] hover:border-[#f07f3c]/40 hover:bg-[#f07f3c]/10 transition-all duration-200 btn-interactive"
             aria-label="GitHub"
           >
             <Github className="w-5 h-5" />
@@ -190,29 +190,29 @@ export default function Hero() {
             href={profile.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-sky-400 hover:border-sky-500/40 hover:bg-sky-500/10 transition-all duration-200 btn-interactive"
+            className="w-11 h-11 rounded-xl bg-white/5 border border-amber-900/40 flex items-center justify-center text-amber-200/80 hover:text-[#f07f3c] hover:border-[#f07f3c]/40 hover:bg-[#f07f3c]/10 transition-all duration-200 btn-interactive"
             aria-label="LinkedIn"
           >
             <Linkedin className="w-5 h-5" />
           </a>
           <a
             href={`mailto:${profile.email}`}
-            className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-sky-400 hover:border-sky-500/40 hover:bg-sky-500/10 transition-all duration-200 btn-interactive"
+            className="w-11 h-11 rounded-xl bg-white/5 border border-amber-900/40 flex items-center justify-center text-amber-200/80 hover:text-[#f07f3c] hover:border-[#f07f3c]/40 hover:bg-[#f07f3c]/10 transition-all duration-200 btn-interactive"
             aria-label="Email"
           >
             <Mail className="w-5 h-5" />
           </a>
         </div>
 
-        <div className="flex items-center justify-center gap-2 text-sm text-slate-500">
-          <MapPin className="w-4 h-4" />
+        <div className="flex items-center justify-center gap-2 text-sm text-amber-200/60">
+          <MapPin className="w-4 h-4 text-[#f07f3c]" />
           {profile.location}
         </div>
       </div>
 
       <a
         href="#about"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-500 hover:text-sky-400 transition-colors btn-interactive p-2 rounded-full"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-amber-600/70 hover:text-[#f07f3c] transition-colors btn-interactive p-2 rounded-full"
         aria-label="Scroll down"
       >
         <ArrowDown className="w-6 h-6 animate-bounce" />
