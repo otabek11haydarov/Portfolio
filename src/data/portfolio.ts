@@ -1,10 +1,22 @@
+export interface Profile {
+  name: string;
+  title: string;
+  tagline: string;
+  email: string;
+  github: string;
+  linkedin: string;
+  location: string;
+  resumeUrl?: string;
+}
+
 export interface Skill {
   name: string;
-  level: number; // 0-100
+  level: number;
   category: 'Languages' | 'Data & Analytics' | 'Frameworks' | 'Tools';
 }
 
 export interface Project {
+  id?: string;
   title: string;
   description: string;
   tags: string[];
@@ -14,13 +26,14 @@ export interface Project {
 }
 
 export interface Experience {
+  id?: string;
   role: string;
   company: string;
   period: string;
   description: string;
 }
 
-export const profile = {
+export const profile: Profile = {
   name: 'Otabek Haydarov',
   title: 'Software Engineer & Data Analyst',
   tagline: 'I turn messy data into clean insights and clean code into great products.',
@@ -31,7 +44,8 @@ export const profile = {
   resumeUrl: '/resume.pdf',
 };
 
-export const aboutText = `I’m a Data Analyst with a solid engineering foundation, focused on turning complex datasets into clear, actionable business insights. While my primary drive is data exploration, dashboarding, and analytics workflows, my background in web development allows me to bridge the gap between backend data pipelines and intuitive interfaces. I care deeply about data integrity, analytical clarity, and delivering metrics that drive confident decisions.`;
+export const aboutText =
+  'I’m a Data Analyst with a solid engineering foundation, focused on turning complex datasets into clear, actionable business insights. While my primary drive is data exploration, dashboarding, and analytics workflows, my background in web development allows me to bridge the gap between backend data pipelines and intuitive interfaces. I care deeply about data integrity, analytical clarity, and delivering metrics that drive confident decisions.';
 
 export const skills: Skill[] = [
   { name: 'Python', level: 95, category: 'Languages' },
@@ -67,42 +81,6 @@ export const projects: Project[] = [
     repo: 'https://github.com/otabek11haydarov/Analyzing-US-Electric-Vehicle-Market-Share',
     emoji: '⚡',
   },
-  {
-    title: 'Analytics Component Library',
-    description:
-      'An open-source React component library for embedding charts and KPI cards in any app. 1.2k+ GitHub stars and used by 30+ teams.',
-    tags: ['TypeScript', 'React', 'Tailwind', 'Vite'],
-    link: 'https://haydarov-portfolio.vercel.app',
-    repo: 'https://github.com/otabek11haydarov/Portfolio',
-    emoji: '🧩',
-  },
-  {
-    title: 'Natural Language Query Engine',
-    description:
-      'A tool that lets non-technical users ask questions in plain English and get SQL results back. Powered by an LLM with a validated SQL-generation guard layer.',
-    tags: ['Python', 'FastAPI', 'LLM', 'PostgreSQL'],
-    link: 'https://haydarov-portfolio.vercel.app',
-    repo: 'https://github.com/otabek11haydarov/Portfolio',
-    emoji: '💬',
-  },
-  {
-    title: 'Realtime Sentiment Tracker',
-    description:
-      'Streams tweets and product reviews through a sentiment model and visualizes trends on a live map. Handles 500 events/sec with sub-second latency.',
-    tags: ['Kafka', 'Python', 'WebSocket', 'React'],
-    link: 'https://haydarov-portfolio.vercel.app',
-    repo: 'https://github.com/otabek11haydarov/Portfolio',
-    emoji: '🗺️',
-  },
-  {
-    title: 'Personal Finance Visualizer',
-    description:
-      'A web app that categorizes transactions automatically and shows spending breakdowns with interactive charts. Featured on a popular dev showcase.',
-    tags: ['TypeScript', 'React', 'Supabase', 'Recharts'],
-    link: 'https://haydarov-portfolio.vercel.app',
-    repo: 'https://github.com/otabek11haydarov/Portfolio',
-    emoji: '💰',
-  },
 ];
 
 export const experience: Experience[] = [
@@ -112,19 +90,5 @@ export const experience: Experience[] = [
     period: '2025 — Present',
     description:
       'Actively open for Internship and Junior Data Analyst / Software Engineer positions. Ready to bring value with solid skills in Python, SQL, Power BI, React, TypeScript, and automated data pipelines.',
-  },
-  {
-    role: 'Data Analyst & Full-Stack Projects',
-    company: 'IT Park Uzbekistan Ecosystem & Open Source',
-    period: '2024 — 2025',
-    description:
-      'Designing and developing end-to-end data analytics solutions, interactive BI dashboards, PostgreSQL data schemas, and full-stack React web applications.',
-  },
-  {
-    role: 'Data Analytics & Software Trainee',
-    company: 'Tashkent Tech & Capstone Labs',
-    period: '2023 — 2024',
-    description:
-      'Completed comprehensive practical training in Data Analytics, Database Management (PostgreSQL, MySQL, SQL Server), Python data modeling, and modern web application development.',
   },
 ];

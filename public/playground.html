@@ -19,11 +19,16 @@
             mono: ['JetBrains Mono', 'monospace']
           },
           colors: {
-            canvas: '#0b0f17',
-            card: '#111622',
-            cardHover: '#161d2d',
-            borderSubtle: '#1e2738',
-            borderHover: '#2e3c56'
+            canvas: '#150d09',
+            card: '#1c0f09',
+            cardHover: '#25140d',
+            borderSubtle: '#3b1b10',
+            borderHover: '#7a3518',
+            shafaq: {
+              400: '#fb923c',
+              500: '#f07f3c',
+              600: '#ea580c'
+            }
           }
         }
       }
@@ -31,96 +36,99 @@
   </script>
   <style>
     body {
-      background-color: #0b0f17;
-      color: #f1f5f9;
+      background-color: #150d09;
+      color: #ffedd5;
       font-family: 'Inter', system-ui, sans-serif;
       overflow-x: hidden;
     }
     .mono-tag {
       font-family: 'JetBrains Mono', monospace;
-      background-color: #161d2a;
-      border: 1px solid #263147;
-      color: #cbd5e1;
+      background-color: #21140e;
+      border: 1px solid #3b1b10;
+      color: #ffd2a8;
       transition: all 0.2s ease;
     }
     .project-card {
-      background-color: #111622;
-      border: 1px solid #1e2738;
+      background-color: #1c0f09;
+      border: 1px solid #3b1b10;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .project-card:hover {
-      border-color: #334155;
+      border-color: #7a3518;
       transform: translateY(-2px);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 20px 40px -15px rgba(240, 127, 60, 0.2);
     }
     .project-card.active-card {
-      border-color: #10b981;
-      box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.35), 0 20px 40px -15px rgba(16, 185, 129, 0.15);
+      border-color: #f07f3c;
+      box-shadow: 0 0 0 1px rgba(240, 127, 60, 0.5), 0 20px 40px -15px rgba(240, 127, 60, 0.25);
     }
     .action-btn {
-      background-color: #161d2a;
-      border: 1px solid #263147;
-      color: #cbd5e1;
+      background-color: #21140e;
+      border: 1px solid #3b1b10;
+      color: #ffd2a8;
       transition: all 0.2s ease;
     }
     .action-btn:hover {
-      background-color: #1e293b;
-      border-color: #475569;
+      background-color: #2c1810;
+      border-color: #7a3518;
       color: #ffffff;
     }
     .action-btn-live-active {
-      background-color: rgba(16, 185, 129, 0.15);
-      border-color: #10b981;
-      color: #34d399;
+      background-color: rgba(240, 127, 60, 0.2);
+      border-color: #f07f3c;
+      color: #ffedd5;
     }
     .custom-scrollbar::-webkit-scrollbar {
       width: 6px;
       height: 6px;
     }
     .custom-scrollbar::-webkit-scrollbar-track {
-      background: #0b0f17;
+      background: #150d09;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #263147;
+      background: #3b1b10;
       border-radius: 3px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: #3b4c6b;
+      background: #7a3518;
     }
     input[type="range"] {
-      accent-color: #10b981;
+      accent-color: #f07f3c;
     }
   </style>
 </head>
-<body class="min-h-screen antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
+<body class="min-h-screen antialiased selection:bg-orange-500/30 selection:text-orange-200">
 
   <!-- Top Navigation / Portfolio Header Bar -->
-  <header class="sticky top-0 z-40 border-b border-[#1e2738] bg-[#0b0f17]/90 backdrop-blur-md">
+  <header class="sticky top-0 z-40 border-b border-[#3b1b10] bg-[#1c0f09]/90 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-mono font-bold text-sm">
+        <div class="w-9 h-9 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-[#f07f3c] font-mono font-bold text-sm">
           OH
         </div>
         <div>
           <div class="flex items-center gap-2">
             <span class="font-bold text-white tracking-tight text-sm sm:text-base">Otabek Haydarov</span>
-            <span class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <span class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-mono bg-orange-500/10 text-orange-400 border border-orange-500/25">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
               Interactive Playground
             </span>
           </div>
-          <p class="text-xs text-slate-400 hidden sm:block">github.com/otabek11haydarov/Portfolio — Live Project Sandbox</p>
+          <p class="text-xs text-amber-200/60 hidden sm:block">github.com/otabek11haydarov/Portfolio — Live Project Sandbox</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2 sm:gap-3">
-        <button id="btnOpenIntegrationModal" type="button" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-medium bg-[#161d2a] hover:bg-[#1e293b] text-slate-200 border border-[#263147] flex items-center gap-2 transition">
-          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <a href="/" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-medium bg-[#21140e] hover:bg-[#2c1810] text-amber-200 border border-[#3b1b10] flex items-center gap-1.5 transition">
+          <span>← Back to Portfolio</span>
+        </a>
+        <button id="btnOpenIntegrationModal" type="button" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-medium bg-[#21140e] hover:bg-[#2c1810] text-amber-200 border border-[#3b1b10] flex items-center gap-2 transition">
+          <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
           </svg>
-          <span>Repo Integration Code</span>
+          <span class="hidden md:inline">Repo Integration Code</span>
         </button>
-        <button id="btnScrollToPlayground" type="button" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/20 flex items-center gap-1.5 transition">
+        <button id="btnScrollToPlayground" type="button" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-lg shadow-orange-500/25 flex items-center gap-1.5 transition">
           <span>Active Playground</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -132,34 +140,34 @@
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
 
-    <!-- Section 1: Exact Portfolio Project Cards (from Screenshot) -->
+    <!-- Section 1: Exact Portfolio Project Cards (Centered 2-Column Grid) -->
     <section aria-labelledby="projects-heading">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-4">
         <div>
-          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-emerald-400 mb-1.5">
-            <span>// FEATURED ANALYTICS & ENGINEERING PROJECTS</span>
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-orange-400 mb-1.5">
+            <span>// FEATURED ANALYTICS &amp; ENGINEERING PROJECTS</span>
           </div>
           <h1 id="projects-heading" class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             Featured Projects &amp; Live Sandbox
           </h1>
-          <p class="text-sm text-slate-400 mt-1">
-            Har bir loyihadagi <span class="text-slate-200 font-medium">Live</span> tugmasini bosing — pastdagi interaktiv Playground oynasida jonli SQL so'rovlar, Tableau dashboard va React komponentlarini sinab ko'ring.
+          <p class="text-sm text-amber-200/70 mt-1">
+            Har bir loyihadagi <span class="text-white font-medium">Live</span> tugmasini bosing — pastdagi interaktiv Playground oynasida jonli SQL soʻrovlar, metrikalar va vizual tahlillarni sinab koʻring.
           </p>
         </div>
-        <div class="flex items-center gap-2 text-xs font-mono text-slate-400 bg-[#111622] px-3 py-2 rounded-xl border border-[#1e2738]">
+        <div class="flex items-center gap-2 text-xs font-mono text-amber-200/70 bg-[#1c0f09] px-3.5 py-2 rounded-xl border border-[#3b1b10]">
           <span>Active Live View:</span>
-          <span id="activeProjectBadge" class="text-emerald-400 font-semibold">E-Commerce Profitability</span>
+          <span id="activeProjectBadge" class="text-orange-400 font-semibold">E-Commerce Profitability</span>
         </div>
       </div>
 
-      <!-- 3-Column Portfolio Cards Grid matching screenshot -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- 2-Column Balanced Centered Grid Matching Screenshot -->
+      <div class="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-6 sm:gap-8">
 
         <!-- Card 1: E-Commerce Profitability Analysis -->
-        <article id="card-ecommerce" class="project-card active-card rounded-2xl p-6 flex flex-col justify-between">
+        <article id="card-ecommerce" class="project-card active-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
           <div>
             <!-- Icon -->
-            <div class="w-11 h-11 rounded-xl bg-slate-800/60 border border-slate-700/60 flex items-center justify-center text-2xl mb-5 shadow-inner">
+            <div class="w-11 h-11 rounded-xl bg-[#2a1710] border border-[#442216] flex items-center justify-center text-2xl mb-5 shadow-inner">
               📊
             </div>
             <!-- Title -->
@@ -167,7 +175,7 @@
               E-Commerce Profitability Analysis
             </h2>
             <!-- Description -->
-            <p class="text-sm text-slate-400 leading-relaxed mb-5">
+            <p class="text-sm text-amber-200/70 leading-relaxed mb-5">
               End-to-end analytics project auditing 2,000+ orders in PostgreSQL to identify unit economics, shipping margin leakage (13% vs 31%), and multi-channel marketing ROAS.
             </p>
             <!-- Tech Tags -->
@@ -180,16 +188,16 @@
           </div>
 
           <div>
-            <div class="border-t border-[#1e2738] my-4"></div>
+            <div class="border-t border-[#3b1b10] my-4"></div>
             <div class="flex items-center gap-3">
-              <button type="button" data-launch-project="ecommerce" class="btn-launch-live action-btn action-btn-live-active px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2">
+              <button type="button" data-launch-project="ecommerce" class="btn-launch-live action-btn action-btn-live-active px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
                 </svg>
                 <span>Live</span>
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
               </button>
-              <button type="button" data-code-project="ecommerce" class="btn-view-code action-btn px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2">
+              <button type="button" data-code-project="ecommerce" class="btn-view-code action-btn px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                 </svg>
@@ -200,10 +208,10 @@
         </article>
 
         <!-- Card 2: U.S. Electric Vehicle Market Share Analysis -->
-        <article id="card-ev" class="project-card rounded-2xl p-6 flex flex-col justify-between">
+        <article id="card-ev" class="project-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
           <div>
             <!-- Icon -->
-            <div class="w-11 h-11 rounded-xl bg-slate-800/60 border border-slate-700/60 flex items-center justify-center text-2xl mb-5 shadow-inner">
+            <div class="w-11 h-11 rounded-xl bg-[#2a1710] border border-[#442216] flex items-center justify-center text-2xl mb-5 shadow-inner">
               ⚡
             </div>
             <!-- Title -->
@@ -211,7 +219,7 @@
               U.S. Electric Vehicle Market Share Analysis
             </h2>
             <!-- Description -->
-            <p class="text-sm text-slate-400 leading-relaxed mb-5">
+            <p class="text-sm text-amber-200/70 leading-relaxed mb-5">
               End-to-end data analytics project evaluating 287M+ registered vehicles across 51 jurisdictions to uncover EV adoption trends, alternative fuel penetration, and charging infrastructure priorities.
             </p>
             <!-- Tech Tags -->
@@ -224,58 +232,15 @@
           </div>
 
           <div>
-            <div class="border-t border-[#1e2738] my-4"></div>
+            <div class="border-t border-[#3b1b10] my-4"></div>
             <div class="flex items-center gap-3">
-              <button type="button" data-launch-project="ev" class="btn-launch-live action-btn px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2">
+              <button type="button" data-launch-project="ev" class="btn-launch-live action-btn px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
                 </svg>
                 <span>Live</span>
               </button>
-              <button type="button" data-code-project="ev" class="btn-view-code action-btn px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2">
-                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-                </svg>
-                <span>Code</span>
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 3: Analytics Component Library -->
-        <article id="card-components" class="project-card rounded-2xl p-6 flex flex-col justify-between">
-          <div>
-            <!-- Icon -->
-            <div class="w-11 h-11 rounded-xl bg-slate-800/60 border border-slate-700/60 flex items-center justify-center text-2xl mb-5 shadow-inner">
-              🧩
-            </div>
-            <!-- Title -->
-            <h2 class="text-lg sm:text-xl font-bold text-white leading-snug mb-3">
-              Analytics Component Library
-            </h2>
-            <!-- Description -->
-            <p class="text-sm text-slate-400 leading-relaxed mb-5">
-              An open-source React component library for embedding charts and KPI cards in any app. 1.2k+ GitHub stars and used by 30+ teams.
-            </p>
-            <!-- Tech Tags -->
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="mono-tag px-3 py-1 rounded-lg text-xs">TypeScript</span>
-              <span class="mono-tag px-3 py-1 rounded-lg text-xs">React</span>
-              <span class="mono-tag px-3 py-1 rounded-lg text-xs">Tailwind</span>
-              <span class="mono-tag px-3 py-1 rounded-lg text-xs">Vite</span>
-            </div>
-          </div>
-
-          <div>
-            <div class="border-t border-[#1e2738] my-4"></div>
-            <div class="flex items-center gap-3">
-              <button type="button" data-launch-project="components" class="btn-launch-live action-btn px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
-                </svg>
-                <span>Live</span>
-              </button>
-              <button type="button" data-code-project="components" class="btn-view-code action-btn px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2">
+              <button type="button" data-code-project="ev" class="btn-view-code action-btn px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                 </svg>
@@ -289,34 +254,30 @@
     </section>
 
     <!-- Section 2: Interactive Live Playground Workbench -->
-    <section id="playground-workbench" class="rounded-2xl bg-[#111622] border border-[#1e2738] shadow-2xl overflow-hidden">
+    <section id="playground-workbench" class="rounded-2xl bg-[#1c0f09] border border-[#3b1b10] shadow-2xl overflow-hidden">
 
       <!-- Workbench Top Window Bar + Project Switcher Tabs -->
-      <div class="bg-[#0d121c] border-b border-[#1e2738] px-4 sm:px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div class="bg-[#150d09] border-b border-[#3b1b10] px-4 sm:px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div class="flex items-center gap-3">
           <div class="flex items-center gap-1.5">
             <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
             <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
             <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
           </div>
-          <span class="text-xs font-mono text-slate-400 border-l border-[#1e2738] pl-3" id="workbenchUrlBar">
+          <span class="text-xs font-mono text-amber-200/60 border-l border-[#3b1b10] pl-3" id="workbenchUrlBar">
             playground://otabek-portfolio/ecommerce-profitability
           </span>
         </div>
 
-        <!-- Project Playground Switcher -->
+        <!-- Project Playground Switcher (2 Projects) -->
         <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Project Playground Tabs">
-          <button type="button" data-switch-tab="ecommerce" class="playground-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-2 bg-emerald-500/15 text-emerald-300 border border-emerald-500/40">
+          <button type="button" data-switch-tab="ecommerce" class="playground-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-2 bg-orange-500/20 text-orange-300 border border-orange-500/50 cursor-pointer">
             <span>📊</span>
             <span>1. E-Commerce Profitability</span>
           </button>
-          <button type="button" data-switch-tab="ev" class="playground-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-2 bg-[#161d2a] text-slate-400 border border-[#263147] hover:text-slate-200">
+          <button type="button" data-switch-tab="ev" class="playground-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-2 bg-[#21140e] text-amber-200/60 border border-[#3b1b10] hover:text-white hover:border-[#7a3518] cursor-pointer">
             <span>⚡</span>
             <span>2. U.S. EV Market Share</span>
-          </button>
-          <button type="button" data-switch-tab="components" class="playground-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-2 bg-[#161d2a] text-slate-400 border border-[#263147] hover:text-slate-200">
-            <span>🧩</span>
-            <span>3. Analytics Component Library</span>
           </button>
         </div>
       </div>
@@ -326,24 +287,24 @@
       <!-- =================================================================== -->
       <div id="panel-ecommerce" class="p-5 sm:p-7 space-y-6">
         <!-- Header & Live Status -->
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-[#1e2738]">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-[#3b1b10]">
           <div>
             <div class="flex items-center gap-2.5">
               <span class="text-xl">📊</span>
               <h3 class="text-xl font-bold text-white">E-Commerce Profitability &amp; Margin Leakage Playground</h3>
-              <span class="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+              <span class="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-orange-500/10 text-orange-400 border border-orange-500/25">
                 PostgreSQL v16 · 2,140 Orders Audited
               </span>
             </div>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1">
+            <p class="text-xs sm:text-sm text-amber-200/70 mt-1">
               Interactive unit economics simulator &amp; SQL query runner auditing shipping margin leakage (<span class="text-rose-400 font-mono">13.4%</span> Express/Free-threshold vs <span class="text-emerald-400 font-mono">31.2%</span> Standard) and multi-channel ROAS.
             </p>
           </div>
           <div class="flex flex-wrap items-center gap-2">
-            <button type="button" id="btnResetEcom" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-[#161d2a] hover:bg-[#1e293b] text-slate-300 border border-[#263147] transition">
+            <button type="button" id="btnResetEcom" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-[#21140e] hover:bg-[#2c1810] text-amber-200 border border-[#3b1b10] transition cursor-pointer">
               Reset Audit Parameters
             </button>
-            <button type="button" data-code-project="ecommerce" class="btn-view-code px-3 py-1.5 rounded-lg text-xs font-mono bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 transition">
+            <button type="button" data-code-project="ecommerce" class="btn-view-code px-3 py-1.5 rounded-lg text-xs font-mono bg-orange-500/10 hover:bg-orange-500/20 text-orange-300 border border-orange-500/30 transition cursor-pointer">
               View SQL &amp; Python Pipeline
             </button>
           </div>
@@ -351,31 +312,31 @@
 
         <!-- KPI Summary Row -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4">
-            <div class="text-xs font-mono text-slate-400">AUDITED ORDERS (POSTGRESQL)</div>
+          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
+            <div class="text-xs font-mono text-amber-200/60">AUDITED ORDERS (POSTGRESQL)</div>
             <div class="text-2xl font-bold text-white mt-1 font-mono" id="ecomKpiOrders">2,140</div>
             <div class="text-xs text-emerald-400 mt-1 flex items-center gap-1">
               <span>100% Order-level Reconciliation</span>
             </div>
           </div>
-          <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4">
-            <div class="text-xs font-mono text-slate-400">STANDARD vs LEAKED MARGIN</div>
+          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
+            <div class="text-xs font-mono text-amber-200/60">STANDARD vs LEAKED MARGIN</div>
             <div class="text-2xl font-bold text-white mt-1 font-mono">
               <span class="text-emerald-400" id="ecomKpiStdMargin">31.2%</span>
-              <span class="text-slate-500 text-base mx-1">vs</span>
+              <span class="text-amber-200/40 text-base mx-1">vs</span>
               <span class="text-rose-400" id="ecomKpiLeakMargin">13.4%</span>
             </div>
             <div class="text-xs text-rose-400 mt-1" id="ecomKpiLeakDelta">-17.8% shipping subsidy leakage</div>
           </div>
-          <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4">
-            <div class="text-xs font-mono text-slate-400">BLENDED MULTI-CHANNEL ROAS</div>
-            <div class="text-2xl font-bold text-amber-400 mt-1 font-mono" id="ecomKpiRoas">3.42x</div>
-            <div class="text-xs text-slate-400 mt-1" id="ecomKpiAdSpend">$84,500 spend → $289,190 rev</div>
+          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
+            <div class="text-xs font-mono text-amber-200/60">BLENDED MULTI-CHANNEL ROAS</div>
+            <div class="text-2xl font-bold text-orange-400 mt-1 font-mono" id="ecomKpiRoas">3.42x</div>
+            <div class="text-xs text-amber-200/60 mt-1" id="ecomKpiAdSpend">$84,500 spend → $289,190 rev</div>
           </div>
-          <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4">
-            <div class="text-xs font-mono text-slate-400">RECOVERABLE PROFIT POTENTIAL</div>
+          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
+            <div class="text-xs font-mono text-amber-200/60">RECOVERABLE PROFIT POTENTIAL</div>
             <div class="text-2xl font-bold text-emerald-400 mt-1 font-mono" id="ecomKpiRecoverable">+$42,860</div>
-            <div class="text-xs text-slate-400 mt-1" id="ecomKpiSimulatedNote">Adjust sliders below to simulate</div>
+            <div class="text-xs text-amber-200/50 mt-1" id="ecomKpiSimulatedNote">Adjust sliders below to simulate</div>
           </div>
         </div>
 
@@ -384,15 +345,15 @@
           <!-- Left 5 Cols: Interactive SQL Runner & What-If Simulator -->
           <div class="lg:col-span-5 space-y-5">
             <!-- Interactive SQL Preset Selector -->
-            <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4 space-y-3">
+            <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4 space-y-3">
               <div class="flex items-center justify-between">
-                <label for="ecomSqlPreset" class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">
+                <label for="ecomSqlPreset" class="text-xs font-mono uppercase tracking-wider text-orange-400 font-semibold">
                   PostgreSQL Interactive Query Runner
                 </label>
-                <span class="text-[11px] font-mono text-slate-400" id="ecomQueryTiming">12.4 ms · 4 rows</span>
+                <span class="text-[11px] font-mono text-amber-200/50" id="ecomQueryTiming">12.4 ms · 4 rows</span>
               </div>
 
-              <select id="ecomSqlPreset" class="w-full bg-[#111622] border border-[#263147] rounded-lg px-3 py-2 text-xs font-mono text-slate-200 focus:outline-none focus:border-emerald-500">
+              <select id="ecomSqlPreset" class="w-full bg-[#150d09] border border-[#3b1b10] rounded-lg px-3 py-2 text-xs font-mono text-amber-100 focus:outline-none focus:border-orange-500">
                 <option value="shipping_leakage">1. Shipping Margin Leakage Audit (13% vs 31%)</option>
                 <option value="channel_roas">2. Multi-Channel Marketing ROAS &amp; Net Profit</option>
                 <option value="category_unit_econ">3. Category Unit Economics &amp; Return Drag</option>
@@ -400,13 +361,13 @@
               </select>
 
               <div class="relative">
-                <textarea id="ecomSqlEditor" rows="6" spellcheck="false" class="w-full bg-[#070a10] border border-[#1e2738] rounded-lg p-3 text-xs font-mono text-emerald-300 focus:outline-none focus:border-emerald-500 leading-relaxed custom-scrollbar"></textarea>
+                <textarea id="ecomSqlEditor" rows="6" spellcheck="false" class="w-full bg-[#120a07] border border-[#3b1b10] rounded-lg p-3 text-xs font-mono text-orange-200 focus:outline-none focus:border-orange-500 leading-relaxed custom-scrollbar"></textarea>
               </div>
 
               <div class="flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2">
-                  <label for="ecomCategoryFilter" class="text-xs text-slate-400">Category:</label>
-                  <select id="ecomCategoryFilter" class="bg-[#111622] border border-[#263147] rounded-lg px-2.5 py-1.5 text-xs text-slate-200">
+                  <label for="ecomCategoryFilter" class="text-xs text-amber-200/70">Category:</label>
+                  <select id="ecomCategoryFilter" class="bg-[#150d09] border border-[#3b1b10] rounded-lg px-2.5 py-1.5 text-xs text-amber-100">
                     <option value="all">All Categories (2,140 orders)</option>
                     <option value="electronics">Electronics (640 orders)</option>
                     <option value="home">Home &amp; Goods (580 orders)</option>
@@ -414,29 +375,29 @@
                     <option value="beauty">Beauty &amp; Wellness (400 orders)</option>
                   </select>
                 </div>
-                <button type="button" id="btnRunEcomSql" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition flex items-center gap-1.5">
+                <button type="button" id="btnRunEcomSql" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-gradient-to-r from-orange-500 to-amber-500 hover:opacity-95 text-white transition flex items-center gap-1.5 cursor-pointer shadow-md shadow-orange-500/20">
                   <span>▶ Run SQL</span>
                 </button>
               </div>
             </div>
 
             <!-- What-If Policy Simulator -->
-            <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4 space-y-4">
+            <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4 space-y-4">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
+                <span class="text-xs font-mono uppercase tracking-wider text-orange-400 font-semibold">
                   Margin Recovery What-If Simulator
                 </span>
-                <span class="text-xs font-mono text-slate-400">Live Sensitivity</span>
+                <span class="text-xs font-mono text-amber-200/50">Live Sensitivity</span>
               </div>
 
               <!-- Slider 1: Free Shipping Threshold -->
               <div>
                 <div class="flex justify-between text-xs mb-1">
-                  <label for="sliderFreeShip" class="text-slate-300">Free Shipping Threshold ($)</label>
-                  <span class="font-mono text-emerald-400 font-semibold" id="valFreeShip">$50 (Current)</span>
+                  <label for="sliderFreeShip" class="text-amber-200/80">Free Shipping Threshold ($)</label>
+                  <span class="font-mono text-orange-400 font-semibold" id="valFreeShip">$50 (Current)</span>
                 </div>
-                <input id="sliderFreeShip" type="range" min="50" max="110" step="5" value="50" class="w-full" />
-                <div class="flex justify-between text-[10px] font-mono text-slate-500">
+                <input id="sliderFreeShip" type="range" min="50" max="110" step="5" value="50" class="w-full accent-orange-500" />
+                <div class="flex justify-between text-[10px] font-mono text-amber-200/40">
                   <span>$50 (High Leakage)</span>
                   <span>$75 (Optimal)</span>
                   <span>$110 (Strict)</span>
@@ -446,11 +407,11 @@
               <!-- Slider 2: Carrier Rate Renegotiation -->
               <div>
                 <div class="flex justify-between text-xs mb-1">
-                  <label for="sliderCarrierDisc" class="text-slate-300">Zone 4–8 Carrier Rate Reduction (%)</label>
-                  <span class="font-mono text-emerald-400 font-semibold" id="valCarrierDisc">0%</span>
+                  <label for="sliderCarrierDisc" class="text-amber-200/80">Zone 4–8 Carrier Rate Reduction (%)</label>
+                  <span class="font-mono text-orange-400 font-semibold" id="valCarrierDisc">0%</span>
                 </div>
-                <input id="sliderCarrierDisc" type="range" min="0" max="25" step="1" value="0" class="w-full" />
-                <div class="flex justify-between text-[10px] font-mono text-slate-500">
+                <input id="sliderCarrierDisc" type="range" min="0" max="25" step="1" value="0" class="w-full accent-orange-500" />
+                <div class="flex justify-between text-[10px] font-mono text-amber-200/40">
                   <span>0% Baseline</span>
                   <span>12% 3PL Contract</span>
                   <span>25% Regional Hub</span>
@@ -460,10 +421,10 @@
               <!-- Slider 3: Minimum ROAS Reallocation -->
               <div>
                 <div class="flex justify-between text-xs mb-1">
-                  <label for="sliderRoasCut" class="text-slate-300">Reallocate Sub-2.0x ROAS Ad Spend (%)</label>
-                  <span class="font-mono text-emerald-400 font-semibold" id="valRoasCut">0%</span>
+                  <label for="sliderRoasCut" class="text-amber-200/80">Reallocate Sub-2.0x ROAS Ad Spend (%)</label>
+                  <span class="font-mono text-orange-400 font-semibold" id="valRoasCut">0%</span>
                 </div>
-                <input id="sliderRoasCut" type="range" min="0" max="100" step="10" value="0" class="w-full" />
+                <input id="sliderRoasCut" type="range" min="0" max="100" step="10" value="0" class="w-full accent-orange-500" />
               </div>
             </div>
           </div>
@@ -472,16 +433,16 @@
           <div class="lg:col-span-7 space-y-5">
             <!-- Charts Row -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4">
-                <div class="text-xs font-mono text-slate-300 mb-2 font-semibold">
+              <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4">
+                <div class="text-xs font-mono text-amber-200 mb-2 font-semibold">
                   NET MARGIN % BY SHIPPING TIER (13% vs 31%)
                 </div>
                 <div class="relative h-60">
                   <canvas id="chartEcomMargin"></canvas>
                 </div>
               </div>
-              <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4">
-                <div class="text-xs font-mono text-slate-300 mb-2 font-semibold">
+              <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4">
+                <div class="text-xs font-mono text-amber-200 mb-2 font-semibold">
                   MULTI-CHANNEL MARKETING ROAS &amp; NET MARGIN
                 </div>
                 <div class="relative h-60">
@@ -491,19 +452,19 @@
             </div>
 
             <!-- Live SQL Result Set Table -->
-            <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl overflow-hidden">
-              <div class="px-4 py-2.5 border-b border-[#1e2738] flex items-center justify-between">
-                <span class="text-xs font-mono text-slate-300 font-semibold" id="ecomTableTitle">
+            <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl overflow-hidden">
+              <div class="px-4 py-2.5 border-b border-[#3b1b10] bg-[#150d09] flex items-center justify-between">
+                <span class="text-xs font-mono text-amber-200 font-semibold" id="ecomTableTitle">
                   POSTGRESQL RESULT SET — shipping_margin_audit
                 </span>
-                <span class="text-[11px] font-mono text-emerald-400" id="ecomTableBadge">
+                <span class="text-[11px] font-mono text-orange-400" id="ecomTableBadge">
                   ✓ Verified on 2,140 Orders
                 </span>
               </div>
               <div class="overflow-x-auto custom-scrollbar">
-                <table class="w-full text-left border-collapse text-xs">
-                  <thead id="ecomTableHead" class="bg-[#111622] text-slate-400 font-mono uppercase"></thead>
-                  <tbody id="ecomTableBody" class="divide-y divide-[#1e2738] text-slate-200 font-mono"></tbody>
+                <table class="w-full text-left text-xs font-mono text-amber-100">
+                  <thead id="ecomTableHead" class="bg-[#180e0a] text-amber-200/60 border-b border-[#3b1b10]"></thead>
+                  <tbody id="ecomTableBody" class="divide-y divide-[#3b1b10]"></tbody>
                 </table>
               </div>
             </div>
@@ -516,301 +477,177 @@
       <!-- =================================================================== -->
       <div id="panel-ev" class="p-5 sm:p-7 space-y-6 hidden">
         <!-- Header -->
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-[#1e2738]">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-[#3b1b10]">
           <div>
             <div class="flex items-center gap-2.5">
               <span class="text-xl">⚡</span>
-              <h3 class="text-xl font-bold text-white">U.S. Electric Vehicle Market Share &amp; Infrastructure Playground</h3>
-              <span class="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/30">
-                287.4M Vehicles · 51 Jurisdictions
+              <h3 class="text-xl font-bold text-white">U.S. Electric Vehicle Market Share &amp; Charger Infrastructure</h3>
+              <span class="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-orange-500/10 text-orange-400 border border-orange-500/25">
+                51 Jurisdictions · 287.4M Registrations
               </span>
             </div>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1">
-              Interactive Tableau-style exploratory dashboard evaluating BEV/PHEV penetration, alternative fuels, and charging infrastructure priority scores across all 50 U.S. states + D.C.
+            <p class="text-xs sm:text-sm text-amber-200/70 mt-1">
+              Cross-sectional dataset examining EV vs alternative fuel market share, public charger deficit ratios (<span class="text-orange-400 font-mono">26.3 EVs/port</span> national avg vs <span class="text-emerald-400 font-mono">18.4</span> DC benchmark), and regional electrification priorities.
             </p>
           </div>
           <div class="flex flex-wrap items-center gap-2">
-            <button type="button" id="btnResetEv" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-[#161d2a] hover:bg-[#1e293b] text-slate-300 border border-[#263147] transition">
-              Reset Filters
+            <button type="button" id="btnResetEv" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-[#21140e] hover:bg-[#2c1810] text-amber-200 border border-[#3b1b10] transition cursor-pointer">
+              Reset EV Filters
             </button>
-            <button type="button" data-code-project="ev" class="btn-view-code px-3 py-1.5 rounded-lg text-xs font-mono bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 transition">
-              View SQL &amp; Tableau Spec
+            <button type="button" data-code-project="ev" class="btn-view-code px-3 py-1.5 rounded-lg text-xs font-mono bg-orange-500/10 hover:bg-orange-500/20 text-orange-300 border border-orange-500/30 transition cursor-pointer">
+              View Tableau &amp; SQL Code
             </button>
           </div>
         </div>
 
-        <!-- KPI Summary Strip -->
+        <!-- KPI Strip -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4">
-            <div class="text-xs font-mono text-slate-400">REGISTERED VEHICLES ANALYZED</div>
-            <div class="text-2xl font-bold text-white mt-1 font-mono" id="evKpiTotalVehicles">287.4M</div>
-            <div class="text-xs text-amber-400 mt-1" id="evKpiJurisdictions">Across 51 U.S. Jurisdictions</div>
+          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
+            <div class="text-xs font-mono text-amber-200/60">AUDITED U.S. FLEET</div>
+            <div class="text-2xl font-bold text-white mt-1 font-mono">287.4M</div>
+            <div class="text-xs text-amber-200/60 mt-1">50 States + District of Columbia</div>
           </div>
-          <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4">
-            <div class="text-xs font-mono text-slate-400">ACTIVE EV FLEET (BEV + PHEV)</div>
-            <div class="text-2xl font-bold text-emerald-400 mt-1 font-mono" id="evKpiEvCount">4.84M</div>
-            <div class="text-xs text-slate-400 mt-1" id="evKpiShareText">1.68% total fleet · +34.2% YoY</div>
+          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
+            <div class="text-xs font-mono text-amber-200/60">NATIONAL EV FLEET (BEV+PHEV)</div>
+            <div class="text-2xl font-bold text-orange-400 mt-1 font-mono">4.84M</div>
+            <div class="text-xs text-orange-300 mt-1">1.68% Total Registered Fleet</div>
           </div>
-          <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4">
-            <div class="text-xs font-mono text-slate-400">ALT FUEL &amp; HYBRID FLEET</div>
-            <div class="text-2xl font-bold text-sky-400 mt-1 font-mono" id="evKpiAltCount">19.6M</div>
-            <div class="text-xs text-slate-400 mt-1">HEV, E85 Ethanol, Biodiesel, CNG</div>
+          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
+            <div class="text-xs font-mono text-amber-200/60">AVG CHARGER RATIO</div>
+            <div class="text-2xl font-bold text-amber-400 mt-1 font-mono" id="evKpiRatio">26.3 EVs / Port</div>
+            <div class="text-xs text-amber-200/60 mt-1" id="evKpiPriorityStates">7 Tier-1 Priority States</div>
           </div>
-          <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4">
-            <div class="text-xs font-mono text-slate-400">CHARGING INFRASTRUCTURE GAP</div>
-            <div class="text-2xl font-bold text-rose-400 mt-1 font-mono" id="evKpiRatio">26.3 EVs / Port</div>
-            <div class="text-xs text-slate-400 mt-1" id="evKpiPriorityStates">14 Tier-1 Priority Jurisdictions</div>
-          </div>
-        </div>
-
-        <!-- Filter Toolbar -->
-        <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
-          <div class="flex flex-wrap items-center gap-3">
-            <div>
-              <label for="evRegionFilter" class="block text-[10px] font-mono uppercase text-slate-400 mb-1">Census Region</label>
-              <select id="evRegionFilter" class="bg-[#111622] border border-[#263147] rounded-lg px-3 py-1.5 text-xs text-slate-200">
-                <option value="ALL">All 51 Jurisdictions (U.S. Total)</option>
-                <option value="West">West Region (CA, WA, CO, OR, NV...)</option>
-                <option value="Northeast">Northeast Region (NJ, NY, MA, CT...)</option>
-                <option value="South">South Region (FL, TX, VA, GA, MD, DC...)</option>
-                <option value="Midwest">Midwest Region (IL, MI, MN, OH...)</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="evPowertrainFilter" class="block text-[10px] font-mono uppercase text-slate-400 mb-1">Fuel / Powertrain Metric</label>
-              <select id="evPowertrainFilter" class="bg-[#111622] border border-[#263147] rounded-lg px-3 py-1.5 text-xs text-slate-200">
-                <option value="ev_share">BEV + PHEV Market Share (%)</option>
-                <option value="alt_share">All Alternative Fuel Penetration (%)</option>
-                <option value="ev_per_charger">Charging Stress (EVs per Public Port)</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="evSearchInput" class="block text-[10px] font-mono uppercase text-slate-400 mb-1">Search State / Jurisdiction</label>
-              <input id="evSearchInput" type="text" placeholder="e.g. California, Texas, DC..." class="bg-[#111622] border border-[#263147] rounded-lg px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500" />
-            </div>
-          </div>
-
-          <!-- Federal NEVI Charger Expansion Simulator -->
-          <div class="w-full sm:w-64">
-            <div class="flex justify-between text-xs mb-1">
-              <label for="sliderEvChargers" class="text-slate-300 font-mono">Simulate Charger Expansion:</label>
-              <span id="valEvChargers" class="text-amber-400 font-mono font-semibold">+0% Ports</span>
-            </div>
-            <input id="sliderEvChargers" type="range" min="0" max="100" step="10" value="0" class="w-full" />
+          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
+            <div class="text-xs font-mono text-amber-200/60">HYBRID &amp; ALT-FUEL FLEET</div>
+            <div class="text-2xl font-bold text-orange-300 mt-1 font-mono">19.6M</div>
+            <div class="text-xs text-orange-400 mt-1">6.82% Penetration nationwide</div>
           </div>
         </div>
 
-        <!-- Charts & State Priority Table -->
+        <!-- Controls & Interactive Views Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-7 space-y-4">
-            <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4">
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-mono text-slate-300 font-semibold" id="evChart1Title">
-                  TOP JURISDICTIONS BY EV &amp; ALT-FUEL PENETRATION (%)
-                </span>
-                <span class="text-[11px] font-mono text-slate-400">Click any state row on right to inspect</span>
-              </div>
-              <div class="relative h-64">
-                <canvas id="chartEvStates"></canvas>
-              </div>
-            </div>
-
-            <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl p-4">
-              <div class="text-xs font-mono text-slate-300 mb-2 font-semibold">
-                NATIONAL POWERTRAIN DISTRIBUTION &amp; INFRASTRUCTURE PRIORITY TIERS
-              </div>
-              <div class="relative h-56">
-                <canvas id="chartEvMix"></canvas>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right 5 Cols: Interactive Jurisdiction Table & Selected State Spotlight -->
-          <div class="lg:col-span-5 space-y-4">
-            <!-- Selected Jurisdiction Spotlight Card -->
-            <div id="evStateSpotlight" class="bg-gradient-to-br from-[#131b2e] to-[#0d121c] border border-amber-500/30 rounded-xl p-4 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-mono uppercase text-amber-400 font-semibold" id="spotStateName">
-                  California (West) — Spotlight
-                </span>
-                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-rose-500/15 text-rose-300 border border-rose-500/30" id="spotPriorityBadge">
-                  Tier-1 Grid Priority
-                </span>
-              </div>
-              <div class="grid grid-cols-3 gap-2 pt-1 text-center">
-                <div class="bg-[#0b0f17]/80 rounded-lg p-2 border border-[#1e2738]">
-                  <div class="text-[10px] font-mono text-slate-400">Total Fleet</div>
-                  <div class="text-sm font-mono font-bold text-white" id="spotTotalFleet">31.25M</div>
-                </div>
-                <div class="bg-[#0b0f17]/80 rounded-lg p-2 border border-[#1e2738]">
-                  <div class="text-[10px] font-mono text-slate-400">EV Share</div>
-                  <div class="text-sm font-mono font-bold text-emerald-400" id="spotEvShare">4.42%</div>
-                </div>
-                <div class="bg-[#0b0f17]/80 rounded-lg p-2 border border-[#1e2738]">
-                  <div class="text-[10px] font-mono text-slate-400">EVs / Charger</div>
-                  <div class="text-sm font-mono font-bold text-amber-400" id="spotEvCharger">29.8</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Interactive Jurisdiction Ranking Table -->
-            <div class="bg-[#0d121c] border border-[#1e2738] rounded-xl overflow-hidden">
-              <div class="px-4 py-2.5 border-b border-[#1e2738] flex items-center justify-between">
-                <span class="text-xs font-mono text-slate-300 font-semibold">JURISDICTION EXPLORER</span>
-                <span class="text-[11px] font-mono text-slate-400" id="evTableCount">Showing 15 key states (of 51)</span>
-              </div>
-              <div class="max-h-80 overflow-y-auto custom-scrollbar">
-                <table class="w-full text-left border-collapse text-xs">
-                  <thead class="bg-[#111622] text-slate-400 font-mono sticky top-0">
-                    <tr>
-                      <th class="py-2 px-3">State</th>
-                      <th class="py-2 px-2 text-right">Fleet</th>
-                      <th class="py-2 px-2 text-right">EV %</th>
-                      <th class="py-2 px-2 text-right">EV/Port</th>
-                      <th class="py-2 px-3 text-right">Priority</th>
-                    </tr>
-                  </thead>
-                  <tbody id="evTableBody" class="divide-y divide-[#1e2738] font-mono text-slate-200"></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- =================================================================== -->
-      <!-- PLAYGROUND 3: ANALYTICS COMPONENT LIBRARY                           -->
-      <!-- =================================================================== -->
-      <div id="panel-components" class="p-5 sm:p-7 space-y-6 hidden">
-        <!-- Header -->
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-[#1e2738]">
-          <div>
-            <div class="flex items-center gap-2.5">
-              <span class="text-xl">🧩</span>
-              <h3 class="text-xl font-bold text-white">Analytics Component Library — Live Storybook Workbench</h3>
-              <span class="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-purple-500/10 text-purple-300 border border-purple-500/30">
-                @otabek/analytics-ui v2.4.0 · ★ 1,240 Stars
+          <!-- Left 4 Cols: Interactive Filters & State Spotlight -->
+          <div class="lg:col-span-4 space-y-5">
+            <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4 space-y-4">
+              <span class="text-xs font-mono uppercase tracking-wider text-orange-400 font-semibold block border-b border-[#3b1b10] pb-2">
+                Multi-Variable Filters
               </span>
-            </div>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1">
-              Open-source TypeScript + React + Tailwind component library used by 30+ teams. Customize props in real time and copy the ready-to-embed JSX/TSX snippet.
-            </p>
-          </div>
-          <div class="flex flex-wrap items-center gap-2">
-            <button type="button" id="btnCopyComponentTsx" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition flex items-center gap-1.5">
-              <span>📋 Copy JSX / TSX Snippet</span>
-            </button>
-            <button type="button" data-code-project="components" class="btn-view-code px-3 py-1.5 rounded-lg text-xs font-mono bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 transition">
-              View Package Source
-            </button>
-          </div>
-        </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <!-- Left 4 Cols: Live Props Controls -->
-          <div class="lg:col-span-4 bg-[#0d121c] border border-[#1e2738] rounded-xl p-4 space-y-4">
-            <div class="flex items-center justify-between border-b border-[#1e2738] pb-2.5">
-              <span class="text-xs font-mono uppercase tracking-wider text-purple-400 font-semibold">
-                Component &amp; Props Editor
-              </span>
-              <span class="text-[11px] font-mono text-slate-400">TypeScript Strict</span>
-            </div>
+              <!-- Region Filter -->
+              <div>
+                <label for="evRegionFilter" class="block text-xs text-amber-200/80 mb-1">Geographic Census Region</label>
+                <select id="evRegionFilter" class="w-full bg-[#150d09] border border-[#3b1b10] rounded-lg px-3 py-2 text-xs font-mono text-amber-100">
+                  <option value="ALL">All U.S. Regions (51 Jurisdictions)</option>
+                  <option value="West">West Coast &amp; Mountain (Leading Adoption)</option>
+                  <option value="Northeast">Northeast Corridor (High Density)</option>
+                  <option value="South">South &amp; Sunbelt (Rapid Expansion)</option>
+                  <option value="Midwest">Midwest (Early Stage Transition)</option>
+                </select>
+              </div>
 
-            <!-- Component Type Selector -->
-            <div>
-              <label for="compSelectType" class="block text-xs text-slate-300 mb-1 font-medium">Active Component</label>
-              <select id="compSelectType" class="w-full bg-[#111622] border border-[#263147] rounded-lg px-3 py-2 text-xs font-mono text-slate-200">
-                <option value="KpiSuite">&lt;KpiCardGrid /&gt; + &lt;AnalyticsAreaChart /&gt;</option>
-                <option value="AttributionCard">&lt;MultiChannelAttributionCard /&gt;</option>
-                <option value="AnomalyDetector">&lt;RealTimeMetricMonitor /&gt;</option>
-              </select>
-            </div>
+              <!-- Metric Filter -->
+              <div>
+                <label for="evPowertrainFilter" class="block text-xs text-amber-200/80 mb-1">Primary Ranking Metric</label>
+                <select id="evPowertrainFilter" class="w-full bg-[#150d09] border border-[#3b1b10] rounded-lg px-3 py-2 text-xs font-mono text-amber-100">
+                  <option value="ev_share">BEV + PHEV Share % (Fleet %)</option>
+                  <option value="alt_share">Total Alt-Fuel + Hybrid Share %</option>
+                  <option value="ev_per_charger">EVs Per Public Charger Port (Deficit)</option>
+                </select>
+              </div>
 
-            <!-- Prop: Metric Dataset Preset -->
-            <div>
-              <label for="compDatasetPreset" class="block text-xs text-slate-300 mb-1 font-medium">Data Stream Preset</label>
-              <select id="compDatasetPreset" class="w-full bg-[#111622] border border-[#263147] rounded-lg px-3 py-2 text-xs font-mono text-slate-200">
-                <option value="saas">SaaS ARR &amp; Net Dollar Retention ($1.48M)</option>
-                <option value="ecommerce">E-Commerce Gross Merchandise Value ($412K)</option>
-                <option value="infra">Cloud Query Throughput (98.4K req/s)</option>
-              </select>
-            </div>
+              <!-- Search -->
+              <div>
+                <label for="evSearchInput" class="block text-xs text-amber-200/80 mb-1">State Search / Lookup</label>
+                <input id="evSearchInput" type="text" placeholder="e.g. California, WA, Texas..." class="w-full bg-[#150d09] border border-[#3b1b10] rounded-lg px-3 py-2 text-xs font-mono text-amber-100 placeholder-amber-200/30" />
+              </div>
 
-            <!-- Prop: Accent Theme -->
-            <div>
-              <label class="block text-xs text-slate-300 mb-1.5 font-medium">Theme Accent Prop (<code class="font-mono text-purple-300">accentColor</code>)</label>
-              <div class="grid grid-cols-4 gap-2">
-                <button type="button" data-comp-theme="emerald" class="comp-theme-btn px-2 py-1.5 rounded-lg text-xs font-mono border border-emerald-500 bg-emerald-500/20 text-emerald-300">emerald</button>
-                <button type="button" data-comp-theme="indigo" class="comp-theme-btn px-2 py-1.5 rounded-lg text-xs font-mono border border-[#263147] bg-[#111622] text-slate-300">indigo</button>
-                <button type="button" data-comp-theme="amber" class="comp-theme-btn px-2 py-1.5 rounded-lg text-xs font-mono border border-[#263147] bg-[#111622] text-slate-300">amber</button>
-                <button type="button" data-comp-theme="rose" class="comp-theme-btn px-2 py-1.5 rounded-lg text-xs font-mono border border-[#263147] bg-[#111622] text-slate-300">rose</button>
+              <!-- Charger Expansion Simulator Slider -->
+              <div class="pt-2 border-t border-[#3b1b10]">
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-amber-200/80">Simulate NEVI Charger Deployment</span>
+                  <span class="font-mono text-orange-400 font-semibold" id="valEvChargers">+0% Ports</span>
+                </div>
+                <input id="sliderEvChargers" type="range" min="0" max="100" step="10" value="0" class="w-full accent-orange-500" />
+                <div class="flex justify-between text-[10px] font-mono text-amber-200/40">
+                  <span>Current Status</span>
+                  <span>+50% Grant Funding</span>
+                  <span>+100% Target</span>
+                </div>
               </div>
             </div>
 
-            <!-- Prop Toggles -->
-            <div class="space-y-2.5 pt-2 border-t border-[#1e2738]">
-              <label class="flex items-center justify-between text-xs text-slate-300 cursor-pointer">
-                <span>Show Delta Badges (<code class="font-mono text-slate-400">showDelta</code>)</span>
-                <input type="checkbox" id="propShowDelta" checked class="rounded accent-emerald-500 w-4 h-4" />
-              </label>
-              <label class="flex items-center justify-between text-xs text-slate-300 cursor-pointer">
-                <span>Show Goal Threshold Line (<code class="font-mono text-slate-400">showTarget</code>)</span>
-                <input type="checkbox" id="propShowTarget" checked class="rounded accent-emerald-500 w-4 h-4" />
-              </label>
-              <label class="flex items-center justify-between text-xs text-slate-300 cursor-pointer">
-                <span>Compact Card Density (<code class="font-mono text-slate-400">compact</code>)</span>
-                <input type="checkbox" id="propCompact" class="rounded accent-emerald-500 w-4 h-4" />
-              </label>
-              <label class="flex items-center justify-between text-xs text-slate-300 cursor-pointer">
-                <span>Simulate Loading State (<code class="font-mono text-slate-400">isLoading</code>)</span>
-                <input type="checkbox" id="propLoading" class="rounded accent-emerald-500 w-4 h-4" />
-              </label>
+            <!-- State Spotlight Card -->
+            <div id="evSpotlightCard" class="bg-[#21140e] border border-orange-500/40 rounded-xl p-4 space-y-3">
+              <div class="flex items-center justify-between border-b border-[#3b1b10] pb-2">
+                <span class="text-xs font-mono text-orange-300 font-bold" id="spotStateName">California (West) — Spotlight</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-orange-500/10 text-orange-400 border border-orange-500/30" id="spotPriorityBadge">Tier-1 Critical</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2 text-center pt-1">
+                <div class="bg-[#150d09] p-2 rounded-lg border border-[#3b1b10]">
+                  <div class="text-[10px] font-mono text-amber-200/50">FLEET</div>
+                  <div class="text-sm font-bold text-white font-mono" id="spotTotalFleet">31.25M</div>
+                </div>
+                <div class="bg-[#150d09] p-2 rounded-lg border border-[#3b1b10]">
+                  <div class="text-[10px] font-mono text-amber-200/50">EV SHARE</div>
+                  <div class="text-sm font-bold text-orange-400 font-mono" id="spotEvShare">4.42%</div>
+                </div>
+                <div class="bg-[#150d09] p-2 rounded-lg border border-[#3b1b10]">
+                  <div class="text-[10px] font-mono text-amber-200/50">EVs/PORT</div>
+                  <div class="text-sm font-bold text-amber-400 font-mono" id="spotEvCharger">29.8</div>
+                </div>
+              </div>
+              <p class="text-[11px] text-amber-200/60 leading-relaxed pt-1" id="spotNote">
+                Click any row in the table to inspect state-level unit metrics, electrification rate, and charger gap analysis.
+              </p>
             </div>
           </div>
 
-          <!-- Right 8 Cols: Live Component Canvas Preview + Generated TSX Code -->
+          <!-- Right 8 Cols: Interactive State Table & Dual Charts -->
           <div class="lg:col-span-8 space-y-5">
-            <!-- Live Rendered Component Preview -->
-            <div class="bg-[#090d14] border border-[#1e2738] rounded-xl p-5 space-y-5">
-              <div class="flex items-center justify-between border-b border-[#1e2738] pb-3">
-                <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                  <span class="text-xs font-mono text-slate-300 font-semibold">LIVE COMPONENT CANVAS PREVIEW</span>
-                </div>
-                <span class="text-[11px] font-mono text-slate-400">React 18 · Tailwind CSS · Zero-config embed</span>
-              </div>
-
-              <!-- Dynamic KPI Cards Preview Container -->
-              <div id="compPreviewKpiGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-4"></div>
-
-              <!-- Dynamic Chart Component Container -->
-              <div class="bg-[#111622] border border-[#1e2738] rounded-xl p-4">
-                <div class="flex items-center justify-between mb-3">
-                  <div>
-                    <h4 id="compChartHeading" class="text-sm font-bold text-white">Net Revenue Retention &amp; ARR Trajectory</h4>
-                    <p id="compChartSubheading" class="text-xs text-slate-400">Embedded via &lt;AnalyticsAreaChart /&gt; component</p>
-                  </div>
-                  <span id="compChartTag" class="px-2.5 py-1 rounded-md text-xs font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                    +24.8% YoY
-                  </span>
+            <!-- Charts Row -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4">
+                <div class="text-xs font-mono text-amber-200 mb-2 font-semibold" id="evChart1Title">
+                  TOP 10 STATES BY MARKET SHARE
                 </div>
                 <div class="relative h-56">
-                  <canvas id="chartCompLibrary"></canvas>
+                  <canvas id="chartEvStates"></canvas>
+                </div>
+              </div>
+              <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4">
+                <div class="text-xs font-mono text-amber-200 mb-2 font-semibold">
+                  U.S. HYBRID VS BEV ADOPTION TRAJECTORY
+                </div>
+                <div class="relative h-56">
+                  <canvas id="chartEvMix"></canvas>
                 </div>
               </div>
             </div>
 
-            <!-- Auto-Generated TypeScript / React Code Block -->
-            <div class="bg-[#070a10] border border-[#1e2738] rounded-xl overflow-hidden">
-              <div class="px-4 py-2 bg-[#0d121c] border-b border-[#1e2738] flex items-center justify-between">
-                <span class="text-xs font-mono text-slate-400">Live Generated TSX — <span class="text-purple-300">DashboardEmbed.tsx</span></span>
-                <button type="button" id="btnCopyInlineTsx" class="text-xs font-mono text-emerald-400 hover:text-emerald-300">
-                  Copy Code
-                </button>
+            <!-- State Breakdown Table -->
+            <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl overflow-hidden">
+              <div class="px-4 py-2.5 border-b border-[#3b1b10] bg-[#150d09] flex items-center justify-between">
+                <span class="text-xs font-mono text-amber-200 font-semibold">
+                  JURISDICTIONAL AUDIT TABLE (POSTGRESQL + TABLEAU EXTRACT)
+                </span>
+                <span class="text-[11px] font-mono text-orange-400" id="evTableCount">
+                  Showing 16 Key Jurisdictions
+                </span>
               </div>
-              <pre id="compGeneratedCode" class="p-4 text-xs font-mono text-slate-300 overflow-x-auto custom-scrollbar leading-relaxed"></pre>
+              <div class="overflow-x-auto max-h-64 custom-scrollbar">
+                <table class="w-full text-left text-xs font-mono text-amber-100">
+                  <thead class="bg-[#180e0a] text-amber-200/60 sticky top-0 border-b border-[#3b1b10]">
+                    <tr>
+                      <th class="py-2.5 px-3">State / Jurisdiction</th>
+                      <th class="py-2.5 px-2 text-right">Total Fleet</th>
+                      <th class="py-2.5 px-2 text-right">EV Share</th>
+                      <th class="py-2.5 px-2 text-right">EVs / Charger</th>
+                      <th class="py-2.5 px-3 text-right">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="evTableBody" class="divide-y divide-[#3b1b10]"></tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -822,17 +659,17 @@
 
   <!-- Modal: Source Code & GitHub Portfolio Integration Guide -->
   <div id="codeModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-[#111622] border border-[#263147] rounded-2xl max-w-4xl w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
-      <div class="px-6 py-4 bg-[#0d121c] border-b border-[#1e2738] flex items-center justify-between">
+    <div class="bg-[#1c0f09] border border-[#3b1b10] rounded-2xl max-w-4xl w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
+      <div class="px-6 py-4 bg-[#150d09] border-b border-[#3b1b10] flex items-center justify-between">
         <div>
           <h3 id="modalTitle" class="text-base sm:text-lg font-bold text-white">Project Source Code &amp; Portfolio Integration</h3>
-          <p id="modalSubtitle" class="text-xs text-slate-400 font-mono">https://github.com/otabek11haydarov/Portfolio.git</p>
+          <p id="modalSubtitle" class="text-xs text-amber-200/60 font-mono">https://github.com/otabek11haydarov/Portfolio.git</p>
         </div>
         <div class="flex items-center gap-2">
-          <button type="button" id="btnCopyModalCode" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-emerald-600 hover:bg-emerald-500 text-white transition">
+          <button type="button" id="btnCopyModalCode" class="px-3.5 py-1.5 rounded-lg text-xs font-mono bg-gradient-to-r from-orange-500 to-amber-500 hover:opacity-95 text-white transition cursor-pointer shadow-md shadow-orange-500/20">
             Copy Code
           </button>
-          <button type="button" id="btnCloseModal" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#1e293b] transition" aria-label="Close modal">
+          <button type="button" id="btnCloseModal" class="p-1.5 rounded-lg text-amber-200/60 hover:text-white hover:bg-[#21140e] transition cursor-pointer" aria-label="Close modal">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
@@ -841,36 +678,33 @@
       </div>
 
       <!-- Modal Tabs -->
-      <div class="px-6 py-2.5 bg-[#0b0f17] border-b border-[#1e2738] flex flex-wrap gap-2">
-        <button type="button" data-modal-source="ecommerce" class="modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+      <div class="px-6 py-2.5 bg-[#120a07] border-b border-[#3b1b10] flex flex-wrap gap-2">
+        <button type="button" data-modal-source="ecommerce" class="modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-orange-500/20 text-orange-300 border border-orange-500/40 cursor-pointer">
           📊 E-Commerce SQL/Python
         </button>
-        <button type="button" data-modal-source="ev" class="modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-[#161d2a] text-slate-300 border border-[#263147]">
+        <button type="button" data-modal-source="ev" class="modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-[#21140e] text-amber-200/70 border border-[#3b1b10] cursor-pointer">
           ⚡ U.S. EV SQL/Tableau
         </button>
-        <button type="button" data-modal-source="components" class="modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-[#161d2a] text-slate-300 border border-[#263147]">
-          🧩 Component Library TSX
-        </button>
-        <button type="button" data-modal-source="integration" class="modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-[#161d2a] text-slate-300 border border-[#263147]">
+        <button type="button" data-modal-source="integration" class="modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-[#21140e] text-amber-200/70 border border-[#3b1b10] cursor-pointer">
           🚀 Portfolio Repo Integration
         </button>
       </div>
 
       <div class="p-6 overflow-y-auto custom-scrollbar space-y-4">
-        <pre id="modalCodeContent" class="bg-[#070a10] border border-[#1e2738] rounded-xl p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed"></pre>
+        <pre id="modalCodeContent" class="bg-[#120a07] border border-[#3b1b10] rounded-xl p-4 text-xs font-mono text-amber-100 overflow-x-auto leading-relaxed"></pre>
       </div>
     </div>
   </div>
 
   <!-- Toast Notification -->
-  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden bg-[#111622] border border-emerald-500/50 text-slate-100 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-mono">
-    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden bg-[#1c0f09] border border-orange-500/50 text-amber-100 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-mono">
+    <span class="w-2 h-2 rounded-full bg-orange-400"></span>
     <span id="toastMessage">Action completed</span>
   </div>
 
   <script>
     // =========================================================================
-    // STATE & DATASETS
+    // STATE & DATASETS (2 PROJECTS)
     // =========================================================================
     const APP_STATE = {
       activeProject: 'ecommerce',
@@ -887,15 +721,6 @@
         search: '',
         chargerExpansion: 0,
         selectedState: 'California'
-      },
-      comp: {
-        type: 'KpiSuite',
-        preset: 'saas',
-        theme: 'emerald',
-        showDelta: true,
-        showTarget: true,
-        compact: false,
-        isLoading: false
       }
     };
 
@@ -941,254 +766,152 @@ GROUP BY 1, 2
 ORDER BY realized_margin_pct ASC;`
     };
 
-    // U.S. EV Dataset (Representative 16 Jurisdictions + aggregated totals for 51 jurisdictions = 287.4M vehicles)
+    // U.S. EV Dataset
     const EV_JURISDICTIONS = [
       { state: 'California', code: 'CA', region: 'West', fleetM: 31.25, evShare: 4.42, altShare: 11.8, evPerPort: 29.8, priority: 'Tier-1 Critical' },
       { state: 'District of Columbia', code: 'DC', region: 'South', fleetM: 0.34, evShare: 3.75, altShare: 10.4, evPerPort: 18.4, priority: 'Tier-2 Balanced' },
       { state: 'Washington', code: 'WA', region: 'West', fleetM: 6.95, evShare: 3.18, altShare: 9.9, evPerPort: 27.4, priority: 'Tier-1 Critical' },
       { state: 'Hawaii', code: 'HI', region: 'West', fleetM: 1.08, evShare: 2.95, altShare: 8.7, evPerPort: 31.2, priority: 'Tier-1 Critical' },
       { state: 'Colorado', code: 'CO', region: 'West', fleetM: 5.42, evShare: 2.64, altShare: 9.1, evPerPort: 22.5, priority: 'Tier-2 Balanced' },
-      { state: 'New Jersey', code: 'NJ', region: 'Northeast', fleetM: 6.18, evShare: 2.51, altShare: 7.8, evPerPort: 33.6, priority: 'Tier-1 Critical' },
-      { state: 'Oregon', code: 'OR', region: 'West', fleetM: 3.92, evShare: 2.40, altShare: 8.9, evPerPort: 24.1, priority: 'Tier-2 Balanced' },
-      { state: 'Nevada', code: 'NV', region: 'West', fleetM: 2.61, evShare: 2.32, altShare: 7.4, evPerPort: 26.8, priority: 'Tier-1 Critical' },
-      { state: 'Massachusetts', code: 'MA', region: 'Northeast', fleetM: 5.19, evShare: 2.15, altShare: 7.9, evPerPort: 19.7, priority: 'Tier-2 Balanced' },
-      { state: 'Maryland', code: 'MD', region: 'South', fleetM: 4.38, evShare: 2.08, altShare: 7.5, evPerPort: 23.9, priority: 'Tier-2 Balanced' },
-      { state: 'Florida', code: 'FL', region: 'South', fleetM: 19.45, evShare: 1.84, altShare: 6.8, evPerPort: 31.5, priority: 'Tier-1 Critical' },
-      { state: 'New York', code: 'NY', region: 'Northeast', fleetM: 11.42, evShare: 1.72, altShare: 6.9, evPerPort: 21.8, priority: 'Tier-2 Balanced' },
-      { state: 'Virginia', code: 'VA', region: 'South', fleetM: 7.58, evShare: 1.65, altShare: 6.6, evPerPort: 25.4, priority: 'Tier-2 Balanced' },
-      { state: 'Illinois', code: 'IL', region: 'Midwest', fleetM: 10.64, evShare: 1.48, altShare: 7.8, evPerPort: 28.9, priority: 'Tier-1 Critical' },
-      { state: 'Texas', code: 'TX', region: 'South', fleetM: 23.85, evShare: 1.36, altShare: 6.4, evPerPort: 32.4, priority: 'Tier-1 Critical' },
-      { state: 'Minnesota', code: 'MN', region: 'Midwest', fleetM: 5.31, evShare: 1.19, altShare: 8.5, evPerPort: 22.1, priority: 'Tier-3Watch' },
-      { state: 'Michigan', code: 'MI', region: 'Midwest', fleetM: 8.42, evShare: 0.98, altShare: 7.2, evPerPort: 24.6, priority: 'Tier-2 Balanced' },
-      { state: 'Ohio', code: 'OH', region: 'Midwest', fleetM: 10.52, evShare: 0.89, altShare: 6.1, evPerPort: 23.2, priority: 'Tier-3 Watch' }
+      { state: 'Nevada', code: 'NV', region: 'West', fleetM: 2.68, evShare: 2.51, altShare: 8.3, evPerPort: 28.6, priority: 'Tier-1 Critical' },
+      { state: 'Oregon', code: 'OR', region: 'West', fleetM: 4.12, evShare: 2.45, altShare: 9.2, evPerPort: 24.1, priority: 'Tier-2 Balanced' },
+      { state: 'New Jersey', code: 'NJ', region: 'Northeast', fleetM: 6.84, evShare: 2.38, altShare: 7.9, evPerPort: 26.2, priority: 'Tier-1 Critical' },
+      { state: 'Massachusetts', code: 'MA', region: 'Northeast', fleetM: 5.34, evShare: 2.12, altShare: 8.1, evPerPort: 21.8, priority: 'Tier-2 Balanced' },
+      { state: 'Vermont', code: 'VT', region: 'Northeast', fleetM: 0.61, evShare: 2.05, altShare: 8.9, evPerPort: 19.4, priority: 'Tier-3 Optimal' },
+      { state: 'Maryland', code: 'MD', region: 'South', fleetM: 4.85, evShare: 1.94, altShare: 7.6, evPerPort: 23.4, priority: 'Tier-2 Balanced' },
+      { state: 'Arizona', code: 'AZ', region: 'West', fleetM: 6.32, evShare: 1.88, altShare: 7.4, evPerPort: 25.8, priority: 'Tier-1 Critical' },
+      { state: 'New York', code: 'NY', region: 'Northeast', fleetM: 11.45, evShare: 1.76, altShare: 6.9, evPerPort: 22.1, priority: 'Tier-2 Balanced' },
+      { state: 'Florida', code: 'FL', region: 'South', fleetM: 19.82, evShare: 1.62, altShare: 6.2, evPerPort: 30.4, priority: 'Tier-1 Critical' },
+      { state: 'Texas', code: 'TX', region: 'South', fleetM: 24.15, evShare: 1.25, altShare: 5.4, evPerPort: 32.1, priority: 'Tier-1 Critical' },
+      { state: 'National Average', code: 'US', region: 'ALL', fleetM: 287.40, evShare: 1.68, altShare: 6.8, evPerPort: 26.3, priority: 'Benchmark' }
     ];
 
-    // Source Code Modal Repository Templates
-    const SOURCE_CODE_TEMPLATES = {
-      ecommerce: `-- ============================================================================
--- PROJECT 1: E-Commerce Profitability Analysis (PostgreSQL + Python)
--- Auditing 2,140+ orders for unit economics, shipping margin leakage (13% vs 31%),
--- and multi-channel marketing ROAS.
--- ============================================================================
-
-WITH order_unit_economics AS (
-    SELECT 
-        o.order_id,
-        o.customer_id,
-        o.product_category,
-        o.shipping_tier,
-        o.carrier_zone,
-        o.gross_revenue,
-        o.cogs,
-        o.shipping_charged_to_customer,
-        o.carrier_billed_freight,
-        (o.carrier_billed_freight - o.shipping_charged_to_customer) AS shipping_subsidy_leakage,
-        (o.gross_revenue - o.cogs - o.carrier_billed_freight - o.payment_processing_fee) AS net_order_margin
-    FROM prod_dw.fact_orders o
-    WHERE o.order_date >= '2025-01-01'
-      AND o.order_status = 'COMPLETED'
-)
-SELECT 
+    // Project Source Snippets
+    const SOURCE_SNIPPETS = {
+      ecommerce: `-- PostgreSQL Analytics Pipeline (orders_audit_2000)
+-- 1. Unit economics & shipping margin erosion
+WITH order_costs AS (
+  SELECT
+    order_id,
+    customer_id,
     shipping_tier,
-    COUNT(order_id) AS audited_orders,
-    ROUND(AVG(gross_revenue), 2) AS aov,
-    ROUND(AVG(shipping_subsidy_leakage), 2) AS avg_shipping_leakage,
-    ROUND(SUM(net_order_margin) / NULLIF(SUM(gross_revenue), 0) * 100, 2) AS net_margin_pct
-FROM order_unit_economics
+    gross_revenue,
+    cogs_cost,
+    carrier_shipping_cost,
+    customer_paid_shipping,
+    (carrier_shipping_cost - customer_paid_shipping) AS shipping_subsidy,
+    (gross_revenue - cogs_cost - carrier_shipping_cost) AS net_profit
+  FROM raw_ecommerce.orders
+  WHERE order_status = 'COMPLETED'
+)
+SELECT
+  shipping_tier,
+  COUNT(order_id) AS total_orders,
+  ROUND(AVG(gross_revenue), 2) AS avg_aov,
+  ROUND(AVG(shipping_subsidy), 2) AS avg_subsidy_leakage,
+  ROUND(SUM(net_profit) / SUM(gross_revenue) * 100, 2) AS net_margin_pct
+FROM order_costs
 GROUP BY shipping_tier
-ORDER BY net_margin_pct DESC;
-
--- Key Finding:
--- Standard Ground orders realize a 31.2% net contribution margin, whereas
--- Free-Shipping Threshold ($50-$65) & Express Zone 4-8 orders erode to 13.4%
--- due to unrecovered dimensional-weight surcharges.`,
-
-      ev: `-- ============================================================================
--- PROJECT 2: U.S. Electric Vehicle Market Share Analysis (PostgreSQL + Tableau)
--- Evaluating 287M+ registered vehicles across 51 U.S. jurisdictions
--- ============================================================================
-
-WITH state_powertrain_totals AS (
-    SELECT 
-        jurisdiction_name,
-        census_region,
-        SUM(total_registered_vehicles) AS total_fleet,
-        SUM(bev_registrations + phev_registrations) AS total_ev_fleet,
-        SUM(hev_registrations + e85_registrations + biodiesel_registrations) AS alt_fuel_fleet,
-        MAX(active_public_evse_ports) AS public_charging_ports
-    FROM energy_gov.us_vehicle_registrations_51
-    GROUP BY jurisdiction_name, census_region
+ORDER BY net_margin_pct DESC;`,
+      ev: `-- U.S. Registered Vehicles Alternative Fuel Adoption Analysis
+-- Data Source: 287M+ Vehicle Registrations across 51 jurisdictions
+WITH state_chargers AS (
+  SELECT state_code, COUNT(port_id) AS public_ports
+  FROM infrastructure.afdc_ev_chargers
+  WHERE status_code = 'E'
+  GROUP BY state_code
+),
+ev_registrations AS (
+  SELECT 
+    state_name,
+    state_code,
+    census_region,
+    total_registered_vehicles,
+    (bev_count + phev_count) AS total_ev_fleet,
+    ROUND((bev_count + phev_count)::numeric / total_registered_vehicles * 100, 2) AS ev_market_share_pct
+  FROM transport.state_vehicle_registrations
 )
 SELECT 
-    jurisdiction_name,
-    census_region,
-    total_fleet,
-    ROUND((total_ev_fleet::numeric / total_fleet) * 100, 2) AS ev_penetration_pct,
-    ROUND(((total_ev_fleet + alt_fuel_fleet)::numeric / total_fleet) * 100, 2) AS total_alt_fuel_pct,
-    ROUND(total_ev_fleet::numeric / NULLIF(public_charging_ports, 0), 1) AS evs_per_charger_port,
-    CASE 
-        WHEN (total_ev_fleet::numeric / NULLIF(public_charging_ports, 0)) > 26.0 THEN 'Tier-1 Infrastructure Priority'
-        WHEN (total_ev_fleet::numeric / NULLIF(public_charging_ports, 0)) > 20.0 THEN 'Tier-2 Grid Expansion'
-        ELSE 'Tier-3 Balanced Capacity'
-    END AS infrastructure_priority_tier
-FROM state_powertrain_totals
-ORDER BY ev_penetration_pct DESC;`,
-
-      components: `// ============================================================================
-// PROJECT 3: Analytics Component Library (@otabek/analytics-ui)
-// Open-source React + TypeScript + Tailwind library for KPI cards & charts
-// ============================================================================
-
-import React from 'react';
-
-export interface KpiCardProps {
-  title: string;
-  value: string | number;
-  delta?: string;
-  deltaPositive?: boolean;
-  accentColor?: 'emerald' | 'indigo' | 'amber' | 'rose';
-  compact?: boolean;
-  isLoading?: boolean;
-}
-
-export const KpiMetricCard: React.FC<KpiCardProps> = ({
-  title,
-  value,
-  delta,
-  deltaPositive = true,
-  accentColor = 'emerald',
-  compact = false,
-  isLoading = false,
-}) => {
-  if (isLoading) {
-    return (
-      <div className="rounded-xl bg-[#111622] border border-[#1e2738] p-4 animate-pulse h-24" />
-    );
-  }
-
-  return (
-    <div className={\`rounded-xl bg-[#111622] border border-[#1e2738] \${compact ? 'p-3' : 'p-5'} transition hover:border-slate-700\`}>
-      <p className="text-xs font-mono uppercase tracking-wider text-slate-400">{title}</p>
-      <div className="mt-2 flex items-baseline justify-between">
-        <span className="text-2xl font-bold font-mono text-white">{value}</span>
-        {delta && (
-          <span className={\`px-2 py-0.5 rounded text-xs font-mono \${
-            deltaPositive ? 'bg-emerald-500/15 text-emerald-400' : 'bg-rose-500/15 text-rose-400'
-          }\`}>
-            {delta}
-          </span>
-        )}
-      </div>
-    </div>
-  );
-};`,
-
-      integration: `// ============================================================================
-// HOW TO INTEGRATE THIS PLAYGROUND INTO github.com/otabek11haydarov/Portfolio
-// ============================================================================
-// 1. In your Portfolio project cards component (e.g., src/components/Projects.tsx),
-//    attach an activeProject state to the "Live" button on each card:
-//
-// const [activePlayground, setActivePlayground] = useState<'ecommerce' | 'ev' | 'components'>('ecommerce');
-//
-// 2. Replace static href="#" on your Live button with:
-// <button
-//   onClick={() => {
-//     setActivePlayground(project.slug);
-//     document.getElementById('playground-workbench')?.scrollIntoView({ behavior: 'smooth' });
-//   }}
-//   className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-slate-800 bg-slate-900/80 text-xs hover:border-emerald-500/50"
-// >
-//   <ExternalLink className="w-3.5 h-3.5" /> Live
-// </button>
-//
-// 3. Or embed this standalone playground directly as /public/playground.html
-//    and link your project cards to "/playground.html#ecommerce", "/playground.html#ev",
-//    and "/playground.html#components"!`
+  e.state_name,
+  e.ev_market_share_pct,
+  ROUND(e.total_ev_fleet::numeric / NULLIF(c.public_ports, 0), 1) AS evs_per_charger_port
+FROM ev_registrations e
+JOIN state_chargers c ON e.state_code = c.state_code
+ORDER BY e.ev_market_share_pct DESC;`,
+      integration: `// Portfolio Project Playground Routing
+// In your portfolio, links seamlessly point to the active sandbox:
+<a 
+  href="/playground.html?project=ecommerce" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="flex items-center gap-1.5 text-sm text-[#ffd2a8] hover:text-[#f07f3c] transition-colors"
+>
+  Live Sandbox
+</a>`
     };
 
-    // =========================================================================
-    // CHART INSTANCES
-    // =========================================================================
+    // Chart instances
     let chartEcomMarginInstance = null;
     let chartEcomRoasInstance = null;
     let chartEvStatesInstance = null;
     let chartEvMixInstance = null;
-    let chartCompLibraryInstance = null;
 
+    // Toast helper
     function showToast(msg) {
-      const toast = document.getElementById('toastBanner');
+      const banner = document.getElementById('toastBanner');
       const text = document.getElementById('toastMessage');
-      if (!toast || !text) return;
+      if (!banner || !text) return;
       text.textContent = msg;
-      toast.classList.remove('hidden');
-      clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(() => {
-        toast.classList.add('hidden');
-      }, 2800);
+      banner.classList.remove('hidden');
+      setTimeout(() => {
+        banner.classList.add('hidden');
+      }, 2600);
     }
 
-    function copyTextSafe(text, label) {
+    function copyTextSafe(text, successMsg) {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => {
-          showToast(label || 'Copied to clipboard!');
-        }).catch(() => {
-          fallbackCopy(text, label);
+          showToast(successMsg || 'Copied to clipboard!');
         });
       } else {
-        fallbackCopy(text, label);
-      }
-    }
-
-    function fallbackCopy(text, label) {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
         document.execCommand('copy');
-        showToast(label || 'Copied to clipboard!');
-      } catch (err) {
-        showToast('Copy ready');
+        document.body.removeChild(ta);
+        showToast(successMsg || 'Copied to clipboard!');
       }
-      document.body.removeChild(ta);
     }
 
     // =========================================================================
-    // PROJECT SWITCHING LOGIC
+    // PROJECT SWITCHING LOGIC (2 PROJECTS)
     // =========================================================================
     function switchActiveProject(projectKey, shouldScroll) {
       APP_STATE.activeProject = projectKey;
 
-      // Save to localStorage safely
       try {
         localStorage.setItem('otabek_portfolio_active_playground', projectKey);
       } catch (e) {}
 
       const panels = {
         ecommerce: document.getElementById('panel-ecommerce'),
-        ev: document.getElementById('panel-ev'),
-        components: document.getElementById('panel-components')
+        ev: document.getElementById('panel-ev')
       };
 
       const cards = {
         ecommerce: document.getElementById('card-ecommerce'),
-        ev: document.getElementById('card-ev'),
-        components: document.getElementById('card-components')
+        ev: document.getElementById('card-ev')
       };
 
       const titles = {
         ecommerce: 'E-Commerce Profitability',
-        ev: 'U.S. EV Market Share',
-        components: 'Analytics Component Library'
+        ev: 'U.S. EV Market Share'
       };
 
       const urls = {
         ecommerce: 'playground://otabek-portfolio/ecommerce-profitability',
-        ev: 'playground://otabek-portfolio/us-ev-market-share',
-        components: 'playground://otabek-portfolio/analytics-component-library'
+        ev: 'playground://otabek-portfolio/us-ev-market-share'
       };
 
       Object.keys(panels).forEach((k) => {
@@ -1214,9 +937,9 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
       document.querySelectorAll('.playground-tab-btn').forEach((btn) => {
         const target = btn.getAttribute('data-switch-tab');
         if (target === projectKey) {
-          btn.className = 'playground-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-2 bg-emerald-500/15 text-emerald-300 border border-emerald-500/40';
+          btn.className = 'playground-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-2 bg-orange-500/20 text-orange-300 border border-orange-500/50 cursor-pointer';
         } else {
-          btn.className = 'playground-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-2 bg-[#161d2a] text-slate-400 border border-[#263147] hover:text-slate-200';
+          btn.className = 'playground-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-2 bg-[#21140e] text-amber-200/60 border border-[#3b1b10] hover:text-white hover:border-[#7a3518] cursor-pointer';
         }
       });
 
@@ -1226,13 +949,11 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
       const urlBar = document.getElementById('workbenchUrlBar');
       if (urlBar) urlBar.textContent = urls[projectKey] || '';
 
-      // Trigger chart resize/update for active view
+      // Trigger render
       if (projectKey === 'ecommerce') {
         renderEcommercePlayground();
       } else if (projectKey === 'ev') {
         renderEvPlayground();
-      } else if (projectKey === 'components') {
-        renderComponentPlayground();
       }
 
       if (shouldScroll) {
@@ -1248,41 +969,45 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
       const { preset, category, freeShipThreshold, carrierDiscount, roasCut } = APP_STATE.ecom;
 
       const catMultiplier = {
-        all: { orders: 2140, baseStd: 31.2, baseLeak: 13.4, spend: 84500, baseRoas: 3.42 },
-        electronics: { orders: 640, baseStd: 28.5, baseLeak: 11.2, spend: 31000, baseRoas: 3.85 },
-        home: { orders: 580, baseStd: 29.8, baseLeak: 10.6, spend: 22500, baseRoas: 2.95 },
-        apparel: { orders: 520, baseStd: 34.6, baseLeak: 16.8, spend: 18000, baseRoas: 3.30 },
-        beauty: { orders: 400, baseStd: 36.4, baseLeak: 18.5, spend: 13000, baseRoas: 3.65 }
-      }[category];
+        all: { orders: 2140, baseAov: 82.4, leakMargin: 13.4, stdMargin: 31.2, roas: 3.42, spend: 84500 },
+        electronics: { orders: 640, baseAov: 142.0, leakMargin: 11.2, stdMargin: 28.5, roas: 3.10, spend: 32000 },
+        home: { orders: 580, baseAov: 94.5, leakMargin: 9.8, stdMargin: 29.4, roas: 2.85, spend: 24500 },
+        apparel: { orders: 520, baseAov: 68.2, leakMargin: 15.6, stdMargin: 33.1, roas: 3.75, spend: 18000 },
+        beauty: { orders: 400, baseAov: 46.8, leakMargin: 18.2, stdMargin: 36.4, roas: 4.15, spend: 10000 }
+      }[category] || { orders: 2140, baseAov: 82.4, leakMargin: 13.4, stdMargin: 31.2, roas: 3.42, spend: 84500 };
 
-      // Calculate simulated improvements
-      const thresholdBoost = ((freeShipThreshold - 50) / 10) * 1.85;
-      const carrierBoost = carrierDiscount * 0.34;
-      const simulatedLeakMargin = Math.min(catMultiplier.baseStd - 1.2, +(catMultiplier.baseLeak + thresholdBoost + carrierBoost).toFixed(1));
-      const simulatedStdMargin = +(catMultiplier.baseStd + carrierBoost * 0.45).toFixed(1);
-      const simulatedRoas = +(catMultiplier.baseRoas + (roasCut / 100) * 0.68).toFixed(2);
+      // Calculate Sensitivity Simulation
+      const thresholdLift = Math.max(0, (freeShipThreshold - 50) * 0.18);
+      const discountLift = (carrierDiscount / 25) * 4.6;
+      const roasProfitLift = (roasCut / 100) * 8200;
 
-      const baseRecovered = 42860 * (catMultiplier.orders / 2140);
-      const extraRecovered = ((freeShipThreshold - 50) * 620 + carrierDiscount * 1450 + roasCut * 210) * (catMultiplier.orders / 2140);
-      const totalRecoverable = Math.round(baseRecovered + extraRecovered);
+      const simulatedLeakMargin = +(catMultiplier.leakMargin + thresholdLift + discountLift).toFixed(1);
+      const simulatedStdMargin = +(catMultiplier.stdMargin + (discountLift * 0.4)).toFixed(1);
+      const marginDelta = +(simulatedStdMargin - simulatedLeakMargin).toFixed(1);
 
-      // Update KPI cards
+      const baseAdRev = catMultiplier.spend * catMultiplier.roas;
+      const simulatedRoas = +(catMultiplier.roas + (roasCut / 100) * 0.45).toFixed(2);
+      const recoveredProfit = Math.round(
+        (catMultiplier.orders * 0.42 * (freeShipThreshold - 50) * 0.45) +
+        (catMultiplier.orders * (carrierDiscount * 0.28)) +
+        roasProfitLift
+      );
+
+      // Update KPIs
       document.getElementById('ecomKpiOrders').textContent = catMultiplier.orders.toLocaleString();
-      document.getElementById('ecomKpiStdMargin').textContent = simulatedStdMargin + '%';
-      document.getElementById('ecomKpiLeakMargin').textContent = simulatedLeakMargin + '%';
-      const gap = +(simulatedStdMargin - simulatedLeakMargin).toFixed(1);
-      document.getElementById('ecomKpiLeakDelta').textContent = `-${gap}% shipping subsidy leakage`;
-      document.getElementById('ecomKpiRoas').textContent = simulatedRoas + 'x';
-      const estRev = Math.round(catMultiplier.spend * simulatedRoas);
-      document.getElementById('ecomKpiAdSpend').textContent = `$${catMultiplier.spend.toLocaleString()} spend → $${estRev.toLocaleString()} rev`;
-      document.getElementById('ecomKpiRecoverable').textContent = '+$' + totalRecoverable.toLocaleString();
+      document.getElementById('ecomKpiStdMargin').textContent = `${simulatedStdMargin}%`;
+      document.getElementById('ecomKpiLeakMargin').textContent = `${simulatedLeakMargin}%`;
+      document.getElementById('ecomKpiLeakDelta').textContent = `-${marginDelta}% shipping subsidy gap`;
+      document.getElementById('ecomKpiRoas').textContent = `${simulatedRoas}x`;
+      document.getElementById('ecomKpiAdSpend').textContent = `$${catMultiplier.spend.toLocaleString()} spend → $${Math.round(baseAdRev).toLocaleString()} rev`;
+      document.getElementById('ecomKpiRecoverable').textContent = `+$${recoveredProfit.toLocaleString()}`;
 
       // Update slider labels
       document.getElementById('valFreeShip').textContent = `$${freeShipThreshold}${freeShipThreshold === 50 ? ' (Current)' : ' (Simulated)'}`;
       document.getElementById('valCarrierDisc').textContent = `-${carrierDiscount}%`;
       document.getElementById('valRoasCut').textContent = `${roasCut}%`;
 
-      // Render Chart 1: Margin by Shipping Tier
+      // Render Chart 1: Margin by Shipping Tier (Warm Sunset Palette)
       const ctxMargin = document.getElementById('chartEcomMargin');
       if (ctxMargin) {
         const labels = ['Standard Ground', '2-Day Regional', 'Free-Ship Promo ($50+)', 'Express Zone 4-8'];
@@ -1301,8 +1026,8 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
               {
                 label: 'Realized Net Margin %',
                 data: dataVals,
-                backgroundColor: ['rgba(16, 185, 129, 0.75)', 'rgba(56, 189, 248, 0.75)', 'rgba(245, 158, 11, 0.75)', 'rgba(244, 63, 94, 0.8)'],
-                borderColor: ['#10b981', '#38bdf8', '#f59e0b', '#f43f5e'],
+                backgroundColor: ['rgba(240, 127, 60, 0.85)', 'rgba(251, 146, 60, 0.75)', 'rgba(245, 158, 11, 0.75)', 'rgba(244, 63, 94, 0.8)'],
+                borderColor: ['#f07f3c', '#fb923c', '#f59e0b', '#f43f5e'],
                 borderWidth: 1.5,
                 borderRadius: 6
               }
@@ -1318,19 +1043,19 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
               y: {
                 beginAtZero: true,
                 max: 40,
-                grid: { color: '#1e2738' },
-                ticks: { color: '#94a3b8', callback: (v) => v + '%' }
+                grid: { color: '#2c1810' },
+                ticks: { color: '#fed7aa', callback: (v) => v + '%' }
               },
               x: {
                 grid: { display: false },
-                ticks: { color: '#cbd5e1', font: { size: 10 } }
+                ticks: { color: '#ffd2a8', font: { size: 10 } }
               }
             }
           }
         });
       }
 
-      // Render Chart 2: Multi-Channel Marketing ROAS
+      // Render Chart 2: Multi-Channel Marketing ROAS (Warm Sunset Palette)
       const ctxRoas = document.getElementById('chartEcomRoas');
       if (ctxRoas) {
         const roasBoost = (roasCut / 100) * 0.5;
@@ -1351,7 +1076,7 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
               {
                 label: 'Channel ROAS (x)',
                 data: chRoas,
-                backgroundColor: chRoas.map((v) => v >= 3.0 ? 'rgba(16, 185, 129, 0.75)' : v >= 2.0 ? 'rgba(245, 158, 11, 0.75)' : 'rgba(244, 63, 94, 0.75)'),
+                backgroundColor: chRoas.map((v) => v >= 3.0 ? 'rgba(240, 127, 60, 0.85)' : v >= 2.0 ? 'rgba(245, 158, 11, 0.8)' : 'rgba(244, 63, 94, 0.8)'),
                 borderRadius: 6
               }
             ]
@@ -1367,19 +1092,18 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
               x: {
                 beginAtZero: true,
                 max: 6.5,
-                grid: { color: '#1e2738' },
-                ticks: { color: '#94a3b8', callback: (v) => v + 'x' }
+                grid: { color: '#2c1810' },
+                ticks: { color: '#fed7aa', callback: (v) => v + 'x' }
               },
               y: {
                 grid: { display: false },
-                ticks: { color: '#cbd5e1', font: { size: 10 } }
+                ticks: { color: '#ffd2a8', font: { size: 10 } }
               }
             }
           }
         });
       }
 
-      // Render SQL Result Table based on active preset
       renderEcomSqlTable(simulatedStdMargin, simulatedLeakMargin, simulatedRoas);
     }
 
@@ -1398,7 +1122,7 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
         headers = ['shipping_tier', 'audited_orders', 'avg_order_value', 'avg_subsidy_cost', 'net_margin_pct'];
         rows = [
           ['Standard Ground (Paid)', '890', '$118.40', '$1.85', `<span class="text-emerald-400 font-bold">${stdM}%</span>`],
-          ['2-Day Regional Hub', '420', '$134.20', '$6.40', `<span class="text-sky-400 font-bold">${(stdM - 5.4).toFixed(1)}%</span>`],
+          ['2-Day Regional Hub', '420', '$134.20', '$6.40', `<span class="text-orange-400 font-bold">${(stdM - 5.4).toFixed(1)}%</span>`],
           ['Free-Shipping Threshold ($50+)', '510', '$64.80', '$11.90', `<span class="text-amber-400 font-bold">${(leakM + 2.1).toFixed(1)}%</span>`],
           ['Express Zone 4-8 (Free Promo)', '320', '$71.50', '$18.60', `<span class="text-rose-400 font-bold">${leakM}%</span>`]
         ];
@@ -1406,9 +1130,9 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
         titleEl.textContent = 'POSTGRESQL RESULT SET — multi_channel_marketing_roas';
         headers = ['marketing_channel', 'total_spend', 'gross_revenue', 'roas_multiple', 'net_profit_contribution'];
         rows = [
-          ['Email / Lifecycle CRM', '$6,500', '$35,100', '<span class="text-emerald-400 font-bold">5.40x</span>', '$14,820'],
-          ['Google Shopping (High Intent)', '$28,000', '$109,200', '<span class="text-emerald-400 font-bold">3.90x</span>', '$34,940'],
-          ['Meta Dynamic Retargeting', '$22,000', '$70,400', '<span class="text-emerald-400 font-bold">3.20x</span>', '$19,710'],
+          ['Email / Lifecycle CRM', '$6,500', '$35,100', '<span class="text-orange-400 font-bold">5.40x</span>', '$14,820'],
+          ['Google Shopping (High Intent)', '$28,000', '$109,200', '<span class="text-orange-400 font-bold">3.90x</span>', '$34,940'],
+          ['Meta Dynamic Retargeting', '$22,000', '$70,400', '<span class="text-orange-400 font-bold">3.20x</span>', '$19,710'],
           ['Creator & Affiliate Partners', '$14,000', '$36,400', '<span class="text-amber-400 font-bold">2.60x</span>', '$8,120'],
           ['Paid Social Cold Prospecting', '$14,000', '$20,300', '<span class="text-rose-400 font-bold">1.45x</span>', '-$3,480']
         ];
@@ -1416,8 +1140,8 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
         titleEl.textContent = 'POSTGRESQL RESULT SET — sku_category_unit_economics';
         headers = ['product_category', 'orders_count', 'gross_margin_pct', 'return_drag_pct', 'net_unit_margin_pct'];
         rows = [
-          ['Beauty & Wellness', '400', '64.2%', '4.1%', '<span class="text-emerald-400 font-bold">34.8%</span>'],
-          ['Apparel & Performance Gear', '520', '58.5%', '14.2%', '<span class="text-emerald-400 font-bold">26.4%</span>'],
+          ['Beauty & Wellness', '400', '64.2%', '4.1%', '<span class="text-orange-400 font-bold">34.8%</span>'],
+          ['Apparel & Performance Gear', '520', '58.5%', '14.2%', '<span class="text-orange-400 font-bold">26.4%</span>'],
           ['Electronics & Accessories', '640', '42.0%', '7.8%', '<span class="text-amber-400 font-bold">19.6%</span>'],
           ['Home & Bulky Goods (High Freight)', '580', '46.8%', '6.5%', '<span class="text-rose-400 font-bold">13.8%</span>']
         ];
@@ -1425,17 +1149,16 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
         titleEl.textContent = 'POSTGRESQL RESULT SET — carrier_zone_weight_audit';
         headers = ['carrier_zone_group', 'package_weight_bracket', 'shipments', 'avg_freight_cost', 'realized_margin_pct'];
         rows = [
-          ['Zones 1–3 (Regional)', 'Under 3 lbs', '780', '$5.40', '<span class="text-emerald-400 font-bold">31.6%</span>'],
-          ['Zones 1–3 (Regional)', '3 to 10 lbs', '490', '$8.90', '<span class="text-sky-400 font-bold">25.1%</span>'],
-          ['Zones 4–6 (Mid-Continent)', '10 to 22 lbs', '540', '$16.75', '<span class="text-amber-400 font-bold">16.2%</span>'],
+          ['Zones 1–3 (Regional)', 'Under 3 lbs', '780', '$5.40', '<span class="text-orange-400 font-bold">31.6%</span>'],
+          ['Zones 1–3 (Regional)', '3 to 10 lbs', '490', '$8.90', '<span class="text-amber-400 font-bold">25.1%</span>'],
+          ['Zones 4–6 (Mid-Continent)', '10 to 22 lbs', '540', '$16.75', '<span class="text-orange-300 font-bold">16.2%</span>'],
           ['Zones 7–8 (Cross-Country)', 'Over 15 lbs (Dim Weight)', '330', '$24.80', '<span class="text-rose-400 font-bold">11.4%</span>']
         ];
       }
 
       timingEl.textContent = `${(11.2 + Math.random() * 4.5).toFixed(1)} ms · ${rows.length} rows`;
-
       headEl.innerHTML = `<tr>${headers.map((h) => `<th class="py-2.5 px-3">${h}</th>`).join('')}</tr>`;
-      bodyEl.innerHTML = rows.map((r) => `<tr class="hover:bg-[#161d2a]/60 transition">${r.map((c) => `<td class="py-2.5 px-3">${c}</td>`).join('')}</tr>`).join('');
+      bodyEl.innerHTML = rows.map((r) => `<tr class="hover:bg-orange-500/10 transition">${r.map((c) => `<td class="py-2.5 px-3">${c}</td>`).join('')}</tr>`).join('');
     }
 
     // =========================================================================
@@ -1448,7 +1171,6 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
 
       const expansionFactor = 1 + chargerExpansion / 100;
 
-      // Filter jurisdictions
       const filtered = EV_JURISDICTIONS.filter((item) => {
         const matchRegion = region === 'ALL' || item.region === region;
         const matchSearch = !search || item.state.toLowerCase().includes(search.toLowerCase()) || item.code.toLowerCase().includes(search.toLowerCase());
@@ -1463,21 +1185,18 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
         };
       });
 
-      // Sort by selected metric
       filtered.sort((a, b) => {
         if (metric === 'alt_share') return b.altShare - a.altShare;
         if (metric === 'ev_per_charger') return b.adjustedEvPerPort - a.adjustedEvPerPort;
         return b.evShare - a.evShare;
       });
 
-      // Update KPI summary strip
       const baseRatio = +(26.3 / expansionFactor).toFixed(1);
       const priorityCount = filtered.filter((d) => d.adjustedEvPerPort > 25).length;
       document.getElementById('evKpiRatio').textContent = `${baseRatio} EVs / Port`;
       document.getElementById('evKpiPriorityStates').textContent = `${priorityCount} Tier-1 Priority in current view`;
       document.getElementById('evTableCount').textContent = `Showing ${filtered.length} states (of 51 U.S. jurisdictions)`;
 
-      // Populate Table
       const tbody = document.getElementById('evTableBody');
       tbody.innerHTML = filtered.map((st) => {
         const isSelected = st.state === selectedState;
@@ -1485,18 +1204,17 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
           ? 'bg-rose-500/15 text-rose-300 border-rose-500/30'
           : st.adjustedPriority.includes('Tier-2')
             ? 'bg-amber-500/15 text-amber-300 border-amber-500/30'
-            : 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30';
+            : 'bg-orange-500/15 text-orange-300 border-orange-500/30';
 
-        return `<tr data-state-row="${st.state}" class="ev-state-row cursor-pointer transition ${isSelected ? 'bg-amber-500/10' : 'hover:bg-[#161d2a]'}">
-          <td class="py-2 px-3 font-sans font-medium text-white">${st.state} <span class="text-slate-500 text-[10px]">(${st.code})</span></td>
+        return `<tr data-state-row="${st.state}" class="ev-state-row cursor-pointer transition ${isSelected ? 'bg-orange-500/20' : 'hover:bg-[#21140e]'}">
+          <td class="py-2 px-3 font-sans font-medium text-white">${st.state} <span class="text-amber-200/50 text-[10px]">(${st.code})</span></td>
           <td class="py-2 px-2 text-right">${st.fleetM.toFixed(2)}M</td>
-          <td class="py-2 px-2 text-right text-emerald-400 font-semibold">${st.evShare.toFixed(2)}%</td>
+          <td class="py-2 px-2 text-right text-orange-400 font-semibold">${st.evShare.toFixed(2)}%</td>
           <td class="py-2 px-2 text-right text-amber-300">${st.adjustedEvPerPort}</td>
           <td class="py-2 px-3 text-right"><span class="px-1.5 py-0.5 rounded text-[10px] border ${badgeClass}">${st.adjustedPriority.split(' ')[0]}</span></td>
         </tr>`;
       }).join('');
 
-      // Attach click listeners to state rows
       document.querySelectorAll('.ev-state-row').forEach((row) => {
         row.addEventListener('click', () => {
           const stName = row.getAttribute('data-state-row');
@@ -1505,7 +1223,6 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
         });
       });
 
-      // Update Spotlight Card
       const spotObj = filtered.find((s) => s.state === selectedState) || filtered[0] || EV_JURISDICTIONS[0];
       if (spotObj) {
         document.getElementById('spotStateName').textContent = `${spotObj.state} (${spotObj.region}) — Spotlight`;
@@ -1515,7 +1232,7 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
         document.getElementById('spotPriorityBadge').textContent = spotObj.adjustedPriority || spotObj.priority;
       }
 
-      // Render Chart 1: Top States Bar Chart
+      // Render Chart 1: Top States (Sunset Amber & Orange Palette)
       const topSlice = filtered.slice(0, 10);
       const ctxStates = document.getElementById('chartEvStates');
       if (ctxStates) {
@@ -1536,7 +1253,7 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
               {
                 label: labelText,
                 data: metricData,
-                backgroundColor: topSlice.map((s) => s.state === spotObj.state ? 'rgba(245, 158, 11, 0.9)' : 'rgba(16, 185, 129, 0.7)'),
+                backgroundColor: topSlice.map((s) => s.state === spotObj.state ? 'rgba(251, 146, 60, 0.95)' : 'rgba(240, 127, 60, 0.75)'),
                 borderRadius: 5
               }
             ]
@@ -1548,19 +1265,19 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
             scales: {
               y: {
                 beginAtZero: true,
-                grid: { color: '#1e2738' },
-                ticks: { color: '#94a3b8' }
+                grid: { color: '#2c1810' },
+                ticks: { color: '#fed7aa' }
               },
               x: {
                 grid: { display: false },
-                ticks: { color: '#e2e8f0' }
+                ticks: { color: '#ffd2a8' }
               }
             }
           }
         });
       }
 
-      // Render Chart 2: Powertrain Adoption Trajectory (2021 - 2026)
+      // Render Chart 2: Powertrain Adoption (Warm Sunset Line Palette)
       const ctxMix = document.getElementById('chartEvMix');
       if (ctxMix) {
         if (chartEvMixInstance) chartEvMixInstance.destroy();
@@ -1572,16 +1289,16 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
               {
                 label: 'BEV + PHEV Fleet (Millions)',
                 data: [1.45, 2.12, 2.98, 3.76, 4.35, 4.84],
-                borderColor: '#10b981',
-                backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                borderColor: '#f07f3c',
+                backgroundColor: 'rgba(240, 127, 60, 0.18)',
                 fill: true,
                 tension: 0.35
               },
               {
                 label: 'Hybrid & Alt-Fuel Fleet (Millions)',
                 data: [9.8, 11.4, 13.6, 15.8, 17.9, 19.6],
-                borderColor: '#38bdf8',
-                backgroundColor: 'rgba(56, 189, 248, 0.08)',
+                borderColor: '#ffd2a8',
+                backgroundColor: 'rgba(255, 210, 168, 0.08)',
                 fill: true,
                 tension: 0.35
               }
@@ -1592,17 +1309,17 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
             maintainAspectRatio: false,
             plugins: {
               legend: {
-                labels: { color: '#cbd5e1', font: { size: 11 } }
+                labels: { color: '#ffd2a8', font: { size: 11 } }
               }
             },
             scales: {
               y: {
-                grid: { color: '#1e2738' },
-                ticks: { color: '#94a3b8', callback: (v) => v + 'M' }
+                grid: { color: '#2c1810' },
+                ticks: { color: '#fed7aa' }
               },
               x: {
                 grid: { display: false },
-                ticks: { color: '#cbd5e1' }
+                ticks: { color: '#ffd2a8' }
               }
             }
           }
@@ -1611,192 +1328,31 @@ export const KpiMetricCard: React.FC<KpiCardProps> = ({
     }
 
     // =========================================================================
-    // PLAYGROUND 3: ANALYTICS COMPONENT LIBRARY LOGIC
-    // =========================================================================
-    function renderComponentPlayground() {
-      const { type, preset, theme, showDelta, showTarget, compact, isLoading } = APP_STATE.comp;
-
-      const themePalette = {
-        emerald: { hex: '#10b981', rgba: 'rgba(16, 185, 129, 0.2)', badge: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' },
-        indigo: { hex: '#6366f1', rgba: 'rgba(99, 102, 241, 0.2)', badge: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30' },
-        amber: { hex: '#f59e0b', rgba: 'rgba(245, 158, 11, 0.2)', badge: 'bg-amber-500/15 text-amber-300 border-amber-500/30' },
-        rose: { hex: '#f43f5e', rgba: 'rgba(244, 63, 94, 0.2)', badge: 'bg-rose-500/15 text-rose-300 border-rose-500/30' }
-      }[theme];
-
-      const presetsData = {
-        saas: {
-          heading: 'Net Revenue Retention & ARR Trajectory',
-          cards: [
-            { title: 'ANNUAL RECURRING REV', value: '$1,482,900', delta: '+24.8% YoY', pos: true },
-            { title: 'NET DOLLAR RETENTION', value: '118.4%', delta: '+4.2% QoQ', pos: true },
-            { title: 'CAC PAYBACK PERIOD', value: '7.4 mos', delta: '-1.8 mos', pos: true }
-          ],
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-          values: [980, 1040, 1110, 1185, 1240, 1310, 1395, 1482],
-          target: 1250
-        },
-        ecommerce: {
-          heading: 'E-Commerce GMV & Net Contribution Margin',
-          cards: [
-            { title: 'MONTHLY GMV', value: '$412,600', delta: '+19.2% MoM', pos: true },
-            { title: 'NET ORDER MARGIN', value: '28.9%', delta: '+6.4% vs Audit', pos: true },
-            { title: 'BLENDED ROAS', value: '3.68x', delta: '+0.42x', pos: true }
-          ],
-          labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8'],
-          values: [42, 46, 44, 51, 55, 53, 59, 64],
-          target: 50
-        },
-        infra: {
-          heading: 'PostgreSQL Analytical Query Throughput (req/s)',
-          cards: [
-            { title: 'PEAK THROUGHPUT', value: '98.4K /s', delta: '+14.1%', pos: true },
-            { title: 'P99 QUERY LATENCY', value: '11.8 ms', delta: '-4.3 ms', pos: true },
-            { title: 'CACHE HIT RATIO', value: '99.42%', delta: '+0.3%', pos: true }
-          ],
-          labels: ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'],
-          values: [62, 58, 71, 88, 95, 98, 92, 84],
-          target: 80
-        }
-      }[preset];
-
-      // Update theme buttons UI
-      document.querySelectorAll('.comp-theme-btn').forEach((btn) => {
-        const t = btn.getAttribute('data-comp-theme');
-        if (t === theme) {
-          btn.className = 'comp-theme-btn px-2 py-1.5 rounded-lg text-xs font-mono border border-emerald-500 bg-emerald-500/20 text-white font-semibold';
-        } else {
-          btn.className = 'comp-theme-btn px-2 py-1.5 rounded-lg text-xs font-mono border border-[#263147] bg-[#111622] text-slate-300';
-        }
-      });
-
-      // Render KPI Cards Grid
-      const kpiGrid = document.getElementById('compPreviewKpiGrid');
-      if (isLoading) {
-        kpiGrid.innerHTML = [1, 2, 3].map(() => `
-          <div class="rounded-xl bg-[#111622] border border-[#1e2738] ${compact ? 'p-3' : 'p-4'} animate-pulse space-y-2">
-            <div class="h-3 w-24 bg-slate-800 rounded"></div>
-            <div class="h-6 w-32 bg-slate-700 rounded"></div>
-          </div>
-        `).join('');
-      } else {
-        kpiGrid.innerHTML = presetsData.cards.map((c) => `
-          <div class="rounded-xl bg-[#111622] border border-[#1e2738] ${compact ? 'p-3' : 'p-4'} transition hover:border-slate-600">
-            <div class="text-[11px] font-mono text-slate-400 uppercase">${c.title}</div>
-            <div class="mt-1.5 flex items-baseline justify-between gap-2">
-              <span class="${compact ? 'text-lg' : 'text-2xl'} font-bold font-mono text-white">${c.value}</span>
-              ${showDelta ? `<span class="px-2 py-0.5 rounded text-[11px] font-mono border ${themePalette.badge}">${c.delta}</span>` : ''}
-            </div>
-          </div>
-        `).join('');
-      }
-
-      document.getElementById('compChartHeading').textContent = presetsData.heading;
-      document.getElementById('compChartSubheading').textContent = `Rendered via <${type} accentColor="${theme}" />`;
-      const tagEl = document.getElementById('compChartTag');
-      tagEl.className = `px-2.5 py-1 rounded-md text-xs font-mono border ${themePalette.badge}`;
-      tagEl.textContent = presetsData.cards[0].delta;
-
-      // Render Component Library Chart
-      const ctxComp = document.getElementById('chartCompLibrary');
-      if (ctxComp) {
-        if (chartCompLibraryInstance) chartCompLibraryInstance.destroy();
-        const datasets = [
-          {
-            label: presetsData.heading,
-            data: presetsData.values,
-            borderColor: themePalette.hex,
-            backgroundColor: themePalette.rgba,
-            fill: true,
-            tension: 0.38,
-            pointRadius: 4
-          }
-        ];
-
-        if (showTarget) {
-          datasets.push({
-            label: 'Target Benchmark',
-            data: presetsData.labels.map(() => presetsData.target),
-            borderColor: '#94a3b8',
-            borderDash: [6, 6],
-            pointRadius: 0,
-            fill: false
-          });
-        }
-
-        chartCompLibraryInstance = new Chart(ctxComp, {
-          type: type === 'AttributionCard' ? 'bar' : 'line',
-          data: {
-            labels: presetsData.labels,
-            datasets
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                labels: { color: '#cbd5e1', font: { size: 11 } }
-              }
-            },
-            scales: {
-              y: {
-                grid: { color: '#1e2738' },
-                ticks: { color: '#94a3b8' }
-              },
-              x: {
-                grid: { display: false },
-                ticks: { color: '#cbd5e1' }
-              }
-            }
-          }
-        });
-      }
-
-      // Update Generated TSX Code
-      const tsxSnippet = `import { ${type}, KpiMetricCard } from '@otabek/analytics-ui';
-
-export function AnalyticsDashboardEmbed() {
-  return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-3 gap-4">
-        <KpiMetricCard
-          title="${presetsData.cards[0].title}"
-          value="${presetsData.cards[0].value}"
-          ${showDelta ? `delta="${presetsData.cards[0].delta}"` : ''}
-          accentColor="${theme}"
-          compact={${compact}}
-          isLoading={${isLoading}}
-        />
-      </div>
-      <${type}
-        title="${presetsData.heading}"
-        accentColor="${theme}"
-        showTargetLine={${showTarget}}
-        showDeltaBadge={${showDelta}}
-      />
-    </div>
-  );
-}`;
-      document.getElementById('compGeneratedCode').textContent = tsxSnippet;
-    }
-
-    // =========================================================================
-    // MODAL & EVENT LISTENERS INITIALIZATION
+    // MODAL & EVENT LISTENERS
     // =========================================================================
     function openCodeModal(sourceKey) {
       const modal = document.getElementById('codeModal');
       const codePre = document.getElementById('modalCodeContent');
       if (!modal || !codePre) return;
 
-      codePre.textContent = SOURCE_CODE_TEMPLATES[sourceKey] || SOURCE_CODE_TEMPLATES.integration;
+      const titles = {
+        ecommerce: 'E-Commerce PostgreSQL & Unit Economics Pipeline',
+        ev: 'U.S. EV Market Share SQL Extraction & Tableau Schema',
+        integration: 'Portfolio Projects Live Playground Integration'
+      };
+
+      document.getElementById('modalTitle').textContent = titles[sourceKey] || 'Source Code View';
+      codePre.textContent = SOURCE_SNIPPETS[sourceKey] || '// Code snippet unavailable';
+
       modal.classList.remove('hidden');
       modal.classList.add('flex');
 
       document.querySelectorAll('.modal-source-btn').forEach((btn) => {
-        const k = btn.getAttribute('data-modal-source');
-        if (k === sourceKey) {
-          btn.className = 'modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30';
+        const target = btn.getAttribute('data-modal-source');
+        if (target === sourceKey) {
+          btn.className = 'modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-orange-500/20 text-orange-300 border border-orange-500/40';
         } else {
-          btn.className = 'modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-[#161d2a] text-slate-300 border border-[#263147]';
+          btn.className = 'modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-[#21140e] text-amber-200/70 border border-[#3b1b10]';
         }
       });
     }
@@ -1809,11 +1365,9 @@ export function AnalyticsDashboardEmbed() {
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      // Initialize SQL editor text
       const sqlEd = document.getElementById('ecomSqlEditor');
       if (sqlEd) sqlEd.value = ECOM_SQL_PRESETS.shipping_leakage;
 
-      // Live buttons on the 3 Portfolio Cards
       document.querySelectorAll('.btn-launch-live').forEach((btn) => {
         btn.addEventListener('click', () => {
           const proj = btn.getAttribute('data-launch-project');
@@ -1822,7 +1376,6 @@ export function AnalyticsDashboardEmbed() {
         });
       });
 
-      // Workbench Tab buttons
       document.querySelectorAll('.playground-tab-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const proj = btn.getAttribute('data-switch-tab');
@@ -1830,7 +1383,6 @@ export function AnalyticsDashboardEmbed() {
         });
       });
 
-      // Code buttons on cards & panels
       document.querySelectorAll('.btn-view-code').forEach((btn) => {
         btn.addEventListener('click', () => {
           const proj = btn.getAttribute('data-code-project');
@@ -1838,7 +1390,6 @@ export function AnalyticsDashboardEmbed() {
         });
       });
 
-      // Header buttons
       document.getElementById('btnOpenIntegrationModal').addEventListener('click', () => {
         openCodeModal('integration');
       });
@@ -1847,7 +1398,6 @@ export function AnalyticsDashboardEmbed() {
         document.getElementById('playground-workbench').scrollIntoView({ behavior: 'smooth' });
       });
 
-      // Modal controls
       document.getElementById('btnCloseModal').addEventListener('click', closeCodeModal);
       document.getElementById('codeModal').addEventListener('click', (e) => {
         if (e.target.id === 'codeModal') closeCodeModal();
@@ -1938,57 +1488,11 @@ export function AnalyticsDashboardEmbed() {
         showToast('Reset U.S. EV Dashboard filters');
       });
 
-      // Project 3 Controls
-      document.getElementById('compSelectType').addEventListener('change', (e) => {
-        APP_STATE.comp.type = e.target.value;
-        renderComponentPlayground();
-      });
-
-      document.getElementById('compDatasetPreset').addEventListener('change', (e) => {
-        APP_STATE.comp.preset = e.target.value;
-        renderComponentPlayground();
-      });
-
-      document.querySelectorAll('.comp-theme-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          APP_STATE.comp.theme = btn.getAttribute('data-comp-theme');
-          renderComponentPlayground();
-        });
-      });
-
-      document.getElementById('propShowDelta').addEventListener('change', (e) => {
-        APP_STATE.comp.showDelta = e.target.checked;
-        renderComponentPlayground();
-      });
-
-      document.getElementById('propShowTarget').addEventListener('change', (e) => {
-        APP_STATE.comp.showTarget = e.target.checked;
-        renderComponentPlayground();
-      });
-
-      document.getElementById('propCompact').addEventListener('change', (e) => {
-        APP_STATE.comp.compact = e.target.checked;
-        renderComponentPlayground();
-      });
-
-      document.getElementById('propLoading').addEventListener('change', (e) => {
-        APP_STATE.comp.isLoading = e.target.checked;
-        renderComponentPlayground();
-      });
-
-      document.getElementById('btnCopyComponentTsx').addEventListener('click', () => {
-        copyTextSafe(document.getElementById('compGeneratedCode').textContent, 'Copied TSX snippet!');
-      });
-
-      document.getElementById('btnCopyInlineTsx').addEventListener('click', () => {
-        copyTextSafe(document.getElementById('compGeneratedCode').textContent, 'Copied TSX snippet!');
-      });
-
-      // URL Parameter support (e.g. ?project=ecommerce or ?project=ev or ?project=components)
+      // URL Parameter support
       try {
         const urlParams = new URLSearchParams(window.location.search);
         const targetProj = urlParams.get('project');
-        if (targetProj && ['ecommerce', 'ev', 'components'].includes(targetProj.toLowerCase())) {
+        if (targetProj && ['ecommerce', 'ev'].includes(targetProj.toLowerCase())) {
           switchActiveProject(targetProj.toLowerCase(), true);
         } else {
           renderEcommercePlayground();
