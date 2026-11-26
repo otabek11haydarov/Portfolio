@@ -109,7 +109,7 @@ export default function Hero() {
               onClick={() => setIsResumeOpen((prev) => !prev)}
               aria-expanded={isResumeOpen}
               aria-haspopup="true"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#ea580c] to-[#f07f3c] text-white font-semibold text-sm hover:opacity-95 shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 transition-all hover:-translate-y-0.5 group btn-interactive btn-cta-glow text-center cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#ea580c] to-[#f07f3c] text-white font-semibold text-sm hover:opacity-95 shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 transition-all group btn-interactive btn-cta-glow text-center cursor-pointer"
             >
               <FileDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
               <span>Download CV / Resume</span>
@@ -168,7 +168,7 @@ export default function Hero() {
 
           <a
             href="#projects"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-white/5 border border-amber-900/40 text-amber-100 font-medium text-sm hover:text-white hover:bg-white/10 hover:border-[#f07f3c]/40 transition-all hover:-translate-y-0.5 btn-interactive text-center"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-white/5 border border-amber-900/40 text-amber-100 font-medium text-sm hover:text-white hover:bg-white/10 hover:border-[#f07f3c]/40 transition-all btn-interactive text-center"
           >
             <span>View Projects</span>
             <ArrowRight className="w-4 h-4 text-[#f07f3c]" />

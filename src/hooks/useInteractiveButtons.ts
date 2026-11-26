@@ -63,16 +63,20 @@ export function useInteractiveButtons() {
       const clickX = e.clientX ? e.clientX - rect.left : rect.width / 2;
       const clickY = e.clientY ? e.clientY - rect.top : rect.height / 2;
 
+      // Clear any previous ripple waves inside this button
+      btn.querySelectorAll('.btn-ripple-wave').forEach((el) => el.remove());
+
       // 1. Ripple to'lqini
       const ripple = document.createElement('span');
-      const size = Math.max(rect.width, rect.height) * 1.3;
+      const size = Math.max(rect.width, rect.height) * 1.2;
       ripple.className = 'btn-ripple-wave';
+      ripple.style.position = 'absolute';
       ripple.style.width = `${size}px`;
       ripple.style.height = `${size}px`;
       ripple.style.left = `${clickX}px`;
       ripple.style.top = `${clickY}px`;
       btn.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 680);
+      setTimeout(() => ripple.remove(), 620);
 
       // 2. 8 ta Neon zarracha portlashi (Particle Burst)
       if (e.clientX && e.clientY) {

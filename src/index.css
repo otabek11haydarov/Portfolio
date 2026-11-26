@@ -113,26 +113,31 @@ body {
 }
 
 /* ===== ADVANCED INTERACTIVE BUTTON ANIMATIONS ===== */
+button:not(.absolute):not(.fixed),
+a.btn-interactive:not(.absolute):not(.fixed),
+.btn-interactive:not(.absolute):not(.fixed) {
+  position: relative;
+}
+
 button,
 a.btn-interactive,
 .btn-interactive {
-  position: relative;
   overflow: hidden;
   isolation: isolate;
   transform: translate3d(var(--tx, 0px), var(--ty, 0px), 0) scale(var(--scale, 1));
   transition:
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.25s ease,
     background-color 0.25s ease,
     color 0.2s ease;
   will-change: transform, box-shadow;
 }
 
-/* Keep text/icons inside buttons elevated above spotlight and shimmer overlays */
-button > *,
-a.btn-interactive > *,
-.btn-interactive > * {
+/* Keep text/icons inside buttons elevated above spotlight and shimmer overlays, excluding absolute ripple waves */
+button > *:not(.btn-ripple-wave),
+a.btn-interactive > *:not(.btn-ripple-wave),
+.btn-interactive > *:not(.btn-ripple-wave) {
   position: relative;
   z-index: 4;
 }
@@ -194,7 +199,7 @@ a.btn-interactive:hover::after,
 button:hover,
 a.btn-interactive:hover,
 .btn-interactive:hover {
-  --scale: 1.035;
+  --scale: 1.025;
   box-shadow:
     0 10px 26px -6px rgba(240, 127, 60, 0.4),
     0 0 16px -2px rgba(255, 210, 168, 0.25);
@@ -203,7 +208,7 @@ a.btn-interactive:hover,
 button:active,
 a.btn-interactive:active,
 .btn-interactive:active {
-  --scale: 0.94 !important;
+  --scale: 0.96 !important;
   transition-duration: 0.08s;
 }
 
@@ -225,21 +230,24 @@ a.btn-interactive:active,
 @keyframes btnRippleExpand {
   0% {
     transform: translate(-50%, -50%) scale(0);
-    opacity: 0.75;
+    opacity: 0.65;
   }
   100% {
-    transform: translate(-50%, -50%) scale(4.2);
+    transform: translate(-50%, -50%) scale(3.5);
     opacity: 0;
   }
 }
 
 .btn-ripple-wave {
-  position: absolute;
+  position: absolute !important;
   border-radius: 9999px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(240, 127, 60, 0.5) 60%, transparent 100%);
-  pointer-events: none;
-  z-index: 3;
-  animation: btnRippleExpand 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(240, 127, 60, 0.45) 60%, transparent 100%);
+  pointer-events: none !important;
+  z-index: 3 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-shrink: 0;
+  animation: btnRippleExpand 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Uchqun zarrachalari (Click Burst Particles) */
