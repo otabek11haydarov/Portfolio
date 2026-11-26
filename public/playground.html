@@ -415,142 +415,37 @@
       </div>
 
       <div class="flex items-center gap-2 sm:gap-3">
-        <a href="/#projects" class="btn-interactive px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#21140e]/80 hover:bg-[#27170f] text-amber-100 border border-amber-900/40 hover:border-[#f07f3c]/40 flex items-center gap-1.5 transition">
-          <span>← Portfolio</span>
-        </a>
+        <!-- Header Change Project Selector -->
+        <div class="flex items-center gap-2 bg-[#21140e]/90 border border-amber-900/50 hover:border-[#f07f3c]/50 rounded-xl px-3 py-1.5 transition-colors">
+          <label for="headerProjectSelect" class="text-[11px] font-mono uppercase tracking-wider text-[#f07f3c] font-semibold hidden md:inline">
+            Change Project:
+          </label>
+          <select id="headerProjectSelect" aria-label="Change Project" class="bg-transparent text-xs sm:text-sm font-medium text-[#ffedd5] focus:outline-none cursor-pointer pr-1">
+            <option value="ecommerce" class="bg-[#1c0f09] text-[#ffedd5]">📊 E-Commerce Profitability Analysis</option>
+            <option value="ev" class="bg-[#1c0f09] text-[#ffedd5]">⚡ U.S. Electric Vehicle Market Share</option>
+          </select>
+        </div>
+
         <button id="btnOpenIntegrationModal" type="button" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#21140e]/80 hover:bg-[#27170f] text-[#ffd2a8] border border-amber-900/40 hover:border-[#f07f3c]/40 flex items-center gap-2 transition cursor-pointer">
           <svg class="w-4 h-4 text-[#f07f3c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
           </svg>
-          <span class="hidden md:inline">SQL &amp; Pipeline Code</span>
+          <span class="hidden lg:inline">Pipeline Code</span>
         </button>
-        <button id="btnScrollToPlayground" type="button" class="btn-cta-glow px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[#ea580c] to-[#f07f3c] text-white shadow-lg shadow-orange-500/25 flex items-center gap-1.5 transition cursor-pointer">
-          <span>Active Workbench</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-          </svg>
-        </button>
+
+        <a href="/#projects" class="btn-interactive px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#21140e]/80 hover:bg-[#27170f] text-amber-100 border border-amber-900/40 hover:border-[#f07f3c]/40 flex items-center gap-1.5 transition">
+          <span>← Portfolio</span>
+        </a>
       </div>
     </div>
   </header>
 
-  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 space-y-12">
+  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-8">
 
-    <!-- Section 1: Exact Portfolio Project Cards (Centered 2-Column Grid) -->
-    <section aria-labelledby="projects-heading">
-      <div class="mb-8">
-        <p class="text-[#f07f3c] font-display font-semibold text-sm tracking-widest uppercase mb-2">
-          Projects &amp; Live Playground
-        </p>
-        <h1 id="projects-heading" class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
-          Featured Analytics &amp; <span class="bg-gradient-to-r from-[#f07f3c] via-[#ffd2a8] to-[#f07f3c] bg-clip-text text-transparent">Live Sandbox</span>
-        </h1>
-        <p class="text-sm text-amber-200/75 mt-2 max-w-2xl leading-relaxed">
-          Har bir loyihadagi <span class="text-[#ffd2a8] font-semibold">Live Sandbox</span> tugmasini bosing — pastdagi interaktiv Playground oynasida jonli PostgreSQL soʻrovlar, What-If simulyator va vizual tahlillarni sinab koʻring.
-        </p>
-      </div>
-
-      <!-- 2-Column Balanced Centered Grid Matching Projects.tsx -->
-      <div class="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-6 lg:gap-8">
-
-        <!-- Card 1: E-Commerce Profitability Analysis -->
-        <article id="card-ecommerce" class="interactive-card active-card group rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-11 h-11 rounded-xl bg-[#27170f] border border-amber-900/40 flex items-center justify-center text-2xl shadow-inner">
-                📊
-              </div>
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-medium bg-[#f07f3c]/15 text-[#ffd2a8] border border-[#f07f3c]/30">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#f07f3c] animate-pulse"></span>
-                Playground
-              </span>
-            </div>
-            <h2 class="font-display font-semibold text-lg sm:text-xl text-white leading-snug mb-2 group-hover:text-[#f07f3c] transition-colors">
-              E-Commerce Profitability Analysis
-            </h2>
-            <p class="text-sm text-amber-200/70 leading-relaxed mb-5">
-              End-to-end analytics project auditing 2,000+ orders in PostgreSQL to identify unit economics, shipping margin leakage (13% vs 31%), and multi-channel marketing ROAS.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">PostgreSQL</span>
-              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">Python</span>
-              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">SQL</span>
-              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">Data Analytics</span>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-3 pt-4 border-t border-amber-900/30">
-            <button type="button" data-launch-project="ecommerce" class="btn-launch-live action-btn action-btn-live-active px-3.5 py-2 rounded-lg text-sm font-medium inline-flex items-center gap-1.5 cursor-pointer">
-              <svg class="w-4 h-4 text-[#f07f3c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
-              </svg>
-              <span>Live Sandbox</span>
-              <span class="w-1.5 h-1.5 rounded-full bg-[#f07f3c]"></span>
-            </button>
-            <button type="button" data-code-project="ecommerce" class="btn-view-code action-btn px-3.5 py-2 rounded-lg text-sm font-medium inline-flex items-center gap-1.5 cursor-pointer">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-              </svg>
-              <span>Pipeline Code</span>
-            </button>
-            <a href="https://github.com/otabek11haydarov/E-Commerce-Profitability-Analysis" target="_blank" rel="noopener noreferrer" class="btn-interactive action-btn px-3 py-2 rounded-lg text-xs font-mono inline-flex items-center gap-1 ml-auto" title="Open GitHub Repository">
-              <span>GitHub ↗</span>
-            </a>
-          </div>
-        </article>
-
-        <!-- Card 2: U.S. Electric Vehicle Market Share Analysis -->
-        <article id="card-ev" class="interactive-card group rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-11 h-11 rounded-xl bg-[#27170f] border border-amber-900/40 flex items-center justify-center text-2xl shadow-inner">
-                ⚡
-              </div>
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-medium bg-[#f07f3c]/15 text-[#ffd2a8] border border-[#f07f3c]/30">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#f07f3c] animate-pulse"></span>
-                Playground
-              </span>
-            </div>
-            <h2 class="font-display font-semibold text-lg sm:text-xl text-white leading-snug mb-2 group-hover:text-[#f07f3c] transition-colors">
-              U.S. Electric Vehicle Market Share Analysis
-            </h2>
-            <p class="text-sm text-amber-200/70 leading-relaxed mb-5">
-              End-to-end data analytics project evaluating 287M+ registered vehicles across 51 jurisdictions to uncover EV adoption trends, alternative fuel penetration, and charging infrastructure priorities.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">PostgreSQL</span>
-              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">Python</span>
-              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">Tableau</span>
-              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">SQL</span>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-3 pt-4 border-t border-amber-900/30">
-            <button type="button" data-launch-project="ev" class="btn-launch-live action-btn px-3.5 py-2 rounded-lg text-sm font-medium inline-flex items-center gap-1.5 cursor-pointer">
-              <svg class="w-4 h-4 text-[#f07f3c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
-              </svg>
-              <span>Live Sandbox</span>
-            </button>
-            <button type="button" data-code-project="ev" class="btn-view-code action-btn px-3.5 py-2 rounded-lg text-sm font-medium inline-flex items-center gap-1.5 cursor-pointer">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-              </svg>
-              <span>Pipeline Code</span>
-            </button>
-            <a href="https://github.com/otabek11haydarov/Analyzing-US-Electric-Vehicle-Market-Share" target="_blank" rel="noopener noreferrer" class="btn-interactive action-btn px-3 py-2 rounded-lg text-xs font-mono inline-flex items-center gap-1 ml-auto" title="Open GitHub Repository">
-              <span>GitHub ↗</span>
-            </a>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- Section 2: Interactive Live Playground Workbench -->
+    <!-- Interactive Live Playground Workbench -->
     <section id="playground-workbench" class="rounded-3xl bg-[#1c0f09]/95 border border-amber-900/40 shadow-2xl overflow-hidden backdrop-blur-md">
 
-      <!-- Workbench Top Window Bar + Project Switcher Tabs -->
+      <!-- Workbench Top Window Bar + Change Project Select Dropdown -->
       <div class="bg-[#150d09] border-b border-amber-900/40 px-4 sm:px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div class="flex items-center gap-3">
           <!-- Quyosh Shafaqi Window Controls -->
@@ -564,16 +459,24 @@
           </span>
         </div>
 
-        <!-- Project Playground Switcher (2 Projects) -->
-        <div class="flex flex-wrap items-center gap-2.5" role="tablist" aria-label="Project Playground Tabs">
-          <button type="button" data-switch-tab="ecommerce" class="playground-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold transition flex items-center gap-2 bg-gradient-to-r from-[#ea580c] to-[#f07f3c] text-white shadow-md shadow-orange-500/20 cursor-pointer">
-            <span>📊</span>
-            <span>1. E-Commerce Profitability</span>
-          </button>
-          <button type="button" data-switch-tab="ev" class="playground-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-medium transition flex items-center gap-2 bg-[#21140e] text-amber-200/70 border border-amber-900/40 hover:text-white hover:border-[#f07f3c]/50 cursor-pointer">
-            <span>⚡</span>
-            <span>2. U.S. EV Market Share</span>
-          </button>
+        <!-- Change Project Dropdown & Quick Repo Link -->
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="flex items-center gap-2.5 bg-[#21140e] border border-[#f07f3c]/45 rounded-xl px-3.5 py-2 shadow-md shadow-orange-500/10">
+            <label for="workbenchProjectSelect" class="text-xs font-mono uppercase tracking-wider text-[#f07f3c] font-semibold whitespace-nowrap">
+              Change Project:
+            </label>
+            <select id="workbenchProjectSelect" class="bg-[#150d09] border border-amber-900/50 rounded-lg px-3 py-1.5 text-xs sm:text-sm font-mono font-semibold text-[#ffd2a8] focus:outline-none focus:border-[#f07f3c] cursor-pointer">
+              <option value="ecommerce" class="bg-[#150d09] text-[#ffedd5]">📊 1. E-Commerce Profitability Analysis</option>
+              <option value="ev" class="bg-[#150d09] text-[#ffedd5]">⚡ 2. U.S. Electric Vehicle Market Share</option>
+            </select>
+          </div>
+
+          <a id="activeProjectGithubLink" href="https://github.com/otabek11haydarov/E-Commerce-Profitability-Analysis" target="_blank" rel="noopener noreferrer" class="btn-interactive action-btn px-3.5 py-2 rounded-xl text-xs font-mono inline-flex items-center gap-1.5" title="Open Active Project GitHub Repository">
+            <svg class="w-4 h-4 text-[#f07f3c]" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+            <span>GitHub Repo ↗</span>
+          </a>
         </div>
       </div>
 
@@ -1378,9 +1281,9 @@ ORDER BY e.ev_market_share_pct DESC;`,
     }
 
     // =========================================================================
-    // PROJECT SWITCHING LOGIC (2 PROJECTS)
+    // PROJECT SWITCHING LOGIC (2 PROJECTS VIA SELECT DROPDOWN)
     // =========================================================================
-    function switchActiveProject(projectKey, shouldScroll) {
+    function switchActiveProject(projectKey) {
       APP_STATE.activeProject = projectKey;
 
       const panels = {
@@ -1388,59 +1291,48 @@ ORDER BY e.ev_market_share_pct DESC;`,
         ev: document.getElementById('panel-ev')
       };
 
-      const cards = {
-        ecommerce: document.getElementById('card-ecommerce'),
-        ev: document.getElementById('card-ev')
-      };
-
-      const titles = {
-        ecommerce: 'E-Commerce Profitability',
-        ev: 'U.S. EV Market Share'
-      };
-
       const urls = {
         ecommerce: 'playground://otabek-portfolio/ecommerce-profitability',
         ev: 'playground://otabek-portfolio/us-ev-market-share'
       };
 
+      const repos = {
+        ecommerce: 'https://github.com/otabek11haydarov/E-Commerce-Profitability-Analysis',
+        ev: 'https://github.com/otabek11haydarov/Analyzing-US-Electric-Vehicle-Market-Share'
+      };
+
       Object.keys(panels).forEach((k) => {
         if (panels[k]) panels[k].classList.toggle('hidden', k !== projectKey);
-        if (cards[k]) cards[k].classList.toggle('active-card', k === projectKey);
       });
 
-      document.querySelectorAll('.btn-launch-live').forEach((btn) => {
-        const target = btn.getAttribute('data-launch-project');
-        if (target === projectKey) {
-          btn.classList.add('action-btn-live-active');
-        } else {
-          btn.classList.remove('action-btn-live-active');
-        }
-      });
+      const headerSelect = document.getElementById('headerProjectSelect');
+      if (headerSelect && headerSelect.value !== projectKey) {
+        headerSelect.value = projectKey;
+      }
 
-      document.querySelectorAll('.playground-tab-btn').forEach((btn) => {
-        const target = btn.getAttribute('data-switch-tab');
-        if (target === projectKey) {
-          btn.className = 'playground-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold transition flex items-center gap-2 bg-gradient-to-r from-[#ea580c] to-[#f07f3c] text-white shadow-md shadow-orange-500/20 cursor-pointer';
-        } else {
-          btn.className = 'playground-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-medium transition flex items-center gap-2 bg-[#21140e] text-amber-200/70 border border-amber-900/40 hover:text-white hover:border-[#f07f3c]/50 cursor-pointer';
-        }
-      });
+      const workbenchSelect = document.getElementById('workbenchProjectSelect');
+      if (workbenchSelect && workbenchSelect.value !== projectKey) {
+        workbenchSelect.value = projectKey;
+      }
 
-      const badge = document.getElementById('activeProjectBadge');
-      if (badge) badge.textContent = titles[projectKey] || projectKey;
+      const repoLink = document.getElementById('activeProjectGithubLink');
+      if (repoLink && repos[projectKey]) {
+        repoLink.href = repos[projectKey];
+      }
 
       const urlBar = document.getElementById('workbenchUrlBar');
       if (urlBar) urlBar.textContent = urls[projectKey] || '';
+
+      try {
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.set('project', projectKey);
+        window.history.replaceState({}, '', newUrl.toString());
+      } catch (e) {}
 
       if (projectKey === 'ecommerce') {
         renderEcommercePlayground();
       } else if (projectKey === 'ev') {
         renderEvPlayground();
-      }
-
-      if (shouldScroll) {
-        const wb = document.getElementById('playground-workbench');
-        if (wb) wb.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 
@@ -1936,20 +1828,23 @@ ORDER BY e.ev_market_share_pct DESC;`,
       const sqlEd = document.getElementById('ecomSqlEditor');
       if (sqlEd) sqlEd.value = ECOM_SQL_PRESETS.shipping_leakage;
 
-      document.querySelectorAll('.btn-launch-live').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const proj = btn.getAttribute('data-launch-project');
-          switchActiveProject(proj, true);
-          showToast(`Launched Live Playground: ${proj.toUpperCase()}`);
+      const headerSelect = document.getElementById('headerProjectSelect');
+      if (headerSelect) {
+        headerSelect.addEventListener('change', (e) => {
+          const proj = e.target.value;
+          switchActiveProject(proj);
+          showToast(`Project changed: ${proj === 'ev' ? 'U.S. EV Market Share' : 'E-Commerce Profitability'}`);
         });
-      });
+      }
 
-      document.querySelectorAll('.playground-tab-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const proj = btn.getAttribute('data-switch-tab');
-          switchActiveProject(proj, false);
+      const workbenchSelect = document.getElementById('workbenchProjectSelect');
+      if (workbenchSelect) {
+        workbenchSelect.addEventListener('change', (e) => {
+          const proj = e.target.value;
+          switchActiveProject(proj);
+          showToast(`Project changed: ${proj === 'ev' ? 'U.S. EV Market Share' : 'E-Commerce Profitability'}`);
         });
-      });
+      }
 
       document.querySelectorAll('.btn-view-code').forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -1985,11 +1880,7 @@ ORDER BY e.ev_market_share_pct DESC;`,
       });
 
       document.getElementById('btnOpenIntegrationModal').addEventListener('click', () => {
-        openCodeModal('ecommerce');
-      });
-
-      document.getElementById('btnScrollToPlayground').addEventListener('click', () => {
-        document.getElementById('playground-workbench').scrollIntoView({ behavior: 'smooth' });
+        openCodeModal(APP_STATE.activeProject || 'ecommerce');
       });
 
       document.getElementById('btnCloseModal').addEventListener('click', closeCodeModal);
