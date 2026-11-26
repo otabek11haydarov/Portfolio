@@ -24,11 +24,11 @@ export default function Experience() {
 
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold hover:bg-emerald-500/20 transition-all self-start sm:self-auto group btn-interactive btn-cta-glow"
+            className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-[#f07f3c]/15 border border-[#f07f3c]/35 text-[#ffd2a8] text-xs font-semibold hover:bg-[#f07f3c]/25 transition-all self-start sm:self-auto group btn-interactive btn-cta-glow"
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-[#f07f3c] animate-pulse" />
             <span>Open to Work — Available for Internship</span>
-            <ArrowUpRight className="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#f07f3c] opacity-80 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
         </div>
 

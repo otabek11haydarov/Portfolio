@@ -64,8 +64,9 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    // If a private remote API URL is specified in .env, optionally fetch fresh data
-    const remoteApiUrl = import.meta.env.VITE_API_URL;
+    // Connect to Render cloud backend (or custom VITE_API_URL) with local static data fallback
+    const remoteApiUrl =
+      import.meta.env.VITE_API_URL || 'https://portfolio-admin-server-q4jg.onrender.com';
     if (!remoteApiUrl) return;
 
     let isMounted = true;

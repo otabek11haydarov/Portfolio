@@ -10,9 +10,6 @@ const getLivePlaygroundUrl = (title: string, defaultLink: string) => {
   if (lower.includes('electric') || lower.includes('vehicle') || lower.includes('ev')) {
     return '/playground.html?project=ev';
   }
-  if (lower.includes('component')) {
-    return '/playground.html?project=components';
-  }
   return defaultLink;
 };
 
@@ -45,18 +42,16 @@ export default function Projects() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 p-5 rounded-2xl bg-[#21140e]/60 border border-amber-900/40 backdrop-blur-sm max-w-4xl mx-auto lg:max-w-none">
           <div className="space-y-1">
             <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#f07f3c]">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[#f07f3c] animate-pulse" />
               <span>Interactive SQL & Data Workbench Available</span>
             </div>
             <p className="text-sm text-amber-200/80 max-w-2xl">
-              Endilikda har bir loyiha uchun interaktiv <strong className="text-white">Live Playground</strong> mavjud: PostgreSQL soʻrovlarini bajarish, unit economics tahlili va metrikalarni bevosita brauzeringizda sinab koʻring.
+              Endilikda har bir loyiha uchun interaktiv <strong className="text-[#ffd2a8]">Live Playground</strong> mavjud: PostgreSQL soʻrovlarini bajarish, unit economics tahlili va metrikalarni bevosita brauzeringizda sinab koʻring.
             </p>
           </div>
           <a
             href="/playground.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold text-xs shadow-lg shadow-orange-500/25 hover:opacity-95 transition-all btn-interactive shrink-0"
+            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#ea580c] to-[#f07f3c] text-white font-semibold text-xs shadow-lg shadow-orange-500/25 hover:opacity-95 transition-all btn-interactive btn-cta-glow shrink-0"
           >
             <Terminal className="w-4 h-4" />
             <span>Launch Live Playground</span>
@@ -78,10 +73,12 @@ export default function Projects() {
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-3xl">{p.emoji}</span>
+                    <span className="w-11 h-11 rounded-xl bg-[#27170f] border border-amber-900/40 flex items-center justify-center text-2xl shadow-inner">
+                      {p.emoji}
+                    </span>
                     {isPlayground && (
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-medium bg-[#f07f3c]/15 text-[#ffd2a8] border border-[#f07f3c]/30">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#f07f3c] animate-pulse" />
                         Playground
                       </span>
                     )}

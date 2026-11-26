@@ -80,8 +80,8 @@ export default function Hero() {
       <div className="blob w-72 h-72 bg-[#7a3518] top-1/3 right-1/4 animate-float" style={{ animationDelay: '4s' }} />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center pt-24 pb-16">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-amber-900/40 text-xs text-amber-200/90 mb-8 backdrop-blur-sm">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#21140e]/70 border border-amber-900/40 text-xs text-[#ffd2a8] mb-8 backdrop-blur-sm">
+          <span className="w-2 h-2 rounded-full bg-[#f07f3c] animate-pulse" />
           Available for new opportunities
         </div>
 

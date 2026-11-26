@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Menu, X, Code2 } from 'lucide-react';
+import { Menu, X, Code2, Terminal } from 'lucide-react';
 
 const links = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
-  { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -50,12 +50,21 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center px-4 py-2 rounded-lg bg-[#f07f3c]/10 text-[#f07f3c] border border-[#f07f3c]/30 text-sm font-medium hover:bg-[#f07f3c]/20 transition-colors duration-200 btn-interactive btn-cta-glow"
-        >
-          Let's talk
-        </a>
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="/playground.html"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#21140e]/80 text-[#ffd2a8] border border-amber-900/40 text-xs font-mono font-medium hover:border-[#f07f3c]/50 hover:text-white transition-colors duration-200 btn-interactive"
+          >
+            <Terminal className="w-3.5 h-3.5 text-[#f07f3c]" />
+            <span>Live Playground</span>
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex items-center px-4 py-2 rounded-lg bg-[#f07f3c]/10 text-[#f07f3c] border border-[#f07f3c]/30 text-sm font-medium hover:bg-[#f07f3c]/20 transition-colors duration-200 btn-interactive btn-cta-glow"
+          >
+            Let's talk
+          </a>
+        </div>
 
         <button
           className="md:hidden text-amber-100 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f07f3c]/40"
@@ -82,7 +91,15 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <div className="pt-4 mt-3 border-t border-amber-900/30">
+          <div className="pt-4 mt-3 border-t border-amber-900/30 space-y-2.5">
+            <a
+              href="/playground.html"
+              onClick={() => setOpen(false)}
+              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#21140e] border border-amber-900/40 text-[#ffd2a8] font-mono font-medium text-xs btn-interactive"
+            >
+              <Terminal className="w-4 h-4 text-[#f07f3c]" />
+              <span>Launch Live Playground</span>
+            </a>
             <a
               href="#contact"
               onClick={() => setOpen(false)}

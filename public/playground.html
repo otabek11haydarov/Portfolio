@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Otabek Haydarov — Portfolio Live Project Playground</title>
+  <meta name="theme-color" content="#150d09" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>Otabek Haydarov — Live Project Playground &amp; SQL Sandbox</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -16,18 +19,22 @@
         extend: {
           fontFamily: {
             sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Space Grotesk', 'Inter', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace']
           },
           colors: {
-            canvas: '#150d09',
-            card: '#1c0f09',
-            cardHover: '#25140d',
-            borderSubtle: '#3b1b10',
-            borderHover: '#7a3518',
             shafaq: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              200: '#ffd2a8', // Swatch 5: Soft Peach Cream
+              300: '#fdba74',
               400: '#fb923c',
-              500: '#f07f3c',
-              600: '#ea580c'
+              500: '#f07f3c', // Swatch 4: Sunset Orange
+              600: '#ea580c',
+              700: '#c2410c',
+              800: '#7a3518', // Swatch 3: Warm Terracotta
+              900: '#3b1b10', // Swatch 2: Dark Chocolate
+              950: '#1c0f09', // Swatch 1: Deep Espresso Night
             }
           }
         }
@@ -35,101 +42,390 @@
     };
   </script>
   <style>
-    body {
-      background-color: #150d09;
-      color: #ffedd5;
-      font-family: 'Inter', system-ui, sans-serif;
-      overflow-x: hidden;
+    :root {
+      --bg: #150d09;
+      --bg-soft: #1c0f09;
+      --surface: #21140e;
+      --surface-elevated: #27170f;
+      --border: #442216;
+      --text: #ffedd5;
+      --text-muted: #d5b9a5;
+      --accent: #f07f3c;
+      --accent-2: #ffd2a8;
+      --accent-warm: #ea580c;
+      --terracotta: #7a3518;
+      --chocolate: #3b1b10;
     }
+
+    html, body {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background-color: rgba(240, 127, 60, 0.3);
+      color: #ffd2a8;
+    }
+
+    .font-display {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+    }
+
+    /* Subtle grid background with warm amber glow (Exact match with main portfolio) */
+    .grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(240, 127, 60, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(240, 127, 60, 0.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Animated gradient background blobs (Quyosh shafaqi warm sunset glow) */
+    .blob {
+      position: fixed;
+      border-radius: 9999px;
+      filter: blur(90px);
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* Custom scrollbar matching Quyosh shafaqi theme */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #150d09;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #4a2215;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #7a3518;
+    }
+
     .mono-tag {
       font-family: 'JetBrains Mono', monospace;
-      background-color: #21140e;
-      border: 1px solid #3b1b10;
+      background-color: rgba(59, 27, 16, 0.65);
+      border: 1px solid rgba(120, 53, 15, 0.45);
       color: #ffd2a8;
       transition: all 0.2s ease;
     }
-    .project-card {
-      background-color: #1c0f09;
-      border: 1px solid #3b1b10;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* ===== ADVANCED INTERACTIVE BUTTON ANIMATIONS (Matches Portfolio src/index.css) ===== */
+    button,
+    a.btn-interactive,
+    .btn-interactive {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      transform: translate3d(var(--tx, 0px), var(--ty, 0px), 0) scale(var(--scale, 1));
+      transition:
+        transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.25s ease,
+        background-color 0.25s ease,
+        color 0.2s ease;
+      will-change: transform, box-shadow;
     }
-    .project-card:hover {
-      border-color: #7a3518;
-      transform: translateY(-2px);
-      box-shadow: 0 20px 40px -15px rgba(240, 127, 60, 0.2);
+
+    button > *,
+    a.btn-interactive > *,
+    .btn-interactive > * {
+      position: relative;
+      z-index: 4;
     }
-    .project-card.active-card {
-      border-color: #f07f3c;
-      box-shadow: 0 0 0 1px rgba(240, 127, 60, 0.5), 0 20px 40px -15px rgba(240, 127, 60, 0.25);
+
+    button::before,
+    a.btn-interactive::before,
+    .btn-interactive::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        130px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(255, 255, 255, 0.22),
+        rgba(240, 127, 60, 0.2) 45%,
+        transparent 75%
+      );
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+      z-index: 1;
     }
+
+    button:hover::before,
+    a.btn-interactive:hover::before,
+    .btn-interactive:hover::before {
+      opacity: 1;
+    }
+
+    button::after,
+    a.btn-interactive::after,
+    .btn-interactive::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -130%;
+      width: 65%;
+      height: 200%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.26),
+        transparent
+      );
+      transform: skewX(-24deg);
+      transition: left 0.65s cubic-bezier(0.19, 1, 0.22, 1);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    button:hover::after,
+    a.btn-interactive:hover::after,
+    .btn-interactive:hover::after {
+      left: 145%;
+    }
+
+    button:hover,
+    a.btn-interactive:hover,
+    .btn-interactive:hover {
+      --scale: 1.03;
+      box-shadow:
+        0 10px 26px -6px rgba(240, 127, 60, 0.38),
+        0 0 16px -2px rgba(255, 210, 168, 0.22);
+    }
+
+    button:active,
+    a.btn-interactive:active,
+    .btn-interactive:active {
+      --scale: 0.95 !important;
+      transition-duration: 0.08s;
+    }
+
+    @keyframes neonPulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 15px rgba(240, 127, 60, 0.4), 0 0 30px rgba(122, 53, 24, 0.25);
+      }
+      50% {
+        box-shadow: 0 0 24px rgba(240, 127, 60, 0.7), 0 0 45px rgba(255, 210, 168, 0.35);
+      }
+    }
+
+    .btn-cta-glow {
+      animation: neonPulseGlow 3s infinite ease-in-out;
+    }
+
+    @keyframes btnRippleExpand {
+      0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0.75;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(4.2);
+        opacity: 0;
+      }
+    }
+
+    .btn-ripple-wave {
+      position: absolute;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(240, 127, 60, 0.5) 60%, transparent 100%);
+      pointer-events: none;
+      z-index: 3;
+      animation: btnRippleExpand 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .btn-burst-particle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 9999;
+      animation: particleFly 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes particleFly {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--dx), var(--dy)) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* ===== ADVANCED 3D HOLOGRAPHIC CARD ANIMATIONS ===== */
+    .interactive-card {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      transform-style: preserve-3d;
+      background-color: rgba(33, 20, 14, 0.65);
+      border: 1px solid rgba(120, 53, 15, 0.45);
+      backdrop-filter: blur(8px);
+      transform:
+        perspective(950px)
+        rotateX(var(--rx, 0deg))
+        rotateY(var(--ry, 0deg))
+        translateY(var(--lift, 0px))
+        scale(var(--cscale, 1));
+      transition:
+        transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.3s ease,
+        background-color 0.3s ease;
+      will-change: transform, box-shadow;
+    }
+
+    .interactive-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        320px circle at var(--cmx, 50%) var(--cmy, 50%),
+        rgba(240, 127, 60, 0.16),
+        rgba(122, 53, 24, 0.14) 38%,
+        rgba(255, 210, 168, 0.05) 60%,
+        transparent 80%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .interactive-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: radial-gradient(
+        220px circle at var(--cmx, 50%) var(--cmy, 50%),
+        rgba(240, 127, 60, 0.95),
+        rgba(255, 210, 168, 0.65) 45%,
+        transparent 75%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .interactive-card:hover {
+      --lift: -5px;
+      --cscale: 1.015;
+      border-color: rgba(240, 127, 60, 0.6) !important;
+      box-shadow:
+        0 22px 42px -12px rgba(28, 15, 9, 0.85),
+        0 0 28px -4px rgba(240, 127, 60, 0.28);
+    }
+
+    .interactive-card:hover::before,
+    .interactive-card:hover::after {
+      opacity: 1;
+    }
+
+    .interactive-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .interactive-card.active-card {
+      border-color: #f07f3c !important;
+      box-shadow:
+        0 0 0 1px rgba(240, 127, 60, 0.45),
+        0 22px 44px -12px rgba(240, 127, 60, 0.28);
+    }
+
     .action-btn {
-      background-color: #21140e;
-      border: 1px solid #3b1b10;
-      color: #ffd2a8;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(120, 53, 15, 0.45);
+      color: rgba(254, 215, 170, 0.85);
       transition: all 0.2s ease;
     }
     .action-btn:hover {
-      background-color: #2c1810;
-      border-color: #7a3518;
-      color: #ffffff;
+      background-color: rgba(240, 127, 60, 0.14);
+      border-color: rgba(240, 127, 60, 0.5);
+      color: #f07f3c;
     }
     .action-btn-live-active {
-      background-color: rgba(240, 127, 60, 0.2);
+      background: linear-gradient(135deg, rgba(234, 88, 12, 0.25), rgba(240, 127, 60, 0.28));
       border-color: #f07f3c;
-      color: #ffedd5;
+      color: #ffd2a8;
     }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: #150d09;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #3b1b10;
-      border-radius: 3px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: #7a3518;
-    }
+
     input[type="range"] {
       accent-color: #f07f3c;
     }
   </style>
 </head>
-<body class="min-h-screen antialiased selection:bg-orange-500/30 selection:text-orange-200">
+<body class="min-h-screen antialiased grid-bg relative selection:bg-orange-500/30 selection:text-orange-200">
 
-  <!-- Top Navigation / Portfolio Header Bar -->
-  <header class="sticky top-0 z-40 border-b border-[#3b1b10] bg-[#1c0f09]/90 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-[#f07f3c] font-mono font-bold text-sm">
-          OH
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="font-bold text-white tracking-tight text-sm sm:text-base">Otabek Haydarov</span>
-            <span class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-mono bg-orange-500/10 text-orange-400 border border-orange-500/25">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              Interactive Playground
-            </span>
-          </div>
-          <p class="text-xs text-amber-200/60 hidden sm:block">github.com/otabek11haydarov/Portfolio — Live Project Sandbox</p>
+  <!-- Top Scroll Progress Bar (Matches ScrollProgress.tsx) -->
+  <div class="fixed top-0 left-0 right-0 h-0.5 z-[60] bg-transparent">
+    <div id="scrollProgressBar" class="h-full bg-gradient-to-r from-[#ea580c] via-[#f07f3c] to-[#ffd2a8] transition-[width] duration-75" style="width: 0%"></div>
+  </div>
+
+  <!-- Animated Ambient Sunset Blobs (Matches Hero.tsx) -->
+  <div class="blob w-96 h-96 bg-[#f07f3c] top-16 -left-24 animate-float"></div>
+  <div class="blob w-80 h-80 bg-[#ea580c] bottom-20 right-0 animate-float" style="animation-delay: 2s;"></div>
+  <div class="blob w-72 h-72 bg-[#7a3518] top-1/3 right-1/4 animate-float" style="animation-delay: 4s;"></div>
+
+  <!-- Top Navigation / Portfolio Header Bar (Matches Navbar.tsx) -->
+  <header class="sticky top-0 z-40 border-b border-amber-900/30 bg-[#150d09]/90 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <a href="/" class="flex items-center gap-2 font-display font-bold text-lg text-amber-50 hover:text-[#f07f3c] transition-colors" aria-label="Otabek Haydarov - Home">
+          <svg class="w-6 h-6 text-[#f07f3c]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m18 16 4-4-4-4M6 8l-4 4 4 4m8.5-12-5 16"/>
+          </svg>
+          <span>OH<span class="text-[#f07f3c]">.</span></span>
+        </a>
+        <div class="hidden sm:flex items-center gap-2.5 pl-4 border-l border-amber-900/40">
+          <span class="font-display font-semibold text-white text-sm">Otabek Haydarov</span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-[#f07f3c]/15 text-[#ffd2a8] border border-[#f07f3c]/35">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#f07f3c] animate-pulse"></span>
+            Live Project Sandbox
+          </span>
         </div>
       </div>
 
       <div class="flex items-center gap-2 sm:gap-3">
-        <a href="/" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-medium bg-[#21140e] hover:bg-[#2c1810] text-amber-200 border border-[#3b1b10] flex items-center gap-1.5 transition">
-          <span>← Back to Portfolio</span>
+        <a href="/#projects" class="btn-interactive px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#21140e]/80 hover:bg-[#27170f] text-amber-100 border border-amber-900/40 hover:border-[#f07f3c]/40 flex items-center gap-1.5 transition">
+          <span>← Portfolio</span>
         </a>
-        <button id="btnOpenIntegrationModal" type="button" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-medium bg-[#21140e] hover:bg-[#2c1810] text-amber-200 border border-[#3b1b10] flex items-center gap-2 transition">
-          <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button id="btnOpenIntegrationModal" type="button" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#21140e]/80 hover:bg-[#27170f] text-[#ffd2a8] border border-amber-900/40 hover:border-[#f07f3c]/40 flex items-center gap-2 transition cursor-pointer">
+          <svg class="w-4 h-4 text-[#f07f3c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
           </svg>
-          <span class="hidden md:inline">Repo Integration Code</span>
+          <span class="hidden md:inline">SQL &amp; Pipeline Code</span>
         </button>
-        <button id="btnScrollToPlayground" type="button" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white shadow-lg shadow-orange-500/25 flex items-center gap-1.5 transition">
-          <span>Active Playground</span>
+        <button id="btnScrollToPlayground" type="button" class="btn-cta-glow px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[#ea580c] to-[#f07f3c] text-white shadow-lg shadow-orange-500/25 flex items-center gap-1.5 transition cursor-pointer">
+          <span>Active Workbench</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
           </svg>
@@ -138,115 +434,130 @@
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 space-y-12">
 
     <!-- Section 1: Exact Portfolio Project Cards (Centered 2-Column Grid) -->
     <section aria-labelledby="projects-heading">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-4">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
-          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-orange-400 mb-1.5">
-            <span>// FEATURED ANALYTICS &amp; ENGINEERING PROJECTS</span>
-          </div>
-          <h1 id="projects-heading" class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-            Featured Projects &amp; Live Sandbox
+          <p class="text-[#f07f3c] font-display font-semibold text-sm tracking-widest uppercase mb-2">
+            Projects &amp; Live Playground
+          </p>
+          <h1 id="projects-heading" class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+            Featured Analytics &amp; <span class="bg-gradient-to-r from-[#f07f3c] via-[#ffd2a8] to-[#f07f3c] bg-clip-text text-transparent">Live Sandbox</span>
           </h1>
-          <p class="text-sm text-amber-200/70 mt-1">
-            Har bir loyihadagi <span class="text-white font-medium">Live</span> tugmasini bosing — pastdagi interaktiv Playground oynasida jonli SQL soʻrovlar, metrikalar va vizual tahlillarni sinab koʻring.
+          <p class="text-sm text-amber-200/75 mt-2 max-w-2xl leading-relaxed">
+            Har bir loyihadagi <span class="text-[#ffd2a8] font-semibold">Live Sandbox</span> tugmasini bosing — pastdagi interaktiv Playground oynasida jonli PostgreSQL soʻrovlar, What-If simulyator va vizual tahlillarni sinab koʻring.
           </p>
         </div>
-        <div class="flex items-center gap-2 text-xs font-mono text-amber-200/70 bg-[#1c0f09] px-3.5 py-2 rounded-xl border border-[#3b1b10]">
-          <span>Active Live View:</span>
-          <span id="activeProjectBadge" class="text-orange-400 font-semibold">E-Commerce Profitability</span>
+
+        <!-- Quyosh Shafaqi Palette & Active Project Indicator -->
+        <div class="flex items-center gap-3 bg-[#21140e]/80 px-4 py-2.5 rounded-2xl border border-amber-900/40 backdrop-blur-sm self-start md:self-auto">
+          <div class="flex items-center overflow-hidden rounded-md border border-amber-900/50" title="Quyosh shafaqi Palette">
+            <span class="w-3 h-3 bg-[#1c0f09]"></span>
+            <span class="w-3 h-3 bg-[#3b1b10]"></span>
+            <span class="w-3 h-3 bg-[#7a3518]"></span>
+            <span class="w-3 h-3 bg-[#f07f3c]"></span>
+            <span class="w-3 h-3 bg-[#ffd2a8]"></span>
+          </div>
+          <div class="text-xs font-mono">
+            <span class="text-amber-200/60">Active:</span>
+            <span id="activeProjectBadge" class="text-[#ffd2a8] font-semibold ml-1">E-Commerce Profitability</span>
+          </div>
         </div>
       </div>
 
-      <!-- 2-Column Balanced Centered Grid Matching Screenshot -->
-      <div class="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-6 sm:gap-8">
+      <!-- 2-Column Balanced Centered Grid Matching Projects.tsx -->
+      <div class="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-6 lg:gap-8">
 
         <!-- Card 1: E-Commerce Profitability Analysis -->
-        <article id="card-ecommerce" class="project-card active-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+        <article id="card-ecommerce" class="interactive-card active-card group rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
           <div>
-            <!-- Icon -->
-            <div class="w-11 h-11 rounded-xl bg-[#2a1710] border border-[#442216] flex items-center justify-center text-2xl mb-5 shadow-inner">
-              📊
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-xl bg-[#27170f] border border-amber-900/40 flex items-center justify-center text-2xl shadow-inner">
+                📊
+              </div>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-medium bg-[#f07f3c]/15 text-[#ffd2a8] border border-[#f07f3c]/30">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#f07f3c] animate-pulse"></span>
+                Playground
+              </span>
             </div>
-            <!-- Title -->
-            <h2 class="text-lg sm:text-xl font-bold text-white leading-snug mb-3">
+            <h2 class="font-display font-semibold text-lg sm:text-xl text-white leading-snug mb-2 group-hover:text-[#f07f3c] transition-colors">
               E-Commerce Profitability Analysis
             </h2>
-            <!-- Description -->
             <p class="text-sm text-amber-200/70 leading-relaxed mb-5">
               End-to-end analytics project auditing 2,000+ orders in PostgreSQL to identify unit economics, shipping margin leakage (13% vs 31%), and multi-channel marketing ROAS.
             </p>
-            <!-- Tech Tags -->
             <div class="flex flex-wrap gap-2 mb-6">
-              <span class="mono-tag px-3 py-1 rounded-lg text-xs">PostgreSQL</span>
-              <span class="mono-tag px-3 py-1 rounded-lg text-xs">Python</span>
-              <span class="mono-tag px-3 py-1 rounded-lg text-xs">SQL</span>
-              <span class="mono-tag px-3 py-1 rounded-lg text-xs">Data Analytics</span>
+              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">PostgreSQL</span>
+              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">Python</span>
+              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">SQL</span>
+              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">Data Analytics</span>
             </div>
           </div>
 
-          <div>
-            <div class="border-t border-[#3b1b10] my-4"></div>
-            <div class="flex items-center gap-3">
-              <button type="button" data-launch-project="ecommerce" class="btn-launch-live action-btn action-btn-live-active px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2 cursor-pointer">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
-                </svg>
-                <span>Live</span>
-                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
-              </button>
-              <button type="button" data-code-project="ecommerce" class="btn-view-code action-btn px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2 cursor-pointer">
-                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-                </svg>
-                <span>Code</span>
-              </button>
-            </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-amber-900/30">
+            <button type="button" data-launch-project="ecommerce" class="btn-launch-live action-btn action-btn-live-active px-3.5 py-2 rounded-lg text-sm font-medium inline-flex items-center gap-1.5 cursor-pointer">
+              <svg class="w-4 h-4 text-[#f07f3c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+              </svg>
+              <span>Live Sandbox</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#f07f3c]"></span>
+            </button>
+            <button type="button" data-code-project="ecommerce" class="btn-view-code action-btn px-3.5 py-2 rounded-lg text-sm font-medium inline-flex items-center gap-1.5 cursor-pointer">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+              <span>Pipeline Code</span>
+            </button>
+            <a href="https://github.com/otabek11haydarov/E-Commerce-Profitability-Analysis" target="_blank" rel="noopener noreferrer" class="btn-interactive action-btn px-3 py-2 rounded-lg text-xs font-mono inline-flex items-center gap-1 ml-auto" title="Open GitHub Repository">
+              <span>GitHub ↗</span>
+            </a>
           </div>
         </article>
 
         <!-- Card 2: U.S. Electric Vehicle Market Share Analysis -->
-        <article id="card-ev" class="project-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+        <article id="card-ev" class="interactive-card group rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
           <div>
-            <!-- Icon -->
-            <div class="w-11 h-11 rounded-xl bg-[#2a1710] border border-[#442216] flex items-center justify-center text-2xl mb-5 shadow-inner">
-              ⚡
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-xl bg-[#27170f] border border-amber-900/40 flex items-center justify-center text-2xl shadow-inner">
+                ⚡
+              </div>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-medium bg-[#f07f3c]/15 text-[#ffd2a8] border border-[#f07f3c]/30">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#f07f3c] animate-pulse"></span>
+                Playground
+              </span>
             </div>
-            <!-- Title -->
-            <h2 class="text-lg sm:text-xl font-bold text-white leading-snug mb-3">
+            <h2 class="font-display font-semibold text-lg sm:text-xl text-white leading-snug mb-2 group-hover:text-[#f07f3c] transition-colors">
               U.S. Electric Vehicle Market Share Analysis
             </h2>
-            <!-- Description -->
             <p class="text-sm text-amber-200/70 leading-relaxed mb-5">
               End-to-end data analytics project evaluating 287M+ registered vehicles across 51 jurisdictions to uncover EV adoption trends, alternative fuel penetration, and charging infrastructure priorities.
             </p>
-            <!-- Tech Tags -->
             <div class="flex flex-wrap gap-2 mb-6">
-              <span class="mono-tag px-3 py-1 rounded-lg text-xs">PostgreSQL</span>
-              <span class="mono-tag px-3 py-1 rounded-lg text-xs">Python</span>
-              <span class="mono-tag px-3 py-1 rounded-lg text-xs">Tableau</span>
-              <span class="mono-tag px-3 py-1 rounded-lg text-xs">SQL</span>
+              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">PostgreSQL</span>
+              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">Python</span>
+              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">Tableau</span>
+              <span class="mono-tag px-2.5 py-1 rounded-md text-xs">SQL</span>
             </div>
           </div>
 
-          <div>
-            <div class="border-t border-[#3b1b10] my-4"></div>
-            <div class="flex items-center gap-3">
-              <button type="button" data-launch-project="ev" class="btn-launch-live action-btn px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2 cursor-pointer">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
-                </svg>
-                <span>Live</span>
-              </button>
-              <button type="button" data-code-project="ev" class="btn-view-code action-btn px-3.5 py-2 rounded-lg text-xs font-medium inline-flex items-center gap-2 cursor-pointer">
-                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-                </svg>
-                <span>Code</span>
-              </button>
-            </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-amber-900/30">
+            <button type="button" data-launch-project="ev" class="btn-launch-live action-btn px-3.5 py-2 rounded-lg text-sm font-medium inline-flex items-center gap-1.5 cursor-pointer">
+              <svg class="w-4 h-4 text-[#f07f3c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+              </svg>
+              <span>Live Sandbox</span>
+            </button>
+            <button type="button" data-code-project="ev" class="btn-view-code action-btn px-3.5 py-2 rounded-lg text-sm font-medium inline-flex items-center gap-1.5 cursor-pointer">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+              <span>Pipeline Code</span>
+            </button>
+            <a href="https://github.com/otabek11haydarov/Analyzing-US-Electric-Vehicle-Market-Share" target="_blank" rel="noopener noreferrer" class="btn-interactive action-btn px-3 py-2 rounded-lg text-xs font-mono inline-flex items-center gap-1 ml-auto" title="Open GitHub Repository">
+              <span>GitHub ↗</span>
+            </a>
           </div>
         </article>
 
@@ -254,28 +565,29 @@
     </section>
 
     <!-- Section 2: Interactive Live Playground Workbench -->
-    <section id="playground-workbench" class="rounded-2xl bg-[#1c0f09] border border-[#3b1b10] shadow-2xl overflow-hidden">
+    <section id="playground-workbench" class="rounded-3xl bg-[#1c0f09]/95 border border-amber-900/40 shadow-2xl overflow-hidden backdrop-blur-md">
 
       <!-- Workbench Top Window Bar + Project Switcher Tabs -->
-      <div class="bg-[#150d09] border-b border-[#3b1b10] px-4 sm:px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div class="bg-[#150d09] border-b border-amber-900/40 px-4 sm:px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div class="flex items-center gap-3">
+          <!-- Quyosh Shafaqi Window Controls -->
           <div class="flex items-center gap-1.5">
-            <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
-            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
-            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-[#7a3518] border border-[#f07f3c]/30"></span>
+            <span class="w-3 h-3 rounded-full bg-[#f07f3c]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#ffd2a8]"></span>
           </div>
-          <span class="text-xs font-mono text-amber-200/60 border-l border-[#3b1b10] pl-3" id="workbenchUrlBar">
+          <span class="text-xs font-mono text-amber-200/70 border-l border-amber-900/40 pl-3" id="workbenchUrlBar">
             playground://otabek-portfolio/ecommerce-profitability
           </span>
         </div>
 
         <!-- Project Playground Switcher (2 Projects) -->
-        <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Project Playground Tabs">
-          <button type="button" data-switch-tab="ecommerce" class="playground-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-2 bg-orange-500/20 text-orange-300 border border-orange-500/50 cursor-pointer">
+        <div class="flex flex-wrap items-center gap-2.5" role="tablist" aria-label="Project Playground Tabs">
+          <button type="button" data-switch-tab="ecommerce" class="playground-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold transition flex items-center gap-2 bg-gradient-to-r from-[#ea580c] to-[#f07f3c] text-white shadow-md shadow-orange-500/20 cursor-pointer">
             <span>📊</span>
             <span>1. E-Commerce Profitability</span>
           </button>
-          <button type="button" data-switch-tab="ev" class="playground-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-2 bg-[#21140e] text-amber-200/60 border border-[#3b1b10] hover:text-white hover:border-[#7a3518] cursor-pointer">
+          <button type="button" data-switch-tab="ev" class="playground-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-medium transition flex items-center gap-2 bg-[#21140e] text-amber-200/70 border border-amber-900/40 hover:text-white hover:border-[#f07f3c]/50 cursor-pointer">
             <span>⚡</span>
             <span>2. U.S. EV Market Share</span>
           </button>
@@ -285,58 +597,81 @@
       <!-- =================================================================== -->
       <!-- PLAYGROUND 1: E-COMMERCE PROFITABILITY ANALYSIS                     -->
       <!-- =================================================================== -->
-      <div id="panel-ecommerce" class="p-5 sm:p-7 space-y-6">
+      <div id="panel-ecommerce" class="p-5 sm:p-8 space-y-6">
         <!-- Header & Live Status -->
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-[#3b1b10]">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-amber-900/30">
           <div>
-            <div class="flex items-center gap-2.5">
+            <div class="flex flex-wrap items-center gap-2.5">
               <span class="text-xl">📊</span>
-              <h3 class="text-xl font-bold text-white">E-Commerce Profitability &amp; Margin Leakage Playground</h3>
-              <span class="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-orange-500/10 text-orange-400 border border-orange-500/25">
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-white">E-Commerce Profitability &amp; Margin Leakage Playground</h3>
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-[#f07f3c]/15 text-[#ffd2a8] border border-[#f07f3c]/35">
                 PostgreSQL v16 · 2,140 Orders Audited
               </span>
             </div>
-            <p class="text-xs sm:text-sm text-amber-200/70 mt-1">
-              Interactive unit economics simulator &amp; SQL query runner auditing shipping margin leakage (<span class="text-rose-400 font-mono">13.4%</span> Express/Free-threshold vs <span class="text-emerald-400 font-mono">31.2%</span> Standard) and multi-channel ROAS.
+            <p class="text-xs sm:text-sm text-amber-200/75 mt-1.5 leading-relaxed">
+              Interactive unit economics simulator &amp; SQL query runner auditing shipping margin leakage (<span class="text-[#f07f3c] font-mono font-semibold">13.4%</span> Express/Free-threshold vs <span class="text-[#ffd2a8] font-mono font-semibold">31.2%</span> Standard) and multi-channel ROAS.
             </p>
           </div>
-          <div class="flex flex-wrap items-center gap-2">
-            <button type="button" id="btnResetEcom" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-[#21140e] hover:bg-[#2c1810] text-amber-200 border border-[#3b1b10] transition cursor-pointer">
-              Reset Audit Parameters
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button type="button" id="btnExportEcomCsv" class="px-3.5 py-2 rounded-xl text-xs font-mono bg-[#21140e] hover:bg-[#27170f] text-[#ffd2a8] border border-amber-900/40 hover:border-[#f07f3c]/40 transition cursor-pointer">
+              ⬇ Export CSV
             </button>
-            <button type="button" data-code-project="ecommerce" class="btn-view-code px-3 py-1.5 rounded-lg text-xs font-mono bg-orange-500/10 hover:bg-orange-500/20 text-orange-300 border border-orange-500/30 transition cursor-pointer">
-              View SQL &amp; Python Pipeline
+            <button type="button" id="btnResetEcom" class="px-3.5 py-2 rounded-xl text-xs font-mono bg-[#21140e] hover:bg-[#27170f] text-amber-200/80 border border-amber-900/40 transition cursor-pointer">
+              ↺ Reset Audit
+            </button>
+            <button type="button" data-code-project="ecommerce" class="btn-view-code px-3.5 py-2 rounded-xl text-xs font-mono bg-[#f07f3c]/15 hover:bg-[#f07f3c]/25 text-[#ffd2a8] border border-[#f07f3c]/35 transition cursor-pointer">
+              &lt;/&gt; SQL &amp; Python Pipeline
             </button>
           </div>
         </div>
 
-        <!-- KPI Summary Row -->
+        <!-- KPI Summary Row (Pure Quyosh Shafaqi Palette) -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
-            <div class="text-xs font-mono text-amber-200/60">AUDITED ORDERS (POSTGRESQL)</div>
-            <div class="text-2xl font-bold text-white mt-1 font-mono" id="ecomKpiOrders">2,140</div>
-            <div class="text-xs text-emerald-400 mt-1 flex items-center gap-1">
-              <span>100% Order-level Reconciliation</span>
+          <div class="interactive-card rounded-2xl p-4 sm:p-5">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-amber-200/60">AUDITED ORDERS (POSTGRESQL)</div>
+            <div class="font-display text-2xl sm:text-3xl font-bold text-white mt-1.5" id="ecomKpiOrders">2,140</div>
+            <div class="text-xs text-[#ffd2a8] mt-1 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#f07f3c]"></span>
+              <span>100% Order Reconciliation</span>
             </div>
           </div>
-          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
-            <div class="text-xs font-mono text-amber-200/60">STANDARD vs LEAKED MARGIN</div>
-            <div class="text-2xl font-bold text-white mt-1 font-mono">
-              <span class="text-emerald-400" id="ecomKpiStdMargin">31.2%</span>
-              <span class="text-amber-200/40 text-base mx-1">vs</span>
-              <span class="text-rose-400" id="ecomKpiLeakMargin">13.4%</span>
+          <div class="interactive-card rounded-2xl p-4 sm:p-5">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-amber-200/60">STANDARD vs LEAKED MARGIN</div>
+            <div class="font-display text-2xl sm:text-3xl font-bold text-white mt-1.5">
+              <span class="text-[#ffd2a8]" id="ecomKpiStdMargin">31.2%</span>
+              <span class="text-amber-200/40 text-sm mx-1">vs</span>
+              <span class="text-[#f07f3c]" id="ecomKpiLeakMargin">13.4%</span>
             </div>
-            <div class="text-xs text-rose-400 mt-1" id="ecomKpiLeakDelta">-17.8% shipping subsidy leakage</div>
+            <div class="text-xs text-[#f07f3c] mt-1" id="ecomKpiLeakDelta">-17.8% shipping subsidy gap</div>
           </div>
-          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
-            <div class="text-xs font-mono text-amber-200/60">BLENDED MULTI-CHANNEL ROAS</div>
-            <div class="text-2xl font-bold text-orange-400 mt-1 font-mono" id="ecomKpiRoas">3.42x</div>
-            <div class="text-xs text-amber-200/60 mt-1" id="ecomKpiAdSpend">$84,500 spend → $289,190 rev</div>
+          <div class="interactive-card rounded-2xl p-4 sm:p-5">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-amber-200/60">BLENDED MULTI-CHANNEL ROAS</div>
+            <div class="font-display text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#f07f3c] via-[#ffd2a8] to-[#f07f3c] bg-clip-text text-transparent mt-1.5" id="ecomKpiRoas">3.42x</div>
+            <div class="text-xs text-amber-200/70 mt-1" id="ecomKpiAdSpend">$84,500 spend → $289,190 rev</div>
           </div>
-          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
-            <div class="text-xs font-mono text-amber-200/60">RECOVERABLE PROFIT POTENTIAL</div>
-            <div class="text-2xl font-bold text-emerald-400 mt-1 font-mono" id="ecomKpiRecoverable">+$42,860</div>
-            <div class="text-xs text-amber-200/50 mt-1" id="ecomKpiSimulatedNote">Adjust sliders below to simulate</div>
+          <div class="interactive-card rounded-2xl p-4 sm:p-5">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-amber-200/60">RECOVERABLE PROFIT POTENTIAL</div>
+            <div class="font-display text-2xl sm:text-3xl font-bold text-[#ffd2a8] mt-1.5" id="ecomKpiRecoverable">+$42,860</div>
+            <div class="text-xs text-amber-200/60 mt-1" id="ecomKpiSimulatedNote">Use presets or sliders below</div>
+          </div>
+        </div>
+
+        <!-- Quick What-If Scenario Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-[#21140e]/70 border border-amber-900/40">
+          <span class="text-xs font-mono text-amber-200/80 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#f07f3c]"></span>
+            <span>Quick Strategy Scenarios:</span>
+          </span>
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" data-ecom-scenario="baseline" class="ecom-scenario-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-[#f07f3c]/20 text-[#ffd2a8] border border-[#f07f3c]/40 cursor-pointer">
+              1. Baseline ($50 Threshold)
+            </button>
+            <button type="button" data-ecom-scenario="optimal" class="ecom-scenario-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-[#150d09] text-amber-200/70 border border-amber-900/40 hover:border-[#f07f3c]/40 cursor-pointer">
+              2. Optimal ($75 + 12% 3PL Rate)
+            </button>
+            <button type="button" data-ecom-scenario="aggressive" class="ecom-scenario-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-[#150d09] text-amber-200/70 border border-amber-900/40 hover:border-[#f07f3c]/40 cursor-pointer">
+              3. Max Margin Recovery ($95 + 20% 3PL + 80% ROAS)
+            </button>
           </div>
         </div>
 
@@ -345,15 +680,15 @@
           <!-- Left 5 Cols: Interactive SQL Runner & What-If Simulator -->
           <div class="lg:col-span-5 space-y-5">
             <!-- Interactive SQL Preset Selector -->
-            <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4 space-y-3">
+            <div class="bg-[#21140e]/70 border border-amber-900/40 rounded-2xl p-5 space-y-3.5">
               <div class="flex items-center justify-between">
-                <label for="ecomSqlPreset" class="text-xs font-mono uppercase tracking-wider text-orange-400 font-semibold">
+                <label for="ecomSqlPreset" class="text-xs font-mono uppercase tracking-wider text-[#f07f3c] font-semibold">
                   PostgreSQL Interactive Query Runner
                 </label>
-                <span class="text-[11px] font-mono text-amber-200/50" id="ecomQueryTiming">12.4 ms · 4 rows</span>
+                <span class="text-[11px] font-mono text-[#ffd2a8]/70" id="ecomQueryTiming">12.4 ms · 4 rows</span>
               </div>
 
-              <select id="ecomSqlPreset" class="w-full bg-[#150d09] border border-[#3b1b10] rounded-lg px-3 py-2 text-xs font-mono text-amber-100 focus:outline-none focus:border-orange-500">
+              <select id="ecomSqlPreset" class="w-full bg-[#150d09] border border-amber-900/50 rounded-xl px-3.5 py-2.5 text-xs font-mono text-amber-100 focus:outline-none focus:border-[#f07f3c] transition-colors">
                 <option value="shipping_leakage">1. Shipping Margin Leakage Audit (13% vs 31%)</option>
                 <option value="channel_roas">2. Multi-Channel Marketing ROAS &amp; Net Profit</option>
                 <option value="category_unit_econ">3. Category Unit Economics &amp; Return Drag</option>
@@ -361,43 +696,46 @@
               </select>
 
               <div class="relative">
-                <textarea id="ecomSqlEditor" rows="6" spellcheck="false" class="w-full bg-[#120a07] border border-[#3b1b10] rounded-lg p-3 text-xs font-mono text-orange-200 focus:outline-none focus:border-orange-500 leading-relaxed custom-scrollbar"></textarea>
+                <textarea id="ecomSqlEditor" rows="6" spellcheck="false" class="w-full bg-[#120a07] border border-amber-900/50 rounded-xl p-3.5 text-xs font-mono text-[#ffd2a8] focus:outline-none focus:border-[#f07f3c] leading-relaxed"></textarea>
+                <button type="button" id="btnCopySqlInline" class="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-md text-[10px] font-mono bg-[#21140e]/90 hover:bg-[#3b1b10] text-amber-200 border border-amber-900/40 cursor-pointer">
+                  Copy SQL
+                </button>
               </div>
 
-              <div class="flex items-center justify-between gap-2">
+              <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
                 <div class="flex items-center gap-2">
                   <label for="ecomCategoryFilter" class="text-xs text-amber-200/70">Category:</label>
-                  <select id="ecomCategoryFilter" class="bg-[#150d09] border border-[#3b1b10] rounded-lg px-2.5 py-1.5 text-xs text-amber-100">
-                    <option value="all">All Categories (2,140 orders)</option>
-                    <option value="electronics">Electronics (640 orders)</option>
-                    <option value="home">Home &amp; Goods (580 orders)</option>
-                    <option value="apparel">Apparel &amp; Gear (520 orders)</option>
-                    <option value="beauty">Beauty &amp; Wellness (400 orders)</option>
+                  <select id="ecomCategoryFilter" class="bg-[#150d09] border border-amber-900/50 rounded-xl px-3 py-1.5 text-xs text-amber-100 focus:outline-none focus:border-[#f07f3c]">
+                    <option value="all">All Categories (2,140)</option>
+                    <option value="electronics">Electronics (640)</option>
+                    <option value="home">Home &amp; Goods (580)</option>
+                    <option value="apparel">Apparel &amp; Gear (520)</option>
+                    <option value="beauty">Beauty &amp; Wellness (400)</option>
                   </select>
                 </div>
-                <button type="button" id="btnRunEcomSql" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-gradient-to-r from-orange-500 to-amber-500 hover:opacity-95 text-white transition flex items-center gap-1.5 cursor-pointer shadow-md shadow-orange-500/20">
-                  <span>▶ Run SQL</span>
+                <button type="button" id="btnRunEcomSql" class="btn-cta-glow px-4 py-2 rounded-xl text-xs font-mono font-semibold bg-gradient-to-r from-[#ea580c] to-[#f07f3c] text-white transition flex items-center gap-1.5 cursor-pointer shadow-md shadow-orange-500/20">
+                  <span>▶ Run Query</span>
                 </button>
               </div>
             </div>
 
             <!-- What-If Policy Simulator -->
-            <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4 space-y-4">
+            <div class="bg-[#21140e]/70 border border-amber-900/40 rounded-2xl p-5 space-y-4">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-mono uppercase tracking-wider text-orange-400 font-semibold">
+                <span class="text-xs font-mono uppercase tracking-wider text-[#f07f3c] font-semibold">
                   Margin Recovery What-If Simulator
                 </span>
-                <span class="text-xs font-mono text-amber-200/50">Live Sensitivity</span>
+                <span class="text-xs font-mono text-[#ffd2a8]/60">Live Sensitivity</span>
               </div>
 
               <!-- Slider 1: Free Shipping Threshold -->
               <div>
-                <div class="flex justify-between text-xs mb-1">
-                  <label for="sliderFreeShip" class="text-amber-200/80">Free Shipping Threshold ($)</label>
-                  <span class="font-mono text-orange-400 font-semibold" id="valFreeShip">$50 (Current)</span>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <label for="sliderFreeShip" class="text-amber-100/90">Free Shipping Threshold ($)</label>
+                  <span class="font-mono text-[#ffd2a8] font-semibold" id="valFreeShip">$50 (Current)</span>
                 </div>
-                <input id="sliderFreeShip" type="range" min="50" max="110" step="5" value="50" class="w-full accent-orange-500" />
-                <div class="flex justify-between text-[10px] font-mono text-amber-200/40">
+                <input id="sliderFreeShip" type="range" min="50" max="110" step="5" value="50" class="w-full" />
+                <div class="flex justify-between text-[10px] font-mono text-amber-200/50 mt-1">
                   <span>$50 (High Leakage)</span>
                   <span>$75 (Optimal)</span>
                   <span>$110 (Strict)</span>
@@ -406,12 +744,12 @@
 
               <!-- Slider 2: Carrier Rate Renegotiation -->
               <div>
-                <div class="flex justify-between text-xs mb-1">
-                  <label for="sliderCarrierDisc" class="text-amber-200/80">Zone 4–8 Carrier Rate Reduction (%)</label>
-                  <span class="font-mono text-orange-400 font-semibold" id="valCarrierDisc">0%</span>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <label for="sliderCarrierDisc" class="text-amber-100/90">Zone 4–8 Carrier Rate Reduction (%)</label>
+                  <span class="font-mono text-[#ffd2a8] font-semibold" id="valCarrierDisc">0%</span>
                 </div>
-                <input id="sliderCarrierDisc" type="range" min="0" max="25" step="1" value="0" class="w-full accent-orange-500" />
-                <div class="flex justify-between text-[10px] font-mono text-amber-200/40">
+                <input id="sliderCarrierDisc" type="range" min="0" max="25" step="1" value="0" class="w-full" />
+                <div class="flex justify-between text-[10px] font-mono text-amber-200/50 mt-1">
                   <span>0% Baseline</span>
                   <span>12% 3PL Contract</span>
                   <span>25% Regional Hub</span>
@@ -420,11 +758,11 @@
 
               <!-- Slider 3: Minimum ROAS Reallocation -->
               <div>
-                <div class="flex justify-between text-xs mb-1">
-                  <label for="sliderRoasCut" class="text-amber-200/80">Reallocate Sub-2.0x ROAS Ad Spend (%)</label>
-                  <span class="font-mono text-orange-400 font-semibold" id="valRoasCut">0%</span>
+                <div class="flex justify-between text-xs mb-1.5">
+                  <label for="sliderRoasCut" class="text-amber-100/90">Reallocate Sub-2.0x ROAS Ad Spend (%)</label>
+                  <span class="font-mono text-[#ffd2a8] font-semibold" id="valRoasCut">0%</span>
                 </div>
-                <input id="sliderRoasCut" type="range" min="0" max="100" step="10" value="0" class="w-full accent-orange-500" />
+                <input id="sliderRoasCut" type="range" min="0" max="100" step="10" value="0" class="w-full" />
               </div>
             </div>
           </div>
@@ -433,17 +771,23 @@
           <div class="lg:col-span-7 space-y-5">
             <!-- Charts Row -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4">
-                <div class="text-xs font-mono text-amber-200 mb-2 font-semibold">
-                  NET MARGIN % BY SHIPPING TIER (13% vs 31%)
+              <div class="bg-[#21140e]/70 border border-amber-900/40 rounded-2xl p-4 sm:p-5">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-mono text-[#ffd2a8] font-semibold">
+                    NET MARGIN % BY SHIPPING TIER
+                  </span>
+                  <span class="text-[10px] font-mono text-amber-200/60">13.4% vs 31.2%</span>
                 </div>
                 <div class="relative h-60">
                   <canvas id="chartEcomMargin"></canvas>
                 </div>
               </div>
-              <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4">
-                <div class="text-xs font-mono text-amber-200 mb-2 font-semibold">
-                  MULTI-CHANNEL MARKETING ROAS &amp; NET MARGIN
+              <div class="bg-[#21140e]/70 border border-amber-900/40 rounded-2xl p-4 sm:p-5">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-mono text-[#ffd2a8] font-semibold">
+                    MULTI-CHANNEL MARKETING ROAS
+                  </span>
+                  <span class="text-[10px] font-mono text-amber-200/60">Target &ge; 2.5x</span>
                 </div>
                 <div class="relative h-60">
                   <canvas id="chartEcomRoas"></canvas>
@@ -452,19 +796,19 @@
             </div>
 
             <!-- Live SQL Result Set Table -->
-            <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl overflow-hidden">
-              <div class="px-4 py-2.5 border-b border-[#3b1b10] bg-[#150d09] flex items-center justify-between">
-                <span class="text-xs font-mono text-amber-200 font-semibold" id="ecomTableTitle">
+            <div class="bg-[#21140e]/70 border border-amber-900/40 rounded-2xl overflow-hidden">
+              <div class="px-5 py-3 border-b border-amber-900/40 bg-[#150d09] flex items-center justify-between">
+                <span class="text-xs font-mono text-[#ffd2a8] font-semibold" id="ecomTableTitle">
                   POSTGRESQL RESULT SET — shipping_margin_audit
                 </span>
-                <span class="text-[11px] font-mono text-orange-400" id="ecomTableBadge">
+                <span class="text-[11px] font-mono text-[#f07f3c]" id="ecomTableBadge">
                   ✓ Verified on 2,140 Orders
                 </span>
               </div>
-              <div class="overflow-x-auto custom-scrollbar">
+              <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs font-mono text-amber-100">
-                  <thead id="ecomTableHead" class="bg-[#180e0a] text-amber-200/60 border-b border-[#3b1b10]"></thead>
-                  <tbody id="ecomTableBody" class="divide-y divide-[#3b1b10]"></tbody>
+                  <thead id="ecomTableHead" class="bg-[#180e0a] text-amber-200/70 border-b border-amber-900/40"></thead>
+                  <tbody id="ecomTableBody" class="divide-y divide-amber-900/30"></tbody>
                 </table>
               </div>
             </div>
@@ -475,52 +819,55 @@
       <!-- =================================================================== -->
       <!-- PLAYGROUND 2: U.S. ELECTRIC VEHICLE MARKET SHARE ANALYSIS           -->
       <!-- =================================================================== -->
-      <div id="panel-ev" class="p-5 sm:p-7 space-y-6 hidden">
+      <div id="panel-ev" class="p-5 sm:p-8 space-y-6 hidden">
         <!-- Header -->
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-[#3b1b10]">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-amber-900/30">
           <div>
-            <div class="flex items-center gap-2.5">
+            <div class="flex flex-wrap items-center gap-2.5">
               <span class="text-xl">⚡</span>
-              <h3 class="text-xl font-bold text-white">U.S. Electric Vehicle Market Share &amp; Charger Infrastructure</h3>
-              <span class="px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-orange-500/10 text-orange-400 border border-orange-500/25">
+              <h3 class="font-display text-xl sm:text-2xl font-bold text-white">U.S. Electric Vehicle Market Share &amp; Charger Infrastructure</h3>
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-[#f07f3c]/15 text-[#ffd2a8] border border-[#f07f3c]/35">
                 51 Jurisdictions · 287.4M Registrations
               </span>
             </div>
-            <p class="text-xs sm:text-sm text-amber-200/70 mt-1">
-              Cross-sectional dataset examining EV vs alternative fuel market share, public charger deficit ratios (<span class="text-orange-400 font-mono">26.3 EVs/port</span> national avg vs <span class="text-emerald-400 font-mono">18.4</span> DC benchmark), and regional electrification priorities.
+            <p class="text-xs sm:text-sm text-amber-200/75 mt-1.5 leading-relaxed">
+              Cross-sectional dataset examining EV vs alternative fuel market share, public charger deficit ratios (<span class="text-[#f07f3c] font-mono font-semibold">26.3 EVs/port</span> national avg vs <span class="text-[#ffd2a8] font-mono font-semibold">18.4</span> DC benchmark), and regional electrification priorities.
             </p>
           </div>
-          <div class="flex flex-wrap items-center gap-2">
-            <button type="button" id="btnResetEv" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-[#21140e] hover:bg-[#2c1810] text-amber-200 border border-[#3b1b10] transition cursor-pointer">
-              Reset EV Filters
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button type="button" id="btnExportEvCsv" class="px-3.5 py-2 rounded-xl text-xs font-mono bg-[#21140e] hover:bg-[#27170f] text-[#ffd2a8] border border-amber-900/40 hover:border-[#f07f3c]/40 transition cursor-pointer">
+              ⬇ Export CSV
             </button>
-            <button type="button" data-code-project="ev" class="btn-view-code px-3 py-1.5 rounded-lg text-xs font-mono bg-orange-500/10 hover:bg-orange-500/20 text-orange-300 border border-orange-500/30 transition cursor-pointer">
-              View Tableau &amp; SQL Code
+            <button type="button" id="btnResetEv" class="px-3.5 py-2 rounded-xl text-xs font-mono bg-[#21140e] hover:bg-[#27170f] text-amber-200/80 border border-amber-900/40 transition cursor-pointer">
+              ↺ Reset EV Filters
+            </button>
+            <button type="button" data-code-project="ev" class="btn-view-code px-3.5 py-2 rounded-xl text-xs font-mono bg-[#f07f3c]/15 hover:bg-[#f07f3c]/25 text-[#ffd2a8] border border-[#f07f3c]/35 transition cursor-pointer">
+              &lt;/&gt; Tableau &amp; SQL Code
             </button>
           </div>
         </div>
 
-        <!-- KPI Strip -->
+        <!-- KPI Strip (Pure Quyosh Shafaqi Palette) -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
-            <div class="text-xs font-mono text-amber-200/60">AUDITED U.S. FLEET</div>
-            <div class="text-2xl font-bold text-white mt-1 font-mono">287.4M</div>
-            <div class="text-xs text-amber-200/60 mt-1">50 States + District of Columbia</div>
+          <div class="interactive-card rounded-2xl p-4 sm:p-5">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-amber-200/60">AUDITED U.S. FLEET</div>
+            <div class="font-display text-2xl sm:text-3xl font-bold text-white mt-1.5">287.4M</div>
+            <div class="text-xs text-amber-200/70 mt-1">50 States + District of Columbia</div>
           </div>
-          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
-            <div class="text-xs font-mono text-amber-200/60">NATIONAL EV FLEET (BEV+PHEV)</div>
-            <div class="text-2xl font-bold text-orange-400 mt-1 font-mono">4.84M</div>
-            <div class="text-xs text-orange-300 mt-1">1.68% Total Registered Fleet</div>
+          <div class="interactive-card rounded-2xl p-4 sm:p-5">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-amber-200/60">NATIONAL EV FLEET (BEV+PHEV)</div>
+            <div class="font-display text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#f07f3c] via-[#ffd2a8] to-[#f07f3c] bg-clip-text text-transparent mt-1.5">4.84M</div>
+            <div class="text-xs text-[#ffd2a8] mt-1">1.68% Total Registered Fleet</div>
           </div>
-          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
-            <div class="text-xs font-mono text-amber-200/60">AVG CHARGER RATIO</div>
-            <div class="text-2xl font-bold text-amber-400 mt-1 font-mono" id="evKpiRatio">26.3 EVs / Port</div>
-            <div class="text-xs text-amber-200/60 mt-1" id="evKpiPriorityStates">7 Tier-1 Priority States</div>
+          <div class="interactive-card rounded-2xl p-4 sm:p-5">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-amber-200/60">AVG CHARGER RATIO</div>
+            <div class="font-display text-2xl sm:text-3xl font-bold text-[#f07f3c] mt-1.5" id="evKpiRatio">26.3 EVs / Port</div>
+            <div class="text-xs text-amber-200/70 mt-1" id="evKpiPriorityStates">7 Tier-1 Priority States</div>
           </div>
-          <div class="bg-[#150d09] border border-[#3b1b10] rounded-xl p-4">
-            <div class="text-xs font-mono text-amber-200/60">HYBRID &amp; ALT-FUEL FLEET</div>
-            <div class="text-2xl font-bold text-orange-300 mt-1 font-mono">19.6M</div>
-            <div class="text-xs text-orange-400 mt-1">6.82% Penetration nationwide</div>
+          <div class="interactive-card rounded-2xl p-4 sm:p-5">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-amber-200/60">HYBRID &amp; ALT-FUEL FLEET</div>
+            <div class="font-display text-2xl sm:text-3xl font-bold text-[#ffd2a8] mt-1.5">19.6M</div>
+            <div class="text-xs text-[#f07f3c] mt-1">6.82% Penetration nationwide</div>
           </div>
         </div>
 
@@ -528,15 +875,15 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <!-- Left 4 Cols: Interactive Filters & State Spotlight -->
           <div class="lg:col-span-4 space-y-5">
-            <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4 space-y-4">
-              <span class="text-xs font-mono uppercase tracking-wider text-orange-400 font-semibold block border-b border-[#3b1b10] pb-2">
+            <div class="bg-[#21140e]/70 border border-amber-900/40 rounded-2xl p-5 space-y-4">
+              <span class="text-xs font-mono uppercase tracking-wider text-[#f07f3c] font-semibold block border-b border-amber-900/30 pb-2.5">
                 Multi-Variable Filters
               </span>
 
               <!-- Region Filter -->
               <div>
-                <label for="evRegionFilter" class="block text-xs text-amber-200/80 mb-1">Geographic Census Region</label>
-                <select id="evRegionFilter" class="w-full bg-[#150d09] border border-[#3b1b10] rounded-lg px-3 py-2 text-xs font-mono text-amber-100">
+                <label for="evRegionFilter" class="block text-xs text-amber-100/90 mb-1.5">Geographic Census Region</label>
+                <select id="evRegionFilter" class="w-full bg-[#150d09] border border-amber-900/50 rounded-xl px-3.5 py-2.5 text-xs font-mono text-amber-100 focus:outline-none focus:border-[#f07f3c]">
                   <option value="ALL">All U.S. Regions (51 Jurisdictions)</option>
                   <option value="West">West Coast &amp; Mountain (Leading Adoption)</option>
                   <option value="Northeast">Northeast Corridor (High Density)</option>
@@ -547,8 +894,8 @@
 
               <!-- Metric Filter -->
               <div>
-                <label for="evPowertrainFilter" class="block text-xs text-amber-200/80 mb-1">Primary Ranking Metric</label>
-                <select id="evPowertrainFilter" class="w-full bg-[#150d09] border border-[#3b1b10] rounded-lg px-3 py-2 text-xs font-mono text-amber-100">
+                <label for="evPowertrainFilter" class="block text-xs text-amber-100/90 mb-1.5">Primary Ranking Metric</label>
+                <select id="evPowertrainFilter" class="w-full bg-[#150d09] border border-amber-900/50 rounded-xl px-3.5 py-2.5 text-xs font-mono text-amber-100 focus:outline-none focus:border-[#f07f3c]">
                   <option value="ev_share">BEV + PHEV Share % (Fleet %)</option>
                   <option value="alt_share">Total Alt-Fuel + Hybrid Share %</option>
                   <option value="ev_per_charger">EVs Per Public Charger Port (Deficit)</option>
@@ -557,18 +904,18 @@
 
               <!-- Search -->
               <div>
-                <label for="evSearchInput" class="block text-xs text-amber-200/80 mb-1">State Search / Lookup</label>
-                <input id="evSearchInput" type="text" placeholder="e.g. California, WA, Texas..." class="w-full bg-[#150d09] border border-[#3b1b10] rounded-lg px-3 py-2 text-xs font-mono text-amber-100 placeholder-amber-200/30" />
+                <label for="evSearchInput" class="block text-xs text-amber-100/90 mb-1.5">State Search / Lookup</label>
+                <input id="evSearchInput" type="text" placeholder="e.g. California, WA, Texas..." class="w-full bg-[#150d09] border border-amber-900/50 rounded-xl px-3.5 py-2.5 text-xs font-mono text-amber-100 placeholder-amber-200/30 focus:outline-none focus:border-[#f07f3c]" />
               </div>
 
               <!-- Charger Expansion Simulator Slider -->
-              <div class="pt-2 border-t border-[#3b1b10]">
-                <div class="flex justify-between text-xs mb-1">
-                  <span class="text-amber-200/80">Simulate NEVI Charger Deployment</span>
-                  <span class="font-mono text-orange-400 font-semibold" id="valEvChargers">+0% Ports</span>
+              <div class="pt-3 border-t border-amber-900/30">
+                <div class="flex justify-between text-xs mb-1.5">
+                  <span class="text-amber-100/90">Simulate NEVI Charger Deployment</span>
+                  <span class="font-mono text-[#ffd2a8] font-semibold" id="valEvChargers">+0% Ports</span>
                 </div>
-                <input id="sliderEvChargers" type="range" min="0" max="100" step="10" value="0" class="w-full accent-orange-500" />
-                <div class="flex justify-between text-[10px] font-mono text-amber-200/40">
+                <input id="sliderEvChargers" type="range" min="0" max="100" step="10" value="0" class="w-full" />
+                <div class="flex justify-between text-[10px] font-mono text-amber-200/50 mt-1">
                   <span>Current Status</span>
                   <span>+50% Grant Funding</span>
                   <span>+100% Target</span>
@@ -577,26 +924,26 @@
             </div>
 
             <!-- State Spotlight Card -->
-            <div id="evSpotlightCard" class="bg-[#21140e] border border-orange-500/40 rounded-xl p-4 space-y-3">
-              <div class="flex items-center justify-between border-b border-[#3b1b10] pb-2">
-                <span class="text-xs font-mono text-orange-300 font-bold" id="spotStateName">California (West) — Spotlight</span>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-orange-500/10 text-orange-400 border border-orange-500/30" id="spotPriorityBadge">Tier-1 Critical</span>
+            <div id="evSpotlightCard" class="interactive-card rounded-2xl p-5 space-y-3 border border-[#f07f3c]/40">
+              <div class="flex items-center justify-between border-b border-amber-900/30 pb-2.5">
+                <span class="text-xs font-mono text-[#ffd2a8] font-bold" id="spotStateName">California (West) — Spotlight</span>
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#f07f3c]/15 text-[#ffd2a8] border border-[#f07f3c]/35" id="spotPriorityBadge">Tier-1 Critical</span>
               </div>
-              <div class="grid grid-cols-3 gap-2 text-center pt-1">
-                <div class="bg-[#150d09] p-2 rounded-lg border border-[#3b1b10]">
+              <div class="grid grid-cols-3 gap-2.5 text-center pt-1">
+                <div class="bg-[#150d09] p-2.5 rounded-xl border border-amber-900/40">
                   <div class="text-[10px] font-mono text-amber-200/50">FLEET</div>
-                  <div class="text-sm font-bold text-white font-mono" id="spotTotalFleet">31.25M</div>
+                  <div class="font-display text-base font-bold text-white" id="spotTotalFleet">31.25M</div>
                 </div>
-                <div class="bg-[#150d09] p-2 rounded-lg border border-[#3b1b10]">
+                <div class="bg-[#150d09] p-2.5 rounded-xl border border-amber-900/40">
                   <div class="text-[10px] font-mono text-amber-200/50">EV SHARE</div>
-                  <div class="text-sm font-bold text-orange-400 font-mono" id="spotEvShare">4.42%</div>
+                  <div class="font-display text-base font-bold text-[#f07f3c]" id="spotEvShare">4.42%</div>
                 </div>
-                <div class="bg-[#150d09] p-2 rounded-lg border border-[#3b1b10]">
+                <div class="bg-[#150d09] p-2.5 rounded-xl border border-amber-900/40">
                   <div class="text-[10px] font-mono text-amber-200/50">EVs/PORT</div>
-                  <div class="text-sm font-bold text-amber-400 font-mono" id="spotEvCharger">29.8</div>
+                  <div class="font-display text-base font-bold text-[#ffd2a8]" id="spotEvCharger">29.8</div>
                 </div>
               </div>
-              <p class="text-[11px] text-amber-200/60 leading-relaxed pt-1" id="spotNote">
+              <p class="text-[11px] text-amber-200/65 leading-relaxed pt-1" id="spotNote">
                 Click any row in the table to inspect state-level unit metrics, electrification rate, and charger gap analysis.
               </p>
             </div>
@@ -606,16 +953,16 @@
           <div class="lg:col-span-8 space-y-5">
             <!-- Charts Row -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4">
-                <div class="text-xs font-mono text-amber-200 mb-2 font-semibold" id="evChart1Title">
+              <div class="bg-[#21140e]/70 border border-amber-900/40 rounded-2xl p-4 sm:p-5">
+                <div class="text-xs font-mono text-[#ffd2a8] mb-3 font-semibold" id="evChart1Title">
                   TOP 10 STATES BY MARKET SHARE
                 </div>
                 <div class="relative h-56">
                   <canvas id="chartEvStates"></canvas>
                 </div>
               </div>
-              <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl p-4">
-                <div class="text-xs font-mono text-amber-200 mb-2 font-semibold">
+              <div class="bg-[#21140e]/70 border border-amber-900/40 rounded-2xl p-4 sm:p-5">
+                <div class="text-xs font-mono text-[#ffd2a8] mb-3 font-semibold">
                   U.S. HYBRID VS BEV ADOPTION TRAJECTORY
                 </div>
                 <div class="relative h-56">
@@ -625,27 +972,27 @@
             </div>
 
             <!-- State Breakdown Table -->
-            <div class="bg-[#21140e] border border-[#3b1b10] rounded-xl overflow-hidden">
-              <div class="px-4 py-2.5 border-b border-[#3b1b10] bg-[#150d09] flex items-center justify-between">
-                <span class="text-xs font-mono text-amber-200 font-semibold">
+            <div class="bg-[#21140e]/70 border border-amber-900/40 rounded-2xl overflow-hidden">
+              <div class="px-5 py-3 border-b border-amber-900/40 bg-[#150d09] flex items-center justify-between">
+                <span class="text-xs font-mono text-[#ffd2a8] font-semibold">
                   JURISDICTIONAL AUDIT TABLE (POSTGRESQL + TABLEAU EXTRACT)
                 </span>
-                <span class="text-[11px] font-mono text-orange-400" id="evTableCount">
+                <span class="text-[11px] font-mono text-[#f07f3c]" id="evTableCount">
                   Showing 16 Key Jurisdictions
                 </span>
               </div>
-              <div class="overflow-x-auto max-h-64 custom-scrollbar">
+              <div class="overflow-x-auto max-h-64">
                 <table class="w-full text-left text-xs font-mono text-amber-100">
-                  <thead class="bg-[#180e0a] text-amber-200/60 sticky top-0 border-b border-[#3b1b10]">
+                  <thead class="bg-[#180e0a] text-amber-200/70 sticky top-0 border-b border-amber-900/40">
                     <tr>
-                      <th class="py-2.5 px-3">State / Jurisdiction</th>
+                      <th class="py-2.5 px-4">State / Jurisdiction</th>
                       <th class="py-2.5 px-2 text-right">Total Fleet</th>
                       <th class="py-2.5 px-2 text-right">EV Share</th>
                       <th class="py-2.5 px-2 text-right">EVs / Charger</th>
-                      <th class="py-2.5 px-3 text-right">Status</th>
+                      <th class="py-2.5 px-4 text-right">Priority Tier</th>
                     </tr>
                   </thead>
-                  <tbody id="evTableBody" class="divide-y divide-[#3b1b10]"></tbody>
+                  <tbody id="evTableBody" class="divide-y divide-amber-900/30"></tbody>
                 </table>
               </div>
             </div>
@@ -657,19 +1004,47 @@
 
   </main>
 
+  <!-- Footer (Exact match with Footer.tsx) -->
+  <footer class="relative z-10 border-t border-amber-900/30 py-8 px-6 bg-[#150d09] mt-12">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <a href="/" class="flex items-center gap-2 font-display font-bold text-amber-50 hover:text-[#f07f3c] transition-colors">
+        <svg class="w-5 h-5 text-[#f07f3c]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m18 16 4-4-4-4M6 8l-4 4 4 4m8.5-12-5 16"/>
+        </svg>
+        <span>OH<span class="text-[#f07f3c]">.</span></span>
+      </a>
+
+      <p class="text-sm text-amber-200/60 flex items-center gap-1.5">
+        Built with <span class="text-[#f07f3c]">♥</span> by Otabek Haydarov — Quyosh Shafaqi Edition
+      </p>
+
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/otabek11haydarov" target="_blank" rel="noopener noreferrer" class="btn-interactive px-3 py-1.5 rounded-lg bg-[#21140e]/60 hover:bg-[#f07f3c]/20 text-amber-200/70 hover:text-[#f07f3c] border border-amber-900/30 text-xs font-mono transition-colors">
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/otabek-haydarov" target="_blank" rel="noopener noreferrer" class="btn-interactive px-3 py-1.5 rounded-lg bg-[#21140e]/60 hover:bg-[#f07f3c]/20 text-amber-200/70 hover:text-[#f07f3c] border border-amber-900/30 text-xs font-mono transition-colors">
+          LinkedIn
+        </a>
+        <a href="mailto:otabek11haydarov@gmail.com" class="btn-interactive px-3 py-1.5 rounded-lg bg-[#21140e]/60 hover:bg-[#f07f3c]/20 text-amber-200/70 hover:text-[#f07f3c] border border-amber-900/30 text-xs font-mono transition-colors">
+          Email
+        </a>
+      </div>
+    </div>
+  </footer>
+
   <!-- Modal: Source Code & GitHub Portfolio Integration Guide -->
-  <div id="codeModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-[#1c0f09] border border-[#3b1b10] rounded-2xl max-w-4xl w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
-      <div class="px-6 py-4 bg-[#150d09] border-b border-[#3b1b10] flex items-center justify-between">
+  <div id="codeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-[#1c0f09] border border-amber-900/50 rounded-3xl max-w-4xl w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
+      <div class="px-6 py-4 bg-[#150d09] border-b border-amber-900/40 flex items-center justify-between">
         <div>
-          <h3 id="modalTitle" class="text-base sm:text-lg font-bold text-white">Project Source Code &amp; Portfolio Integration</h3>
-          <p id="modalSubtitle" class="text-xs text-amber-200/60 font-mono">https://github.com/otabek11haydarov/Portfolio.git</p>
+          <h3 id="modalTitle" class="font-display text-base sm:text-lg font-bold text-white">Project Source Code &amp; Pipeline Architecture</h3>
+          <p id="modalSubtitle" class="text-xs text-amber-200/60 font-mono">https://github.com/otabek11haydarov/Portfolio</p>
         </div>
-        <div class="flex items-center gap-2">
-          <button type="button" id="btnCopyModalCode" class="px-3.5 py-1.5 rounded-lg text-xs font-mono bg-gradient-to-r from-orange-500 to-amber-500 hover:opacity-95 text-white transition cursor-pointer shadow-md shadow-orange-500/20">
+        <div class="flex items-center gap-2.5">
+          <button type="button" id="btnCopyModalCode" class="btn-cta-glow px-4 py-1.5 rounded-xl text-xs font-mono font-semibold bg-gradient-to-r from-[#ea580c] to-[#f07f3c] text-white transition cursor-pointer shadow-md shadow-orange-500/20">
             Copy Code
           </button>
-          <button type="button" id="btnCloseModal" class="p-1.5 rounded-lg text-amber-200/60 hover:text-white hover:bg-[#21140e] transition cursor-pointer" aria-label="Close modal">
+          <button type="button" id="btnCloseModal" class="p-1.5 rounded-xl text-amber-200/60 hover:text-white hover:bg-[#21140e] transition cursor-pointer" aria-label="Close modal">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
@@ -678,33 +1053,142 @@
       </div>
 
       <!-- Modal Tabs -->
-      <div class="px-6 py-2.5 bg-[#120a07] border-b border-[#3b1b10] flex flex-wrap gap-2">
-        <button type="button" data-modal-source="ecommerce" class="modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-orange-500/20 text-orange-300 border border-orange-500/40 cursor-pointer">
+      <div class="px-6 py-3 bg-[#120a07] border-b border-amber-900/40 flex flex-wrap gap-2">
+        <button type="button" data-modal-source="ecommerce" class="modal-source-btn px-3.5 py-1.5 rounded-xl text-xs font-mono bg-[#f07f3c]/20 text-[#ffd2a8] border border-[#f07f3c]/40 cursor-pointer">
           📊 E-Commerce SQL/Python
         </button>
-        <button type="button" data-modal-source="ev" class="modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-[#21140e] text-amber-200/70 border border-[#3b1b10] cursor-pointer">
+        <button type="button" data-modal-source="ev" class="modal-source-btn px-3.5 py-1.5 rounded-xl text-xs font-mono bg-[#21140e] text-amber-200/70 border border-amber-900/40 cursor-pointer">
           ⚡ U.S. EV SQL/Tableau
         </button>
-        <button type="button" data-modal-source="integration" class="modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-[#21140e] text-amber-200/70 border border-[#3b1b10] cursor-pointer">
-          🚀 Portfolio Repo Integration
+        <button type="button" data-modal-source="integration" class="modal-source-btn px-3.5 py-1.5 rounded-xl text-xs font-mono bg-[#21140e] text-amber-200/70 border border-amber-900/40 cursor-pointer">
+          🚀 Portfolio Integration
         </button>
       </div>
 
-      <div class="p-6 overflow-y-auto custom-scrollbar space-y-4">
-        <pre id="modalCodeContent" class="bg-[#120a07] border border-[#3b1b10] rounded-xl p-4 text-xs font-mono text-amber-100 overflow-x-auto leading-relaxed"></pre>
+      <div class="p-6 overflow-y-auto space-y-4">
+        <pre id="modalCodeContent" class="bg-[#120a07] border border-amber-900/40 rounded-2xl p-4 text-xs font-mono text-[#ffd2a8] overflow-x-auto leading-relaxed"></pre>
       </div>
     </div>
   </div>
 
   <!-- Toast Notification -->
-  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden bg-[#1c0f09] border border-orange-500/50 text-amber-100 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-mono">
-    <span class="w-2 h-2 rounded-full bg-orange-400"></span>
+  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden bg-[#1c0f09]/95 border border-[#f07f3c]/50 text-[#ffedd5] px-4 py-3 rounded-2xl shadow-2xl backdrop-blur-md flex items-center gap-2.5 text-xs font-mono">
+    <span class="w-2 h-2 rounded-full bg-[#f07f3c] animate-pulse"></span>
     <span id="toastMessage">Action completed</span>
   </div>
 
   <script>
     // =========================================================================
-    // STATE & DATASETS (2 PROJECTS)
+    // 1. PORTFOLIO INTERACTIVE BUTTON & 3D CARD ENGINES (Matches React Hooks)
+    // =========================================================================
+    (function initPortfolioInteractions() {
+      // Scroll Progress Bar
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        const bar = document.getElementById('scrollProgressBar');
+        if (bar) bar.style.width = `${pct}%`;
+      }, { passive: true });
+
+      let currentBtn = null;
+      let currentCard = null;
+
+      window.addEventListener('mousemove', (e) => {
+        const target = e.target;
+        if (!target || !target.closest) return;
+
+        // Magnetic Button Spotlight
+        const btn = target.closest('button, a.btn-interactive, .btn-interactive');
+        if (currentBtn && currentBtn !== btn) {
+          currentBtn.style.setProperty('--tx', '0px');
+          currentBtn.style.setProperty('--ty', '0px');
+          currentBtn = null;
+        }
+        if (btn) {
+          currentBtn = btn;
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          btn.style.setProperty('--mx', `${x}px`);
+          btn.style.setProperty('--my', `${y}px`);
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const deltaX = ((x - centerX) / Math.max(centerX, 1)) * 4.0;
+          const deltaY = ((y - centerY) / Math.max(centerY, 1)) * 3.0;
+          btn.style.setProperty('--tx', `${deltaX.toFixed(2)}px`);
+          btn.style.setProperty('--ty', `${deltaY.toFixed(2)}px`);
+        }
+
+        // 3D Holographic Card Spotlight & Tilt
+        const card = target.closest('.interactive-card');
+        if (currentCard && currentCard !== card) {
+          currentCard.style.setProperty('--rx', '0deg');
+          currentCard.style.setProperty('--ry', '0deg');
+          currentCard = null;
+        }
+        if (card) {
+          currentCard = card;
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--cmx', `${x}px`);
+          card.style.setProperty('--cmy', `${y}px`);
+
+          if (window.innerWidth > 640) {
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateY = ((x - centerX) / Math.max(centerX, 1)) * 4.5;
+            const rotateX = -((y - centerY) / Math.max(centerY, 1)) * 4.5;
+            card.style.setProperty('--rx', `${rotateX.toFixed(2)}deg`);
+            card.style.setProperty('--ry', `${rotateY.toFixed(2)}deg`);
+          }
+        }
+      }, { passive: true });
+
+      // Click Ripple & Quyosh Shafaqi Particle Burst
+      window.addEventListener('click', (e) => {
+        const target = e.target;
+        if (!target || !target.closest) return;
+        const btn = target.closest('button, a.btn-interactive, .btn-interactive');
+        if (!btn) return;
+
+        const rect = btn.getBoundingClientRect();
+        const clickX = e.clientX ? e.clientX - rect.left : rect.width / 2;
+        const clickY = e.clientY ? e.clientY - rect.top : rect.height / 2;
+
+        const ripple = document.createElement('span');
+        const size = Math.max(rect.width, rect.height) * 1.3;
+        ripple.className = 'btn-ripple-wave';
+        ripple.style.width = `${size}px`;
+        ripple.style.height = `${size}px`;
+        ripple.style.left = `${clickX}px`;
+        ripple.style.top = `${clickY}px`;
+        btn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 680);
+
+        if (e.clientX && e.clientY) {
+          const palette = ['#f07f3c', '#ffd2a8', '#ea580c', '#7a3518', '#fb923c'];
+          for (let i = 0; i < 8; i++) {
+            const p = document.createElement('span');
+            p.className = 'btn-burst-particle';
+            const angle = (Math.PI * 2 * i) / 8 + (Math.random() * 0.4 - 0.2);
+            const dist = 24 + Math.random() * 26;
+            p.style.left = `${e.clientX}px`;
+            p.style.top = `${e.clientY}px`;
+            p.style.backgroundColor = palette[i % palette.length];
+            p.style.boxShadow = `0 0 10px ${palette[i % palette.length]}`;
+            p.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+            p.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 660);
+          }
+        }
+      });
+    })();
+
+    // =========================================================================
+    // 2. STATE & DATASETS (2 PROJECTS — QUYOSH SHAFAQI EDITION)
     // =========================================================================
     const APP_STATE = {
       activeProject: 'ecommerce',
@@ -713,18 +1197,20 @@
         category: 'all',
         freeShipThreshold: 50,
         carrierDiscount: 0,
-        roasCut: 0
+        roasCut: 0,
+        currentHeaders: [],
+        currentRowsPlain: []
       },
       ev: {
         region: 'ALL',
         metric: 'ev_share',
         search: '',
         chargerExpansion: 0,
-        selectedState: 'California'
+        selectedState: 'California',
+        filteredRows: []
       }
     };
 
-    // SQL Presets for Project 1
     const ECOM_SQL_PRESETS = {
       shipping_leakage: `SELECT 
   shipping_tier,
@@ -766,7 +1252,6 @@ GROUP BY 1, 2
 ORDER BY realized_margin_pct ASC;`
     };
 
-    // U.S. EV Dataset
     const EV_JURISDICTIONS = [
       { state: 'California', code: 'CA', region: 'West', fleetM: 31.25, evShare: 4.42, altShare: 11.8, evPerPort: 29.8, priority: 'Tier-1 Critical' },
       { state: 'District of Columbia', code: 'DC', region: 'South', fleetM: 0.34, evShare: 3.75, altShare: 10.4, evPerPort: 18.4, priority: 'Tier-2 Balanced' },
@@ -786,7 +1271,6 @@ ORDER BY realized_margin_pct ASC;`
       { state: 'National Average', code: 'US', region: 'ALL', fleetM: 287.40, evShare: 1.68, altShare: 6.8, evPerPort: 26.3, priority: 'Benchmark' }
     ];
 
-    // Project Source Snippets
     const SOURCE_SNIPPETS = {
       ecommerce: `-- PostgreSQL Analytics Pipeline (orders_audit_2000)
 -- 1. Unit economics & shipping margin erosion
@@ -838,25 +1322,34 @@ SELECT
 FROM ev_registrations e
 JOIN state_chargers c ON e.state_code = c.state_code
 ORDER BY e.ev_market_share_pct DESC;`,
-      integration: `// Portfolio Project Playground Routing
-// In your portfolio, links seamlessly point to the active sandbox:
+      integration: `// Portfolio Project Playground Routing (Projects.tsx)
+// Links seamlessly point to the active Quyosh Shafaqi sandbox:
 <a 
   href="/playground.html?project=ecommerce" 
-  target="_blank" 
-  rel="noopener noreferrer"
-  className="flex items-center gap-1.5 text-sm text-[#ffd2a8] hover:text-[#f07f3c] transition-colors"
+  className="flex items-center gap-1.5 text-sm text-amber-200/80 hover:text-[#f07f3c] transition-colors"
 >
   Live Sandbox
 </a>`
     };
 
-    // Chart instances
+    // Chart.js Global Quyosh Shafaqi Styling
+    const SHAFAQ_TOOLTIP = {
+      backgroundColor: '#1c0f09',
+      titleColor: '#ffd2a8',
+      bodyColor: '#ffedd5',
+      borderColor: '#f07f3c',
+      borderWidth: 1,
+      padding: 10,
+      cornerRadius: 10,
+      titleFont: { family: 'JetBrains Mono', size: 11, weight: '600' },
+      bodyFont: { family: 'JetBrains Mono', size: 11 }
+    };
+
     let chartEcomMarginInstance = null;
     let chartEcomRoasInstance = null;
     let chartEvStatesInstance = null;
     let chartEvMixInstance = null;
 
-    // Toast helper
     function showToast(msg) {
       const banner = document.getElementById('toastBanner');
       const text = document.getElementById('toastMessage');
@@ -884,15 +1377,28 @@ ORDER BY e.ev_market_share_pct DESC;`,
       }
     }
 
+    function downloadCsv(filename, headers, rows) {
+      const csvLines = [
+        headers.join(','),
+        ...rows.map((r) => r.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+      ];
+      const blob = new Blob([csvLines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`Exported ${filename}`);
+    }
+
     // =========================================================================
     // PROJECT SWITCHING LOGIC (2 PROJECTS)
     // =========================================================================
     function switchActiveProject(projectKey, shouldScroll) {
       APP_STATE.activeProject = projectKey;
-
-      try {
-        localStorage.setItem('otabek_portfolio_active_playground', projectKey);
-      } catch (e) {}
 
       const panels = {
         ecommerce: document.getElementById('panel-ecommerce'),
@@ -915,15 +1421,10 @@ ORDER BY e.ev_market_share_pct DESC;`,
       };
 
       Object.keys(panels).forEach((k) => {
-        if (panels[k]) {
-          panels[k].classList.toggle('hidden', k !== projectKey);
-        }
-        if (cards[k]) {
-          cards[k].classList.toggle('active-card', k === projectKey);
-        }
+        if (panels[k]) panels[k].classList.toggle('hidden', k !== projectKey);
+        if (cards[k]) cards[k].classList.toggle('active-card', k === projectKey);
       });
 
-      // Update Live buttons on top cards
       document.querySelectorAll('.btn-launch-live').forEach((btn) => {
         const target = btn.getAttribute('data-launch-project');
         if (target === projectKey) {
@@ -933,13 +1434,12 @@ ORDER BY e.ev_market_share_pct DESC;`,
         }
       });
 
-      // Update Workbench Tab buttons
       document.querySelectorAll('.playground-tab-btn').forEach((btn) => {
         const target = btn.getAttribute('data-switch-tab');
         if (target === projectKey) {
-          btn.className = 'playground-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-2 bg-orange-500/20 text-orange-300 border border-orange-500/50 cursor-pointer';
+          btn.className = 'playground-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold transition flex items-center gap-2 bg-gradient-to-r from-[#ea580c] to-[#f07f3c] text-white shadow-md shadow-orange-500/20 cursor-pointer';
         } else {
-          btn.className = 'playground-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-2 bg-[#21140e] text-amber-200/60 border border-[#3b1b10] hover:text-white hover:border-[#7a3518] cursor-pointer';
+          btn.className = 'playground-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-medium transition flex items-center gap-2 bg-[#21140e] text-amber-200/70 border border-amber-900/40 hover:text-white hover:border-[#f07f3c]/50 cursor-pointer';
         }
       });
 
@@ -949,7 +1449,6 @@ ORDER BY e.ev_market_share_pct DESC;`,
       const urlBar = document.getElementById('workbenchUrlBar');
       if (urlBar) urlBar.textContent = urls[projectKey] || '';
 
-      // Trigger render
       if (projectKey === 'ecommerce') {
         renderEcommercePlayground();
       } else if (projectKey === 'ev') {
@@ -963,10 +1462,10 @@ ORDER BY e.ev_market_share_pct DESC;`,
     }
 
     // =========================================================================
-    // PLAYGROUND 1: E-COMMERCE PROFITABILITY LOGIC
+    // PLAYGROUND 1: E-COMMERCE PROFITABILITY LOGIC (Pure Quyosh Shafaqi Colors)
     // =========================================================================
     function renderEcommercePlayground() {
-      const { preset, category, freeShipThreshold, carrierDiscount, roasCut } = APP_STATE.ecom;
+      const { category, freeShipThreshold, carrierDiscount, roasCut } = APP_STATE.ecom;
 
       const catMultiplier = {
         all: { orders: 2140, baseAov: 82.4, leakMargin: 13.4, stdMargin: 31.2, roas: 3.42, spend: 84500 },
@@ -976,7 +1475,6 @@ ORDER BY e.ev_market_share_pct DESC;`,
         beauty: { orders: 400, baseAov: 46.8, leakMargin: 18.2, stdMargin: 36.4, roas: 4.15, spend: 10000 }
       }[category] || { orders: 2140, baseAov: 82.4, leakMargin: 13.4, stdMargin: 31.2, roas: 3.42, spend: 84500 };
 
-      // Calculate Sensitivity Simulation
       const thresholdLift = Math.max(0, (freeShipThreshold - 50) * 0.18);
       const discountLift = (carrierDiscount / 25) * 4.6;
       const roasProfitLift = (roasCut / 100) * 8200;
@@ -987,13 +1485,12 @@ ORDER BY e.ev_market_share_pct DESC;`,
 
       const baseAdRev = catMultiplier.spend * catMultiplier.roas;
       const simulatedRoas = +(catMultiplier.roas + (roasCut / 100) * 0.45).toFixed(2);
-      const recoveredProfit = Math.round(
+      const recoveredProfit = 42860 + Math.round(
         (catMultiplier.orders * 0.42 * (freeShipThreshold - 50) * 0.45) +
         (catMultiplier.orders * (carrierDiscount * 0.28)) +
         roasProfitLift
       );
 
-      // Update KPIs
       document.getElementById('ecomKpiOrders').textContent = catMultiplier.orders.toLocaleString();
       document.getElementById('ecomKpiStdMargin').textContent = `${simulatedStdMargin}%`;
       document.getElementById('ecomKpiLeakMargin').textContent = `${simulatedLeakMargin}%`;
@@ -1002,15 +1499,14 @@ ORDER BY e.ev_market_share_pct DESC;`,
       document.getElementById('ecomKpiAdSpend').textContent = `$${catMultiplier.spend.toLocaleString()} spend → $${Math.round(baseAdRev).toLocaleString()} rev`;
       document.getElementById('ecomKpiRecoverable').textContent = `+$${recoveredProfit.toLocaleString()}`;
 
-      // Update slider labels
       document.getElementById('valFreeShip').textContent = `$${freeShipThreshold}${freeShipThreshold === 50 ? ' (Current)' : ' (Simulated)'}`;
       document.getElementById('valCarrierDisc').textContent = `-${carrierDiscount}%`;
       document.getElementById('valRoasCut').textContent = `${roasCut}%`;
 
-      // Render Chart 1: Margin by Shipping Tier (Warm Sunset Palette)
+      // Chart 1: Margin by Shipping Tier (5-Swatch Quyosh Shafaqi Gradient)
       const ctxMargin = document.getElementById('chartEcomMargin');
       if (ctxMargin) {
-        const labels = ['Standard Ground', '2-Day Regional', 'Free-Ship Promo ($50+)', 'Express Zone 4-8'];
+        const labels = ['Standard Ground', '2-Day Regional', 'Free-Ship ($50+)', 'Express Zone 4-8'];
         const dataVals = [
           simulatedStdMargin,
           +(simulatedStdMargin - 5.4).toFixed(1),
@@ -1026,10 +1522,15 @@ ORDER BY e.ev_market_share_pct DESC;`,
               {
                 label: 'Realized Net Margin %',
                 data: dataVals,
-                backgroundColor: ['rgba(240, 127, 60, 0.85)', 'rgba(251, 146, 60, 0.75)', 'rgba(245, 158, 11, 0.75)', 'rgba(244, 63, 94, 0.8)'],
-                borderColor: ['#f07f3c', '#fb923c', '#f59e0b', '#f43f5e'],
+                backgroundColor: [
+                  'rgba(255, 210, 168, 0.90)', // Swatch 5: Soft Peach Cream (Highest)
+                  'rgba(240, 127, 60, 0.88)',  // Swatch 4: Sunset Orange
+                  'rgba(234, 88, 12, 0.85)',   // Warm Deep Sunset
+                  'rgba(122, 53, 24, 0.88)'    // Swatch 3: Warm Terracotta (Leakage tier)
+                ],
+                borderColor: ['#ffd2a8', '#f07f3c', '#ea580c', '#c2410c'],
                 borderWidth: 1.5,
-                borderRadius: 6
+                borderRadius: 8
               }
             ]
           },
@@ -1037,25 +1538,26 @@ ORDER BY e.ev_market_share_pct DESC;`,
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-              legend: { display: false }
+              legend: { display: false },
+              tooltip: SHAFAQ_TOOLTIP
             },
             scales: {
               y: {
                 beginAtZero: true,
-                max: 40,
-                grid: { color: '#2c1810' },
-                ticks: { color: '#fed7aa', callback: (v) => v + '%' }
+                max: 42,
+                grid: { color: 'rgba(122, 53, 24, 0.25)' },
+                ticks: { color: '#d5b9a5', font: { family: 'JetBrains Mono', size: 10 }, callback: (v) => v + '%' }
               },
               x: {
                 grid: { display: false },
-                ticks: { color: '#ffd2a8', font: { size: 10 } }
+                ticks: { color: '#ffd2a8', font: { family: 'JetBrains Mono', size: 10 } }
               }
             }
           }
         });
       }
 
-      // Render Chart 2: Multi-Channel Marketing ROAS (Warm Sunset Palette)
+      // Chart 2: Multi-Channel Marketing ROAS (Quyosh Shafaqi Palette)
       const ctxRoas = document.getElementById('chartEcomRoas');
       if (ctxRoas) {
         const roasBoost = (roasCut / 100) * 0.5;
@@ -1076,8 +1578,20 @@ ORDER BY e.ev_market_share_pct DESC;`,
               {
                 label: 'Channel ROAS (x)',
                 data: chRoas,
-                backgroundColor: chRoas.map((v) => v >= 3.0 ? 'rgba(240, 127, 60, 0.85)' : v >= 2.0 ? 'rgba(245, 158, 11, 0.8)' : 'rgba(244, 63, 94, 0.8)'),
-                borderRadius: 6
+                backgroundColor: chRoas.map((v) =>
+                  v >= 4.0
+                    ? 'rgba(255, 210, 168, 0.90)' // Peach Cream
+                    : v >= 3.0
+                      ? 'rgba(240, 127, 60, 0.88)' // Sunset Orange
+                      : v >= 2.0
+                        ? 'rgba(234, 88, 12, 0.85)' // Deep Orange
+                        : 'rgba(122, 53, 24, 0.88)' // Terracotta
+                ),
+                borderColor: chRoas.map((v) =>
+                  v >= 4.0 ? '#ffd2a8' : v >= 3.0 ? '#f07f3c' : v >= 2.0 ? '#ea580c' : '#c2410c'
+                ),
+                borderWidth: 1.5,
+                borderRadius: 8
               }
             ]
           },
@@ -1086,28 +1600,29 @@ ORDER BY e.ev_market_share_pct DESC;`,
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-              legend: { display: false }
+              legend: { display: false },
+              tooltip: SHAFAQ_TOOLTIP
             },
             scales: {
               x: {
                 beginAtZero: true,
                 max: 6.5,
-                grid: { color: '#2c1810' },
-                ticks: { color: '#fed7aa', callback: (v) => v + 'x' }
+                grid: { color: 'rgba(122, 53, 24, 0.25)' },
+                ticks: { color: '#d5b9a5', font: { family: 'JetBrains Mono', size: 10 }, callback: (v) => v + 'x' }
               },
               y: {
                 grid: { display: false },
-                ticks: { color: '#ffd2a8', font: { size: 10 } }
+                ticks: { color: '#ffd2a8', font: { family: 'JetBrains Mono', size: 10 } }
               }
             }
           }
         });
       }
 
-      renderEcomSqlTable(simulatedStdMargin, simulatedLeakMargin, simulatedRoas);
+      renderEcomSqlTable(simulatedStdMargin, simulatedLeakMargin);
     }
 
-    function renderEcomSqlTable(stdM, leakM, roasVal) {
+    function renderEcomSqlTable(stdM, leakM) {
       const preset = APP_STATE.ecom.preset;
       const headEl = document.getElementById('ecomTableHead');
       const bodyEl = document.getElementById('ecomTableBody');
@@ -1115,54 +1630,83 @@ ORDER BY e.ev_market_share_pct DESC;`,
       const timingEl = document.getElementById('ecomQueryTiming');
 
       let headers = [];
-      let rows = [];
+      let rowsHtml = [];
+      let rowsPlain = [];
 
       if (preset === 'shipping_leakage') {
         titleEl.textContent = 'POSTGRESQL RESULT SET — shipping_margin_leakage_audit';
         headers = ['shipping_tier', 'audited_orders', 'avg_order_value', 'avg_subsidy_cost', 'net_margin_pct'];
-        rows = [
-          ['Standard Ground (Paid)', '890', '$118.40', '$1.85', `<span class="text-emerald-400 font-bold">${stdM}%</span>`],
-          ['2-Day Regional Hub', '420', '$134.20', '$6.40', `<span class="text-orange-400 font-bold">${(stdM - 5.4).toFixed(1)}%</span>`],
-          ['Free-Shipping Threshold ($50+)', '510', '$64.80', '$11.90', `<span class="text-amber-400 font-bold">${(leakM + 2.1).toFixed(1)}%</span>`],
-          ['Express Zone 4-8 (Free Promo)', '320', '$71.50', '$18.60', `<span class="text-rose-400 font-bold">${leakM}%</span>`]
+        rowsPlain = [
+          ['Standard Ground (Paid)', '890', '$118.40', '$1.85', `${stdM}%`],
+          ['2-Day Regional Hub', '420', '$134.20', '$6.40', `${(stdM - 5.4).toFixed(1)}%`],
+          ['Free-Shipping Threshold ($50+)', '510', '$64.80', '$11.90', `${(leakM + 2.1).toFixed(1)}%`],
+          ['Express Zone 4-8 (Free Promo)', '320', '$71.50', '$18.60', `${leakM}%`]
+        ];
+        rowsHtml = [
+          ['Standard Ground (Paid)', '890', '$118.40', '$1.85', `<span class="text-[#ffd2a8] font-bold">${stdM}%</span>`],
+          ['2-Day Regional Hub', '420', '$134.20', '$6.40', `<span class="text-[#f07f3c] font-bold">${(stdM - 5.4).toFixed(1)}%</span>`],
+          ['Free-Shipping Threshold ($50+)', '510', '$64.80', '$11.90', `<span class="text-[#fb923c] font-bold">${(leakM + 2.1).toFixed(1)}%</span>`],
+          ['Express Zone 4-8 (Free Promo)', '320', '$71.50', '$18.60', `<span class="px-2 py-0.5 rounded bg-[#7a3518]/40 text-[#ffd2a8] border border-[#f07f3c]/30 font-bold">${leakM}%</span>`]
         ];
       } else if (preset === 'channel_roas') {
         titleEl.textContent = 'POSTGRESQL RESULT SET — multi_channel_marketing_roas';
         headers = ['marketing_channel', 'total_spend', 'gross_revenue', 'roas_multiple', 'net_profit_contribution'];
-        rows = [
-          ['Email / Lifecycle CRM', '$6,500', '$35,100', '<span class="text-orange-400 font-bold">5.40x</span>', '$14,820'],
-          ['Google Shopping (High Intent)', '$28,000', '$109,200', '<span class="text-orange-400 font-bold">3.90x</span>', '$34,940'],
-          ['Meta Dynamic Retargeting', '$22,000', '$70,400', '<span class="text-orange-400 font-bold">3.20x</span>', '$19,710'],
-          ['Creator & Affiliate Partners', '$14,000', '$36,400', '<span class="text-amber-400 font-bold">2.60x</span>', '$8,120'],
-          ['Paid Social Cold Prospecting', '$14,000', '$20,300', '<span class="text-rose-400 font-bold">1.45x</span>', '-$3,480']
+        rowsPlain = [
+          ['Email / Lifecycle CRM', '$6,500', '$35,100', '5.40x', '$14,820'],
+          ['Google Shopping (High Intent)', '$28,000', '$109,200', '3.90x', '$34,940'],
+          ['Meta Dynamic Retargeting', '$22,000', '$70,400', '3.20x', '$19,710'],
+          ['Creator & Affiliate Partners', '$14,000', '$36,400', '2.60x', '$8,120'],
+          ['Paid Social Cold Prospecting', '$14,000', '$20,300', '1.45x', '-$3,480']
+        ];
+        rowsHtml = [
+          ['Email / Lifecycle CRM', '$6,500', '$35,100', '<span class="text-[#ffd2a8] font-bold">5.40x</span>', '$14,820'],
+          ['Google Shopping (High Intent)', '$28,000', '$109,200', '<span class="text-[#f07f3c] font-bold">3.90x</span>', '$34,940'],
+          ['Meta Dynamic Retargeting', '$22,000', '$70,400', '<span class="text-[#f07f3c] font-bold">3.20x</span>', '$19,710'],
+          ['Creator & Affiliate Partners', '$14,000', '$36,400', '<span class="text-[#fb923c] font-bold">2.60x</span>', '$8,120'],
+          ['Paid Social Cold Prospecting', '$14,000', '$20,300', '<span class="px-2 py-0.5 rounded bg-[#7a3518]/40 text-[#ffd2a8] border border-[#f07f3c]/30 font-bold">1.45x</span>', '-$3,480']
         ];
       } else if (preset === 'category_unit_econ') {
         titleEl.textContent = 'POSTGRESQL RESULT SET — sku_category_unit_economics';
         headers = ['product_category', 'orders_count', 'gross_margin_pct', 'return_drag_pct', 'net_unit_margin_pct'];
-        rows = [
-          ['Beauty & Wellness', '400', '64.2%', '4.1%', '<span class="text-orange-400 font-bold">34.8%</span>'],
-          ['Apparel & Performance Gear', '520', '58.5%', '14.2%', '<span class="text-orange-400 font-bold">26.4%</span>'],
-          ['Electronics & Accessories', '640', '42.0%', '7.8%', '<span class="text-amber-400 font-bold">19.6%</span>'],
-          ['Home & Bulky Goods (High Freight)', '580', '46.8%', '6.5%', '<span class="text-rose-400 font-bold">13.8%</span>']
+        rowsPlain = [
+          ['Beauty & Wellness', '400', '64.2%', '4.1%', '34.8%'],
+          ['Apparel & Performance Gear', '520', '58.5%', '14.2%', '26.4%'],
+          ['Electronics & Accessories', '640', '42.0%', '7.8%', '19.6%'],
+          ['Home & Bulky Goods (High Freight)', '580', '46.8%', '6.5%', '13.8%']
+        ];
+        rowsHtml = [
+          ['Beauty & Wellness', '400', '64.2%', '4.1%', '<span class="text-[#ffd2a8] font-bold">34.8%</span>'],
+          ['Apparel & Performance Gear', '520', '58.5%', '14.2%', '<span class="text-[#f07f3c] font-bold">26.4%</span>'],
+          ['Electronics & Accessories', '640', '42.0%', '7.8%', '<span class="text-[#fb923c] font-bold">19.6%</span>'],
+          ['Home & Bulky Goods (High Freight)', '580', '46.8%', '6.5%', '<span class="px-2 py-0.5 rounded bg-[#7a3518]/40 text-[#ffd2a8] border border-[#f07f3c]/30 font-bold">13.8%</span>']
         ];
       } else {
         titleEl.textContent = 'POSTGRESQL RESULT SET — carrier_zone_weight_audit';
         headers = ['carrier_zone_group', 'package_weight_bracket', 'shipments', 'avg_freight_cost', 'realized_margin_pct'];
-        rows = [
-          ['Zones 1–3 (Regional)', 'Under 3 lbs', '780', '$5.40', '<span class="text-orange-400 font-bold">31.6%</span>'],
-          ['Zones 1–3 (Regional)', '3 to 10 lbs', '490', '$8.90', '<span class="text-amber-400 font-bold">25.1%</span>'],
-          ['Zones 4–6 (Mid-Continent)', '10 to 22 lbs', '540', '$16.75', '<span class="text-orange-300 font-bold">16.2%</span>'],
-          ['Zones 7–8 (Cross-Country)', 'Over 15 lbs (Dim Weight)', '330', '$24.80', '<span class="text-rose-400 font-bold">11.4%</span>']
+        rowsPlain = [
+          ['Zones 1–3 (Regional)', 'Under 3 lbs', '780', '$5.40', '31.6%'],
+          ['Zones 1–3 (Regional)', '3 to 10 lbs', '490', '$8.90', '25.1%'],
+          ['Zones 4–6 (Mid-Continent)', '10 to 22 lbs', '540', '$16.75', '16.2%'],
+          ['Zones 7–8 (Cross-Country)', 'Over 15 lbs (Dim Weight)', '330', '$24.80', '11.4%']
+        ];
+        rowsHtml = [
+          ['Zones 1–3 (Regional)', 'Under 3 lbs', '780', '$5.40', '<span class="text-[#ffd2a8] font-bold">31.6%</span>'],
+          ['Zones 1–3 (Regional)', '3 to 10 lbs', '490', '$8.90', '<span class="text-[#f07f3c] font-bold">25.1%</span>'],
+          ['Zones 4–6 (Mid-Continent)', '10 to 22 lbs', '540', '$16.75', '<span class="text-[#fb923c] font-bold">16.2%</span>'],
+          ['Zones 7–8 (Cross-Country)', 'Over 15 lbs (Dim Weight)', '330', '$24.80', '<span class="px-2 py-0.5 rounded bg-[#7a3518]/40 text-[#ffd2a8] border border-[#f07f3c]/30 font-bold">11.4%</span>']
         ];
       }
 
-      timingEl.textContent = `${(11.2 + Math.random() * 4.5).toFixed(1)} ms · ${rows.length} rows`;
-      headEl.innerHTML = `<tr>${headers.map((h) => `<th class="py-2.5 px-3">${h}</th>`).join('')}</tr>`;
-      bodyEl.innerHTML = rows.map((r) => `<tr class="hover:bg-orange-500/10 transition">${r.map((c) => `<td class="py-2.5 px-3">${c}</td>`).join('')}</tr>`).join('');
+      APP_STATE.ecom.currentHeaders = headers;
+      APP_STATE.ecom.currentRowsPlain = rowsPlain;
+
+      timingEl.textContent = `${(11.2 + Math.random() * 4.5).toFixed(1)} ms · ${rowsHtml.length} rows`;
+      headEl.innerHTML = `<tr>${headers.map((h) => `<th class="py-2.5 px-4">${h}</th>`).join('')}</tr>`;
+      bodyEl.innerHTML = rowsHtml.map((r) => `<tr class="hover:bg-[#f07f3c]/10 transition">${r.map((c) => `<td class="py-2.5 px-4">${c}</td>`).join('')}</tr>`).join('');
     }
 
     // =========================================================================
-    // PLAYGROUND 2: U.S. EV MARKET SHARE LOGIC
+    // PLAYGROUND 2: U.S. EV MARKET SHARE LOGIC (Pure Quyosh Shafaqi Colors)
     // =========================================================================
     function renderEvPlayground() {
       const { region, metric, search, chargerExpansion, selectedState } = APP_STATE.ev;
@@ -1191,6 +1735,8 @@ ORDER BY e.ev_market_share_pct DESC;`,
         return b.evShare - a.evShare;
       });
 
+      APP_STATE.ev.filteredRows = filtered;
+
       const baseRatio = +(26.3 / expansionFactor).toFixed(1);
       const priorityCount = filtered.filter((d) => d.adjustedEvPerPort > 25).length;
       document.getElementById('evKpiRatio').textContent = `${baseRatio} EVs / Port`;
@@ -1201,17 +1747,17 @@ ORDER BY e.ev_market_share_pct DESC;`,
       tbody.innerHTML = filtered.map((st) => {
         const isSelected = st.state === selectedState;
         const badgeClass = st.adjustedPriority.includes('Tier-1')
-          ? 'bg-rose-500/15 text-rose-300 border-rose-500/30'
+          ? 'bg-[#7a3518]/50 text-[#ffd2a8] border-[#f07f3c]/50'
           : st.adjustedPriority.includes('Tier-2')
-            ? 'bg-amber-500/15 text-amber-300 border-amber-500/30'
-            : 'bg-orange-500/15 text-orange-300 border-orange-500/30';
+            ? 'bg-[#f07f3c]/15 text-[#f07f3c] border-[#f07f3c]/35'
+            : 'bg-[#3b1b10] text-[#ffd2a8] border-amber-900/50';
 
-        return `<tr data-state-row="${st.state}" class="ev-state-row cursor-pointer transition ${isSelected ? 'bg-orange-500/20' : 'hover:bg-[#21140e]'}">
-          <td class="py-2 px-3 font-sans font-medium text-white">${st.state} <span class="text-amber-200/50 text-[10px]">(${st.code})</span></td>
-          <td class="py-2 px-2 text-right">${st.fleetM.toFixed(2)}M</td>
-          <td class="py-2 px-2 text-right text-orange-400 font-semibold">${st.evShare.toFixed(2)}%</td>
-          <td class="py-2 px-2 text-right text-amber-300">${st.adjustedEvPerPort}</td>
-          <td class="py-2 px-3 text-right"><span class="px-1.5 py-0.5 rounded text-[10px] border ${badgeClass}">${st.adjustedPriority.split(' ')[0]}</span></td>
+        return `<tr data-state-row="${st.state}" class="ev-state-row cursor-pointer transition ${isSelected ? 'bg-[#f07f3c]/20' : 'hover:bg-[#f07f3c]/10'}">
+          <td class="py-2.5 px-4 font-sans font-medium text-white">${st.state} <span class="text-amber-200/50 text-[10px]">(${st.code})</span></td>
+          <td class="py-2.5 px-2 text-right">${st.fleetM.toFixed(2)}M</td>
+          <td class="py-2.5 px-2 text-right text-[#f07f3c] font-semibold">${st.evShare.toFixed(2)}%</td>
+          <td class="py-2.5 px-2 text-right text-[#ffd2a8]">${st.adjustedEvPerPort}</td>
+          <td class="py-2.5 px-4 text-right"><span class="px-2 py-0.5 rounded-md text-[10px] border ${badgeClass}">${st.adjustedPriority.split(' ')[0]}</span></td>
         </tr>`;
       }).join('');
 
@@ -1232,7 +1778,7 @@ ORDER BY e.ev_market_share_pct DESC;`,
         document.getElementById('spotPriorityBadge').textContent = spotObj.adjustedPriority || spotObj.priority;
       }
 
-      // Render Chart 1: Top States (Sunset Amber & Orange Palette)
+      // Render Chart 1: Top States (Quyosh Shafaqi Sunset Gradient)
       const topSlice = filtered.slice(0, 10);
       const ctxStates = document.getElementById('chartEvStates');
       if (ctxStates) {
@@ -1253,24 +1799,33 @@ ORDER BY e.ev_market_share_pct DESC;`,
               {
                 label: labelText,
                 data: metricData,
-                backgroundColor: topSlice.map((s) => s.state === spotObj.state ? 'rgba(251, 146, 60, 0.95)' : 'rgba(240, 127, 60, 0.75)'),
-                borderRadius: 5
+                backgroundColor: topSlice.map((s) =>
+                  s.state === spotObj.state
+                    ? 'rgba(255, 210, 168, 0.95)' // Highlighted State: Soft Peach Cream
+                    : 'rgba(240, 127, 60, 0.80)'  // Sunset Orange
+                ),
+                borderColor: topSlice.map((s) => (s.state === spotObj.state ? '#ffd2a8' : '#f07f3c')),
+                borderWidth: 1.5,
+                borderRadius: 6
               }
             ]
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
+            plugins: {
+              legend: { display: false },
+              tooltip: SHAFAQ_TOOLTIP
+            },
             scales: {
               y: {
                 beginAtZero: true,
-                grid: { color: '#2c1810' },
-                ticks: { color: '#fed7aa' }
+                grid: { color: 'rgba(122, 53, 24, 0.25)' },
+                ticks: { color: '#d5b9a5', font: { family: 'JetBrains Mono', size: 10 } }
               },
               x: {
                 grid: { display: false },
-                ticks: { color: '#ffd2a8' }
+                ticks: { color: '#ffd2a8', font: { family: 'JetBrains Mono', size: 10 } }
               }
             }
           }
@@ -1284,21 +1839,23 @@ ORDER BY e.ev_market_share_pct DESC;`,
         chartEvMixInstance = new Chart(ctxMix, {
           type: 'line',
           data: {
-            labels: ['2021', '2022', '2023', '2024', '2025', '2026 (287M Audit)'],
+            labels: ['2021', '2022', '2023', '2024', '2025', '2026'],
             datasets: [
               {
-                label: 'BEV + PHEV Fleet (Millions)',
+                label: 'BEV + PHEV Fleet (M)',
                 data: [1.45, 2.12, 2.98, 3.76, 4.35, 4.84],
                 borderColor: '#f07f3c',
-                backgroundColor: 'rgba(240, 127, 60, 0.18)',
+                backgroundColor: 'rgba(240, 127, 60, 0.20)',
+                pointBackgroundColor: '#f07f3c',
                 fill: true,
                 tension: 0.35
               },
               {
-                label: 'Hybrid & Alt-Fuel Fleet (Millions)',
+                label: 'Hybrid & Alt-Fuel (M)',
                 data: [9.8, 11.4, 13.6, 15.8, 17.9, 19.6],
                 borderColor: '#ffd2a8',
                 backgroundColor: 'rgba(255, 210, 168, 0.08)',
+                pointBackgroundColor: '#ffd2a8',
                 fill: true,
                 tension: 0.35
               }
@@ -1309,17 +1866,18 @@ ORDER BY e.ev_market_share_pct DESC;`,
             maintainAspectRatio: false,
             plugins: {
               legend: {
-                labels: { color: '#ffd2a8', font: { size: 11 } }
-              }
+                labels: { color: '#ffd2a8', font: { family: 'JetBrains Mono', size: 10 } }
+              },
+              tooltip: SHAFAQ_TOOLTIP
             },
             scales: {
               y: {
-                grid: { color: '#2c1810' },
-                ticks: { color: '#fed7aa' }
+                grid: { color: 'rgba(122, 53, 24, 0.25)' },
+                ticks: { color: '#d5b9a5', font: { family: 'JetBrains Mono', size: 10 } }
               },
               x: {
                 grid: { display: false },
-                ticks: { color: '#ffd2a8' }
+                ticks: { color: '#ffd2a8', font: { family: 'JetBrains Mono', size: 10 } }
               }
             }
           }
@@ -1350,9 +1908,9 @@ ORDER BY e.ev_market_share_pct DESC;`,
       document.querySelectorAll('.modal-source-btn').forEach((btn) => {
         const target = btn.getAttribute('data-modal-source');
         if (target === sourceKey) {
-          btn.className = 'modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-orange-500/20 text-orange-300 border border-orange-500/40';
+          btn.className = 'modal-source-btn px-3.5 py-1.5 rounded-xl text-xs font-mono bg-[#f07f3c]/20 text-[#ffd2a8] border border-[#f07f3c]/40 cursor-pointer';
         } else {
-          btn.className = 'modal-source-btn px-3 py-1 rounded-md text-xs font-mono bg-[#21140e] text-amber-200/70 border border-[#3b1b10]';
+          btn.className = 'modal-source-btn px-3.5 py-1.5 rounded-xl text-xs font-mono bg-[#21140e] text-amber-200/70 border border-amber-900/40 cursor-pointer';
         }
       });
     }
@@ -1362,6 +1920,33 @@ ORDER BY e.ev_market_share_pct DESC;`,
       if (!modal) return;
       modal.classList.add('hidden');
       modal.classList.remove('flex');
+    }
+
+    function applyEcomScenario(scenarioKey) {
+      const presets = {
+        baseline: { freeShipThreshold: 50, carrierDiscount: 0, roasCut: 0 },
+        optimal: { freeShipThreshold: 75, carrierDiscount: 12, roasCut: 40 },
+        aggressive: { freeShipThreshold: 95, carrierDiscount: 20, roasCut: 80 }
+      };
+      const cfg = presets[scenarioKey] || presets.baseline;
+      APP_STATE.ecom.freeShipThreshold = cfg.freeShipThreshold;
+      APP_STATE.ecom.carrierDiscount = cfg.carrierDiscount;
+      APP_STATE.ecom.roasCut = cfg.roasCut;
+
+      document.getElementById('sliderFreeShip').value = cfg.freeShipThreshold;
+      document.getElementById('sliderCarrierDisc').value = cfg.carrierDiscount;
+      document.getElementById('sliderRoasCut').value = cfg.roasCut;
+
+      document.querySelectorAll('.ecom-scenario-btn').forEach((b) => {
+        if (b.getAttribute('data-ecom-scenario') === scenarioKey) {
+          b.className = 'ecom-scenario-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-[#f07f3c]/20 text-[#ffd2a8] border border-[#f07f3c]/40 cursor-pointer';
+        } else {
+          b.className = 'ecom-scenario-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-[#150d09] text-amber-200/70 border border-amber-900/40 hover:border-[#f07f3c]/40 cursor-pointer';
+        }
+      });
+
+      renderEcommercePlayground();
+      showToast(`Applied strategy scenario: ${scenarioKey.toUpperCase()}`);
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -1390,8 +1975,34 @@ ORDER BY e.ev_market_share_pct DESC;`,
         });
       });
 
+      document.querySelectorAll('.ecom-scenario-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          applyEcomScenario(btn.getAttribute('data-ecom-scenario'));
+        });
+      });
+
+      document.getElementById('btnCopySqlInline').addEventListener('click', () => {
+        copyTextSafe(document.getElementById('ecomSqlEditor').value, 'Copied PostgreSQL query!');
+      });
+
+      document.getElementById('btnExportEcomCsv').addEventListener('click', () => {
+        downloadCsv(
+          `ecommerce_${APP_STATE.ecom.preset}_audit.csv`,
+          APP_STATE.ecom.currentHeaders,
+          APP_STATE.ecom.currentRowsPlain
+        );
+      });
+
+      document.getElementById('btnExportEvCsv').addEventListener('click', () => {
+        const headers = ['State', 'Code', 'Region', 'Total_Fleet_Millions', 'EV_Share_Pct', 'Alt_Share_Pct', 'EVs_Per_Port', 'Priority_Tier'];
+        const rows = (APP_STATE.ev.filteredRows || EV_JURISDICTIONS).map((s) => [
+          s.state, s.code, s.region, s.fleetM, s.evShare, s.altShare, s.adjustedEvPerPort || s.evPerPort, s.adjustedPriority || s.priority
+        ]);
+        downloadCsv('us_ev_market_share_audit.csv', headers, rows);
+      });
+
       document.getElementById('btnOpenIntegrationModal').addEventListener('click', () => {
-        openCodeModal('integration');
+        openCodeModal('ecommerce');
       });
 
       document.getElementById('btnScrollToPlayground').addEventListener('click', () => {
@@ -1446,15 +2057,12 @@ ORDER BY e.ev_market_share_pct DESC;`,
       });
 
       document.getElementById('btnResetEcom').addEventListener('click', () => {
-        APP_STATE.ecom = { preset: 'shipping_leakage', category: 'all', freeShipThreshold: 50, carrierDiscount: 0, roasCut: 0 };
         document.getElementById('ecomSqlPreset').value = 'shipping_leakage';
         document.getElementById('ecomCategoryFilter').value = 'all';
-        document.getElementById('sliderFreeShip').value = 50;
-        document.getElementById('sliderCarrierDisc').value = 0;
-        document.getElementById('sliderRoasCut').value = 0;
         document.getElementById('ecomSqlEditor').value = ECOM_SQL_PRESETS.shipping_leakage;
-        renderEcommercePlayground();
-        showToast('Reset E-Commerce audit parameters');
+        APP_STATE.ecom.preset = 'shipping_leakage';
+        APP_STATE.ecom.category = 'all';
+        applyEcomScenario('baseline');
       });
 
       // Project 2 Controls
@@ -1479,7 +2087,7 @@ ORDER BY e.ev_market_share_pct DESC;`,
       });
 
       document.getElementById('btnResetEv').addEventListener('click', () => {
-        APP_STATE.ev = { region: 'ALL', metric: 'ev_share', search: '', chargerExpansion: 0, selectedState: 'California' };
+        APP_STATE.ev = { region: 'ALL', metric: 'ev_share', search: '', chargerExpansion: 0, selectedState: 'California', filteredRows: [] };
         document.getElementById('evRegionFilter').value = 'ALL';
         document.getElementById('evPowertrainFilter').value = 'ev_share';
         document.getElementById('evSearchInput').value = '';
@@ -1488,7 +2096,7 @@ ORDER BY e.ev_market_share_pct DESC;`,
         showToast('Reset U.S. EV Dashboard filters');
       });
 
-      // URL Parameter support
+      // URL Parameter support (?project=ecommerce or ?project=ev)
       try {
         const urlParams = new URLSearchParams(window.location.search);
         const targetProj = urlParams.get('project');
